@@ -1,9 +1,9 @@
 <template>
   <div class="nav__container">
         <!-- <img class="company__logo" src="@/assets/company_logo.svg">                 -->
-        <router-link class = "nav__link" :class = "{'active' :this.activePage=='projects'}" to="/projects" @click="setActive('projects')">Проекты</router-link>
-        <router-link class = "nav__link" :class = "{'active' :this.activePage=='materials'}" to="/materials" @click="setActive('materials')">Строматериалы</router-link>
-        <router-link class = "nav__link" :class = "{'active' :this.activePage=='formulas'}" to="/projects" @click="setActive('formulas')">Формулы</router-link>
+        <router-link class = "nav__link" :class = "{'active' :activePage=='projects'}" to="/projects" @click="setActive('projects')">Проекты</router-link>
+        <router-link class = "nav__link" :class = "{'active' :activePage=='materials'}" to="/materials" @click="setActive('materials')">Строматериалы</router-link>
+        <router-link class = "nav__link" :class = "{'active' :activePage=='formulas'}" to="/projects" @click="setActive('formulas')">Формулы</router-link>
         <div class="user__container">
             <div class="user__name">
                 И. И. Иванов
@@ -14,13 +14,15 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-let active = ''
+export default { name: "main-navbar" };
+</script>
 
-@Options({
-  name: 'main-navbar'
-})
-export default class Navbar extends Vue {}
+<script setup lang="ts">
+import { useNavbarStore } from "@/store/navbar_store";
+const navbarStore = useNavbarStore();
+
+let activePage = navbarStore.active;
+
 </script>
 
 <style scoped lang="scss">
