@@ -7,7 +7,13 @@
       <img src="@/assets/logo/finished.svg">
     </div>
     <div class="card__info">
-      Инфа
+      <button class="xlsx__btn">
+        <div>XLSX</div>
+        <img src="@/assets/logo/dawnload.svg">
+      </button>
+      <div class="project__data">12.01.2023</div>
+      <div class="project__customer">Иванов Иван Иванович</div>
+      <div class="project__address">ул. Некрасова 30</div>
     </div>
     <div class="card__btns">
       <button>
@@ -18,7 +24,7 @@
 </template>
 
 <script lang="ts">
-export default { name: "project-card" };
+export default {name: "project-card" };
 </script>
 
 <style lang="scss" scoped>
@@ -45,12 +51,47 @@ export default { name: "project-card" };
     }
   }
   .card__info{
-    width: 100%;
+    width: 60%;
+    display: flex;
+    padding: 1rem 4rem;
+    justify-content: space-between;
+    .xlsx__btn{
+      height: 3rem;
+      border-radius: 0.5rem;
+      border: none;
+      background-color: #E8F6F3;
+      display: flex;
+      color: #34CAA5;
+      font-weight: 600;
+      padding: 0 0.8rem 0 1rem;
+      transition: 0.2s;
+      div{
+        margin-top: 1rem;
+      }
+      img{
+        margin-top: 0.7rem;
+        margin-left: 0.3rem;
+      }
+    }
+    .xlsx__btn:hover{
+      cursor: pointer;
+      background-color: #dcf3ee;
+    }
+    .project__data{
+      padding-top: 0.9rem;
+    }
+    .project__customer{
+      padding-top: 0.9rem;
+    }
+    .project__address{
+      padding-top: 0.9rem;
+    }
   }
   .card__btns{
     color: black;
     height: 100%;
     padding: 1.2rem 1rem;
+    margin-left: auto;
 
     button{
       background-color: #fff;

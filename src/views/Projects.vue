@@ -2,7 +2,7 @@
   <div class="projects__container">
     <div class="header">
       <div class="header__title">
-        Проекты за 2023 год
+        Проекты за {{  }} год
       </div>
       <main-btn>
         <div class="btn__content">
@@ -11,6 +11,7 @@
         </div>
       </main-btn>
     </div>
+    <local-navbar/>
     <projects-list/>
   </div>
 </template>

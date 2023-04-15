@@ -9,20 +9,20 @@
 </template>
 
 <script lang="ts">
-export default { name: "main-sidebar" };
+    export default { name: "main-sidebar" };
 </script>
 
 <script setup lang="ts">
-import { useSidebarStore } from "@/store/sidebar_store";
-import { ref } from 'vue';
-const sidebar_store = useSidebarStore();
+    import { useSidebarStore } from "@/store/sidebar_store";
+    import {onBeforeMount, ref } from 'vue';
+    const sidebar_store = useSidebarStore();
 
-const sidebar_items = sidebar_store.project_items;
-let active_item = ref(sidebar_items[0].name)
+    const sidebar_items = sidebar_store.project_items;
 
-function setActive(newActiveItem: any){
-    active_item.value = newActiveItem;
-}
+    let active_item = ref(sidebar_items[0].name)
+    function setActive(newActiveItem: any){
+        active_item.value = newActiveItem;
+    }
 </script>
 
 <style lang="scss" scoped>
