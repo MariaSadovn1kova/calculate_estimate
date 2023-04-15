@@ -1,14 +1,8 @@
 <template>
    <div class="sidebar__container">
     <div class="sidebar__element-container">
-        <div class="sidebar__element">
-           емае
-        </div>
-        <div class="sidebar__element">
-           емае
-        </div>
-        <div class="sidebar__element">
-           емае
+        <div v-for="item in sidebar_items" :key="item.name" class="sidebar__element" :class = "{'active' :item.name == active_item}" @click="setActive(item.name)">
+           {{ item.name }}
         </div>
     </div>
   </div>
@@ -16,6 +10,19 @@
 
 <script lang="ts">
 export default { name: "main-sidebar" };
+</script>
+
+<script setup lang="ts">
+import { useSidebarStore } from "@/store/sidebar_store";
+import { ref } from 'vue';
+const sidebar_store = useSidebarStore();
+
+const sidebar_items = sidebar_store.project_items;
+let active_item = ref(sidebar_items[0].name)
+
+function setActive(newActiveItem: any){
+    active_item.value = newActiveItem;
+}
 </script>
 
 <style lang="scss" scoped>
