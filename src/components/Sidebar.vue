@@ -31,15 +31,15 @@ export default { name: "main-sidebar" };
             font-weight: 600;
         }
         .sidebar__element:hover{
-            background-color: #FFEDE9;
-            color: #FF594B;
+            background-color: #f3f8f1;
+            color: #6BBF54;
             cursor: pointer;
             font-weight: 600;
         }
         .active{
-            background-color: #FFEDE9;
-            color: #FF594B;
-            border-left: 5px solid #FF594B;
+            background-color: #f3f8f1;
+            color: #6BBF54;
+            border-left: 5px solid #6BBF54;
         }
     }
 </style>
