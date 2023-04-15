@@ -1,6 +1,11 @@
 <template>
-  <main-navbar/>
-  <router-view/>
+  <div class="app">
+    <main-navbar class="main__navbar"/>
+    <div class="app__container">
+      <main-sidebar class="main__sidebar"/>
+      <router-view class="router-view"/>
+    </div>
+  </div>
 </template>
 
 <style lang="scss">
@@ -25,7 +30,7 @@
         }
         .router-view{
           width: 100%;
-          padding: 8rem 6rem 0rem 6rem;
+          padding: 7rem 6rem 0rem 6rem;
           margin-bottom: 10rem;
         }
       }

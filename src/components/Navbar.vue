@@ -1,12 +1,12 @@
 <template>
   <div class="nav__container">
-        <!-- <img class="company__logo" src="@/assets/company_logo.svg">                 -->
+        <img class="company__logo" src="@/assets/logo/company__logo.svg">                
         <router-link v-for="link in itemLinks" :key="link.name" class = "nav__link" active-class="active" :to="link.path">{{ link.name }}</router-link>
         <div class="user__container">
             <div class="user__name">
                 И. И. Иванов
             </div>
-            <!-- <img class="user__img" src="@/assets/user__picture.svg" alt=""> -->
+            <img class="user__img" src="@/assets/logo/user.svg" alt="">
         </div>
     </div>
 </template>
@@ -28,7 +28,7 @@ const itemLinks = [
         display: flex;
         flex-direction: row;
         background-color: #fff;
-        box-shadow: 0px 4px 4px #DEE1E0;
+        box-shadow: 0px 4px 6px #e9ecec;
         padding: 0rem 5rem 0rem 5rem;
         .company__logo{
             width: 4rem;
@@ -38,18 +38,17 @@ const itemLinks = [
             text-decoration: none;
             color: #868585;
             font-weight: 600;
-            padding: 1rem;
+            padding: 1rem; 
         }
         .nav__link.active{
             text-decoration: none;
             font-weight: 600;
-            padding: 1rem;
-            color: #34CAA5;
-            border-bottom: 3px solid #34CAA5;
+            color: #6BBF54;
+            border-bottom: 3px solid #6BBF54;
         }
         .nav__link:hover{
-            background-color: #E8F6F3;
-            color: #34CAA5;
+            background-color: #f3f8f1;
+            color: #6BBF54;
         }
         .user__container{
             display: flex;
@@ -57,11 +56,11 @@ const itemLinks = [
         }
         .user__name{
             font-weight: 600;
-            color: #34CAA5;
+            color: #6BBF54;
             padding: 1rem;
         }
         .user__container:hover{
-            background-color: #E8F6F3;
+            background-color: #f3f8f1;
             cursor: pointer;
         }
         .user__img{
