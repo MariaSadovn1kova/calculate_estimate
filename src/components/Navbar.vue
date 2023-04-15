@@ -1,9 +1,7 @@
 <template>
   <div class="nav__container">
         <!-- <img class="company__logo" src="@/assets/company_logo.svg">                 -->
-        <router-link class = "nav__link" :class = "{'active' :activePage=='projects'}" to="/projects" @click="setActive('projects')">Проекты</router-link>
-        <router-link class = "nav__link" :class = "{'active' :activePage=='materials'}" to="/materials" @click="setActive('materials')">Строматериалы</router-link>
-        <router-link class = "nav__link" :class = "{'active' :activePage=='formulas'}" to="/projects" @click="setActive('formulas')">Формулы</router-link>
+        <router-link v-for="link in itemLinks" :key="link.name" class = "nav__link" active-class="active" :to="link.path">{{ link.name }}</router-link>
         <div class="user__container">
             <div class="user__name">
                 И. И. Иванов
@@ -18,11 +16,11 @@ export default { name: "main-navbar" };
 </script>
 
 <script setup lang="ts">
-import { useNavbarStore } from "@/store/navbar_store";
-const navbarStore = useNavbarStore();
-
-let activePage = navbarStore.active;
-
+const itemLinks = [
+    { name: "Проекты", path: "/" },
+    { name: "Стройматериалы", path: "/materials" },
+    { name: "Формулы", path: "/formulas" }
+]
 </script>
 
 <style scoped lang="scss">
