@@ -15,18 +15,19 @@
 <script setup lang="ts">
     import { useSidebarStore } from "@/store/sidebar_store";
     import {onBeforeMount, ref } from 'vue';
+
     const sidebar_store = useSidebarStore();
-
     const sidebar_items = sidebar_store.project_items;
+    const active_item = ref(sidebar_items[0].name)
 
-    let active_item = ref(sidebar_items[0].name)
     function setActive(newActiveItem: any){
-        active_item.value = newActiveItem;
+        sidebar_store.setActive(newActiveItem);
+        active_item.value = sidebar_store.active;
     }
 </script>
 
 <style lang="scss" scoped>
- .sidebar__container{
+    .sidebar__container{
         flex-shrink: 0;
         width: 15rem;
         background-color: #fff;

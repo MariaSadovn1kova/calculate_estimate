@@ -35,8 +35,9 @@
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #D8D8D8;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     margin-top: 1rem;
+    font-weight: 500;
     .navabar-item__container{
         display: flex;
     }

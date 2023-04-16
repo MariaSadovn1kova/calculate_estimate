@@ -39,10 +39,10 @@ export default {name: "project-card" };
   transition: 0.5s;
 
   .status__mark{
-    width: 3rem;
+    width: 2.5rem;
     height: 100%;
     border-radius: 0.5rem 0 0 0.5rem;
-    padding: 1.5rem 0.6rem;
+    padding: 1.5rem 0.4rem;
     &.finished{
       background-color: #CCF3E9;
     }
@@ -55,6 +55,8 @@ export default {name: "project-card" };
     display: flex;
     padding: 1rem 4rem;
     justify-content: space-between;
+    color: #828282;
+    font-weight: 500;
     .xlsx__btn{
       height: 3rem;
       border-radius: 0.5rem;
@@ -70,7 +72,7 @@ export default {name: "project-card" };
       }
       img{
         margin-top: 0.7rem;
-        margin-left: 0.3rem;
+        margin-left: 0.4rem;
       }
     }
     .xlsx__btn:hover{
@@ -96,7 +98,7 @@ export default {name: "project-card" };
     button{
       background-color: #fff;
       border: 1px solid #FFADAD;
-      padding: 0.4rem;
+      padding: 0.5rem;
       border-radius: 0.4rem;
       transition: 0.5s;
     }

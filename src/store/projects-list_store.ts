@@ -3,11 +3,11 @@ import { computed, ref } from "vue";
 
 export const useProjectsListStore = defineStore("projectsList", () => {
     const project_items = [
-        { name: "Все проекты" },
-        { name: "Текущие проекты" },
-        { name: "Завершенные проекты" }
+        { id: "1", date: '12.01.2023', customer: 'Иванов Иван Иванович', address: 'ул. Некрасова 30', status: 'finished'},
+        { id: "1", date: '12.01.2023', customer: 'Иванов Петр Иванович', address: 'ул. Некрасова 30', status: 'unfinished'},
     ]
 
+    
     return {
         project_items
     }

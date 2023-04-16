@@ -4,6 +4,7 @@ import Button from "@/components/Button.vue"
 import ProjectCard from "@/components/projects/ProjectCard.vue"
 import ProjectsList from "@/components/projects/ProjectsList.vue"
 import LocalNavbar from "@/components/LocalNavbar.vue"
+import Input from "@/components/Input.vue"
 
 export default[
     Navbar,
@@ -11,6 +12,7 @@ export default[
     Button,
     ProjectCard,
     ProjectsList,
-    LocalNavbar
+    LocalNavbar,
+    Input
 ]
 

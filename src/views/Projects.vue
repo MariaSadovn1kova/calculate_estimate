@@ -2,7 +2,7 @@
   <div class="projects__container">
     <div class="header">
       <div class="header__title">
-        Проекты за {{  }} год
+        Проекты за {{ sidebar_store.active }} год
       </div>
       <main-btn>
         <div class="btn__content">
@@ -12,12 +12,21 @@
       </main-btn>
     </div>
     <local-navbar/>
+    <input type="text" class="custom__input">
     <projects-list/>
   </div>
 </template>
 
 <script lang="ts">
-export default { name: "main-projects" };
+  export default { name: "main-projects" };
+</script>
+
+<script setup lang="ts">
+  import { useSidebarStore } from "@/store/sidebar_store";
+  import { ref } from 'vue';
+
+  const sidebar_store = useSidebarStore();
+
 </script>
 
 <style lang="scss" scoped>
@@ -35,6 +44,15 @@ export default { name: "main-projects" };
         margin-right: 0.5rem;
       }
     }
+  }
+  .custom__input{
+    margin-bottom: 2rem;
+    width: 40rem;
+    height: 2.5rem;
+    border-radius: 0.2rem;
+    padding: 1rem;
+    border: 1px solid #E4E7E6;
+    outline: none;
   }
 }
 </style>
