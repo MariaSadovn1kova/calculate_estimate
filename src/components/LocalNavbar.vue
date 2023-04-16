@@ -29,8 +29,8 @@
     const active_item = ref(project_items[0].name)
     
     function setActive(newActive: any){
-        navbar_store.setActive(newActive);
-        active_item.value = navbar_store.active;
+        navbar_store.setProjectsActive(newActive);
+        active_item.value = navbar_store.projects_active;
     }
 </script>
 

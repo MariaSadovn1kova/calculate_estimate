@@ -6,19 +6,23 @@ export const useProjectsListStore = defineStore("projectsList", () => {
         { id: "1", date: '12.01.2023', customer: 'Иванов Иван Иванович', address: 'ул. Некрасова 30', status: 'finished'},
         { id: "2", date: '12.01.2023', customer: 'Иванов Петр Иванович', address: 'ул. Некрасова 35', status: 'unfinished'},
     ]
-    const unfinishedProjects = [{}]
+    const unfinishedProjects: object[] = [];
+    const finishedProjects: object[] = []
+
+
     projects.forEach(
-        function (item, i, arr){
+        function (item){
             if(item.status == 'unfinished'){
                 unfinishedProjects.push(item)
+            } else {
+                finishedProjects.push(item)
             }
         }
     )
 
-    const finishedProjects = []
-
     return {
         projects,
-        unfinishedProjects
+        unfinishedProjects,
+        finishedProjects
     }
 })

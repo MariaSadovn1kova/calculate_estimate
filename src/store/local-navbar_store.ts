@@ -2,13 +2,13 @@ import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 
 export const useLocalNavbarStore = defineStore("localNavbar", () => {
-    const active = ref('')
-    function setActive(newActive: any){
-        active.value = newActive 
+    const projects_active = ref('Все проекты')
+    function setProjectsActive(newActive: any){
+        projects_active.value = newActive 
     }
 
     return {
-        active,
-        setActive
+        projects_active,
+        setProjectsActive
     }
 })
