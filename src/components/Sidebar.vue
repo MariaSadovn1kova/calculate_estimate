@@ -14,8 +14,7 @@
 
 <script setup lang="ts">
     import { useSidebarStore } from "@/store/sidebar_store";
-    import { defineProps, ref } from 'vue';
-    import { useRoute } from "vue-router";
+    import { defineProps, ref, onBeforeMount} from 'vue';
 
     const props = defineProps({
       sidebar_items: Object,
@@ -23,13 +22,15 @@
     })
     const sidebar_store = useSidebarStore();
     const active_item = ref(props.default_active)
-    const route = useRoute();
 
     function setActive(newActiveItem: any){
         sidebar_store.setActive(newActiveItem);
         active_item.value = sidebar_store.active;
     }
 
+    onBeforeMount(async () => {
+        sidebar_store.setActive(props.default_active);
+    })
 </script>
 
 <style lang="scss" scoped>

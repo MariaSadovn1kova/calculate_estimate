@@ -103,7 +103,7 @@ export default {name: "project-card" };
   .card__btns{
     color: black;
     height: 100%;
-    padding: 1.2rem 3rem;
+    padding: 1.3rem 3rem;
     margin-left: auto;
 
     button{

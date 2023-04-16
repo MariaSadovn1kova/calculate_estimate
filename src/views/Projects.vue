@@ -26,7 +26,6 @@
   import { ref } from 'vue';
 
   const sidebar_store = useSidebarStore();
-
 </script>
 
 <style lang="scss" scoped>
