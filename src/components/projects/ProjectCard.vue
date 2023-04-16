@@ -53,7 +53,7 @@ export default {name: "project-card" };
     width: 2.5rem;
     height: 100%;
     border-radius: 0.5rem 0 0 0.5rem;
-    padding: 1.5rem 0.4rem;
+    padding: 1.7rem 0.4rem;
     &.finished{
       background-color: #CCF3E9;
     }

@@ -4,12 +4,14 @@
       <div class="header__title">
         Проекты за {{ sidebar_store.active }} год
       </div>
-      <main-btn>
-        <div class="btn__content">
-          <img src="@/assets/logo/plus.svg" class="btn__img">
-          <div class="btn__text">Новый проект</div>
-        </div>
-      </main-btn>
+      <router-link to="/create">
+        <main-btn>
+          <div class="btn__content">
+            <img src="@/assets/logo/plus.svg" class="btn__img">
+            <div class="btn__text">Новый проект</div>
+          </div>
+        </main-btn>
+      </router-link>
     </div>
     <local-navbar/>
     <input type="text" class="custom__input" placeholder="ФИО заказчика...">
@@ -23,7 +25,6 @@
 
 <script setup lang="ts">
   import { useSidebarStore } from "@/store/sidebar_store";
-  import { ref } from 'vue';
 
   const sidebar_store = useSidebarStore();
 </script>

@@ -12,6 +12,11 @@ export const useSidebarStore = defineStore("sidebar", () => {
         { name: "Коробка" },
         { name: "Крыша" }
     ]
+    const create_items =[
+        { name: "Здания и клиент" },
+        { name: "Смета" },
+        { name: "Список стройматериалов" }
+    ]
 
     const active = ref(project_items[0].name);
 
@@ -22,6 +27,7 @@ export const useSidebarStore = defineStore("sidebar", () => {
         active,
         setActive,
         project_items,
-        materials_items
+        materials_items,
+        create_items
     }
 })

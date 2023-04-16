@@ -16,6 +16,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'formulas',
     component: () => import('../views/Formulas.vue')
   },
+  {
+    path: '/create',
+    name: 'create-project',
+    component: () => import('../views/CreateProject.vue')
+  },
 ]
 
 const router = createRouter({

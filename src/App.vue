@@ -2,8 +2,9 @@
   <div class="app">
     <main-navbar class="main__navbar"/>
     <div class="app__container">
-      <main-sidebar v-if="route.name == 'projects'" class="main__sidebar" :sidebar_items = 'sidebar_store.project_items' :default_active = 'sidebar_store.project_items[0].name'/>
+      <main-sidebar v-if="route.name == 'projects'" class="main__sidebar" :sidebar_items = 'sidebar_store.project_items' :default_active = 'sidebar_store.project_items[0].name' :count = 'true'/>
       <main-sidebar v-if="route.name == 'materials'" class="main__sidebar" :sidebar_items = 'sidebar_store.materials_items' :default_active = 'sidebar_store.materials_items[0].name'/>
+      <main-sidebar v-if="route.name == 'create-project'" class="main__sidebar" :sidebar_items = 'sidebar_store.create_items' :default_active = 'sidebar_store.create_items[0].name'/>
       <router-view class="router-view"/>
     </div>
   </div>

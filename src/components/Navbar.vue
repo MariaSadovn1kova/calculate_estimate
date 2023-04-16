@@ -30,6 +30,7 @@ const itemLinks = [
         background-color: #fff;
         box-shadow: 0px 4px 6px #e9ecec;
         padding: 0rem 5rem 0rem 5rem;
+        height: 3.4rem;
         .company__logo{
             width: 4rem;
             margin-right: 11rem;

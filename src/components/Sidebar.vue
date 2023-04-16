@@ -2,7 +2,12 @@
    <div class="sidebar__container">
     <div class="sidebar__element-container">
         <div v-for="item in sidebar_items" :key="item.name" class="sidebar__element" :class = "{'active' :item.name == active_item}" @click="setActive(item.name)">
-           {{ item.name }}
+           <div>
+            {{ item.name }}
+           </div>
+           <div v-if="props.count" class="projects__count">
+            2
+           </div>
         </div>
     </div>
   </div>
@@ -18,7 +23,8 @@
 
     const props = defineProps({
       sidebar_items: Object,
-      default_active: String
+      default_active: String,
+      count: Boolean
     })
     const sidebar_store = useSidebarStore();
     const active_item = ref(props.default_active)
@@ -44,6 +50,11 @@
             padding: 0.8rem 2rem 0.8rem 2rem;
             color: #868585;
             font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            .projects__count{
+                margin-right: 0.8rem;
+            }
         }
         .sidebar__element:hover{
             background-color: #f3f8f1;
@@ -55,6 +66,13 @@
             background-color: #f3f8f1;
             color: #6BBF54;
             border-left: 5px solid #6BBF54;
+            .projects__count{
+                margin-right:0;
+                padding: 0.2rem 0.8rem;
+                border-radius: 0.5rem;
+                background: #6BBF54;
+                color: #fff;
+            }
         }
     }
 </style>
