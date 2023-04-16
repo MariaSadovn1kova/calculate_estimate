@@ -7,21 +7,20 @@ export const useSidebarStore = defineStore("sidebar", () => {
         { name: "2022" },
         { name: "2021" }
     ]
-    const years_active = ref(project_items[0].name);
-
     const materials_items =[
         { name: "Фундамент" },
         { name: "Коробка" },
         { name: "Крыша" }
     ]
 
+    const active = ref(project_items[0].name);
 
-    function setYearActive(newActive: any){
-        years_active.value = newActive 
+    function setActive(newActive: any){
+        active.value = newActive 
     }
     return {
-        years_active,
-        setYearActive,
+        active,
+        setActive,
         project_items,
         materials_items
     }

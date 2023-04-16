@@ -12,7 +12,7 @@
       </main-btn>
     </div>
     <local-navbar/>
-    <input type="text" class="custom__input">
+    <input type="text" class="custom__input" placeholder="ФИО заказчика...">
     <projects-list/>
   </div>
 </template>
@@ -49,7 +49,7 @@
     margin-bottom: 2rem;
     width: 40rem;
     height: 2.5rem;
-    border-radius: 0.2rem;
+    border-radius: 0.4rem;
     padding: 1rem;
     border: 1px solid #E4E7E6;
     outline: none;

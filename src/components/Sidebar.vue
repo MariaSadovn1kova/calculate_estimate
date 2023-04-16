@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
     import { useSidebarStore } from "@/store/sidebar_store";
-    import { onBeforeMount, defineProps, ref } from 'vue';
+    import { defineProps, ref } from 'vue';
     import { useRoute } from "vue-router";
 
     const props = defineProps({
@@ -26,9 +26,8 @@
     const route = useRoute();
 
     function setActive(newActiveItem: any){
-        console.log(route.name)
-        sidebar_store.setYearActive(newActiveItem);
-        active_item.value = sidebar_store.years_active;
+        sidebar_store.setActive(newActiveItem);
+        active_item.value = sidebar_store.active;
     }
 
 </script>

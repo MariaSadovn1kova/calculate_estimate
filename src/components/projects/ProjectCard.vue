@@ -16,7 +16,10 @@
       <div class="project__address">{{ project.address }}</div>
     </div>
     <div class="card__btns">
-      <button>
+      <button class="edit">
+        <img src="@/assets/logo/edit.svg">
+      </button>
+      <button class="delete">
         <img src="@/assets/logo/delete.svg">
       </button>
     </div>
@@ -100,19 +103,29 @@ export default {name: "project-card" };
   .card__btns{
     color: black;
     height: 100%;
-    padding: 1.2rem 1rem;
+    padding: 1.2rem 3rem;
     margin-left: auto;
 
     button{
       background-color: #fff;
-      border: 1px solid #FFADAD;
-      padding: 0.5rem;
+      padding: 0.3rem;
       border-radius: 0.4rem;
       transition: 0.5s;
     }
-    button:hover{
+    button.edit{
+      border: 1px solid #6BBF54;
+      margin-right: 0.6rem;
+    }
+    button.delete{
+      border: 1px solid #FFADAD;
+    }
+    button.delete:hover{
       cursor: pointer;
       background-color: #fce7e7;
+    }
+    button.edit:hover{
+      cursor: pointer;
+      background-color: #e2f0dc;
     }
   }
 }
