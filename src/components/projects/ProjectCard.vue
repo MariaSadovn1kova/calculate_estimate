@@ -1,9 +1,9 @@
 <template>
   <div class="card__container">
-    <!-- <div class="status__mark unfinished">
+    <div v-if="project.status == 'unfinished'" class="status__mark unfinished">
       <img src="@/assets/logo/unfinished.svg">
-    </div> -->
-    <div class="status__mark finished">
+    </div>
+    <div v-if="project.status == 'finished'" class="status__mark finished">
       <img src="@/assets/logo/finished.svg">
     </div>
     <div class="card__info">
@@ -11,9 +11,9 @@
         <div>XLSX</div>
         <img src="@/assets/logo/dawnload.svg">
       </button>
-      <div class="project__data">12.01.2023</div>
-      <div class="project__customer">Иванов Иван Иванович</div>
-      <div class="project__address">ул. Некрасова 30</div>
+      <div class="project__data">{{ project.date }}</div>
+      <div class="project__customer">{{ project.customer }}</div>
+      <div class="project__address">{{ project.address }}</div>
     </div>
     <div class="card__btns">
       <button>
@@ -25,6 +25,14 @@
 
 <script lang="ts">
 export default {name: "project-card" };
+</script>
+
+<script setup lang="ts">
+import { defineProps } from 'vue';
+
+  const props = defineProps({
+      project:{}
+  })
 </script>
 
 <style lang="scss" scoped>
