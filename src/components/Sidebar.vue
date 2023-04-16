@@ -14,20 +14,27 @@
 
 <script setup lang="ts">
     import { useSidebarStore } from "@/store/sidebar_store";
-    import {onBeforeMount, ref } from 'vue';
+    import { onBeforeMount, defineProps, ref } from 'vue';
+    import { useRoute } from "vue-router";
 
+    const props = defineProps({
+      sidebar_items: Object,
+      default_active: String
+    })
     const sidebar_store = useSidebarStore();
-    const sidebar_items = sidebar_store.project_items;
-    const active_item = ref(sidebar_items[0].name)
+    const active_item = ref(props.default_active)
+    const route = useRoute();
 
     function setActive(newActiveItem: any){
-        sidebar_store.setActive(newActiveItem);
-        active_item.value = sidebar_store.active;
+        console.log(route.name)
+        sidebar_store.setYearActive(newActiveItem);
+        active_item.value = sidebar_store.years_active;
     }
+
 </script>
 
 <style lang="scss" scoped>
-    .sidebar__container{
+    .sidebar__container{    
         flex-shrink: 0;
         width: 15rem;
         background-color: #fff;

@@ -32,6 +32,9 @@
         navbar_store.setProjectsActive(newActive);
         active_item.value = navbar_store.projects_active;
     }
+    onBeforeMount(async () => {
+        navbar_store.setProjectsActive('Все проекты');
+    })
 </script>
 
 <style lang="scss" scoped>
