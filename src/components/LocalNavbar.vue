@@ -1,7 +1,11 @@
 <template>
  <div class="local-navbar__container">
     <div class="navabar-item__container">
-        <div class="local-navbar__item" v-for="item in navbar_items" :key="item.name">{{ item.name }}</div>
+        <div class="local-navbar__item" 
+            v-for="item in navbar_items" 
+            :key="item.name" 
+            :class = "{'active' :item.name == active_item}" 
+            @click="setActive(item.name)">{{ item.name }}</div>
     </div>
     <div class="btn__container">
         <slot></slot>
@@ -15,10 +19,15 @@
 <script setup lang="ts">
     import { useLocalNavbarStore } from "@/store/local-navbar_store";
     import {onBeforeMount, ref } from 'vue';
-    const navbar_store = useLocalNavbarStore();
 
+    const navbar_store = useLocalNavbarStore();
     const navbar_items = navbar_store.project_items;
-    let active_item = ref(navbar_items[0].name)
+    const active_item = ref(navbar_items[0].name)
+
+    function setActive(newActive: any){
+        navbar_store.setActive(newActive);
+        active_item.value = navbar_store.active;
+    }
 </script>
 
 <style lang="scss" scoped>

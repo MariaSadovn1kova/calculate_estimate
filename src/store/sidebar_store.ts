@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 
-export const useSidebarStore = defineStore("events", () => {
+export const useSidebarStore = defineStore("sidebar", () => {
    const project_items = [
     { name: "2023" },
     { name: "2022" },
