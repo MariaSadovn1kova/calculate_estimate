@@ -5,6 +5,7 @@ import ProjectCard from "@/components/projects/ProjectCard.vue"
 import ProjectsList from "@/components/projects/ProjectsList.vue"
 import LocalNavbar from "@/components/LocalNavbar.vue"
 import Input from "@/components/Input.vue"
+import Modal from "@/components/Modal.vue"
 
 export default[
     Navbar,
@@ -13,6 +14,7 @@ export default[
     ProjectCard,
     ProjectsList,
     LocalNavbar,
-    Input
+    Input,
+    Modal
 ]
 

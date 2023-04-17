@@ -2,7 +2,7 @@
    <div class="sidebar__container">
     <div class="sidebar__element-container">
         <div v-for="item in sidebar_items" :key="item.name" class="sidebar__element" :class = "{'active' :item.name == active_item}" @click="setActive(item.name)">
-           <div>
+           <div class="item__name">
             {{ item.name }}
            </div>
            <div v-if="props.count" class="projects__count">
@@ -47,11 +47,16 @@
         box-shadow: 0px 4px 4px #DEE1E0;
         min-height: 100vh;
         .sidebar__element{
-            padding: 0.8rem 2rem 0.8rem 2rem;
+            padding: 0.8rem 2rem;
             color: #868585;
             font-weight: 600;
             display: flex;
             justify-content: space-between;
+            height: 3.2rem;
+            border-bottom: 1px solid #DEE1E0;
+            .item__name{
+                padding-top: 0.1rem;
+            }
             .projects__count{
                 margin-right: 0.8rem;
             }

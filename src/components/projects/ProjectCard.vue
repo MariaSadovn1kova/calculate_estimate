@@ -19,7 +19,7 @@
       <button class="edit">
         <img src="@/assets/logo/edit.svg">
       </button>
-      <button class="delete">
+      <button class="delete" @click.stop="modal_store.setShow">
         <img src="@/assets/logo/delete.svg">
       </button>
     </div>
@@ -32,7 +32,9 @@ export default {name: "project-card" };
 
 <script setup lang="ts">
   import { defineProps } from 'vue';
+  import { useModalStore } from "@/store/modal_store";
 
+  const modal_store = useModalStore();
   const props = defineProps({
       project: Object
   })

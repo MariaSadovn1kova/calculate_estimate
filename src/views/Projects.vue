@@ -16,6 +16,7 @@
     <local-navbar/>
     <input type="text" class="custom__input" placeholder="ФИО заказчика...">
     <projects-list/>
+    <modal-window/>
   </div>
 </template>
 
