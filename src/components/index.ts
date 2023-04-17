@@ -6,9 +6,10 @@ import ProjectsList from "@/components/projects/ProjectsList.vue"
 import LocalNavbar from "@/components/LocalNavbar.vue"
 import Input from "@/components/Input.vue"
 import Modal from "@/components/Modal.vue"
-import CustomerForm from "@/components/create_project/CustomerForm.vue"
+import CustomerForm from "@/components/project/CustomerForm.vue"
 import TextArea from "@/components/TextArea.vue"
 import SubButton from "@/components/SubButton.vue"
+import BuildingForm from "@/components/project/BuildingForm.vue"
 
 export default[
     Navbar,
@@ -21,6 +22,7 @@ export default[
     Modal,
     CustomerForm,
     TextArea,
-    SubButton
+    SubButton,
+    BuildingForm
 ]
 

@@ -1,14 +1,15 @@
 <template>
-  <div class="customer__container">
+  <div class="building__container">
     <div class="header">
-        Заполните данные о заказчике
+        Здание 1
     </div>
-    <div class="content__container">
+    <local-navbar :navbar_items = 'navbar_store.buildings_items'  :default_active = 'navbar_store.buildings_items[0].name'/>
+    <div class="content__container" v-if="navbar_store.active == 'Общая информация'">
         <div class="left__container">
-            <custom-input class="custom__input" :title="'ФИО'"/>
-            <custom-input class="custom__input" :title="'Адрес'"/>
-            <custom-input class="custom__input" :title="'Телефонный номер'"/>
-            <custom-input class="custom__input" :title="'Электронная почта'"/>
+            <custom-input class="custom__input" :title="'Тип здания'"/>
+            <custom-input class="custom__input" :title="'Количество этажей'"/>
+            <custom-input class="custom__input" :title="'Материал'"/>
+            <custom-input class="custom__input" :title="'Наличие крыльца'"/>
         </div>
         <div class="right__container">
             <custom-textarea :title="'Комментарий'"/>
@@ -21,16 +22,23 @@
 </template>
 
 <script lang="ts">
-  export default {name: "customer-form" };
+  export default {name: "building-form" };
+</script>
+
+<script setup lang="ts">
+  import { useLocalNavbarStore } from "@/store/local-navbar_store";
+
+  const navbar_store = useLocalNavbarStore();
 </script>
 
 <style lang="scss" scoped>
-.customer__container{
+.building__container{
     width: 100%;
     background-color: #fff;
     box-shadow: 0px 0px 10px #e1e6e6;
     border-radius: 0.5rem;
     padding: 3rem 4rem;
+    margin-bottom: 5rem;
     .header{
         color: #525252;
         margin-bottom: 1rem;

@@ -12,7 +12,13 @@
         </main-btn>
       </router-link>
     </div>
-    <customer-form v-if="sidebar_store.active == 'Здания и заказчик'"/>
+    <div v-if="sidebar_store.active == 'Здания и заказчик'">
+      <customer-form/>
+      <div class="btn__container">
+        <sub-btn class="sub__button">Добавить здание</sub-btn>
+      </div>
+      <building-form/>
+    </div>
   </div>
 </template>
 
@@ -40,6 +46,18 @@
       .btn__img{
         margin-right: 0.5rem;
       }
+    }
+  }
+  .btn__container{
+    width: 100%;
+    display: flex;
+    margin-bottom: 1rem;
+    .sub__button{
+      margin-left: auto;
+      background-color: #F6FAF8;
+    }
+    .sub__button:hover{
+      background-color: #6cb458;
     }
   }
 </style>

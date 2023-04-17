@@ -1,11 +1,11 @@
 <template>
-  <div v-if="navbar_store.projects_active == 'Все проекты'" class="list__container">
+  <div v-if="navbar_store.active == 'Все проекты'" class="list__container">
     <project-card v-for="project in projects_list_store.projects" :key="project.id" :project = 'project'/>
   </div>
-  <div v-if="navbar_store.projects_active == 'Текущие проекты'" class="list__container">
+  <div v-if="navbar_store.active == 'Текущие проекты'" class="list__container">
     <project-card v-for="project in projects_list_store.unfinishedProjects" :key="project.id" :project = 'project'/>
   </div>
-  <div v-if="navbar_store.projects_active == 'Завершенные проекты'" class="list__container">
+  <div v-if="navbar_store.active == 'Завершенные проекты'" class="list__container">
     <project-card v-for="project in projects_list_store.finishedProjects" :key="project.id" :project = 'project'/>
   </div>
 </template>

@@ -2,7 +2,7 @@
  <div class="local-navbar__container">
     <div class="navabar-item__container">
         <div class="local-navbar__item" 
-            v-for="item in project_items" 
+            v-for="item in props.navbar_items" 
             :key="item.name" 
             :class = "{'active' :item.name == active_item}" 
             @click="setActive(item.name)">{{ item.name }}</div>
@@ -18,22 +18,21 @@
 </script>
 <script setup lang="ts">
     import { useLocalNavbarStore } from "@/store/local-navbar_store";
-    import { onBeforeMount, ref } from 'vue';
+    import { onBeforeMount, ref, defineProps } from 'vue';
 
+    const props = defineProps({
+        navbar_items: Object,
+        default_active: String,
+    })
     const navbar_store = useLocalNavbarStore();
-    const project_items = [
-        { name: "Все проекты" },
-        { name: "Текущие проекты" },
-        { name: "Завершенные проекты" }
-    ]
-    const active_item = ref(project_items[0].name)
+    const active_item = ref(props.default_active);
     
     function setActive(newActive: any){
-        navbar_store.setProjectsActive(newActive);
-        active_item.value = navbar_store.projects_active;
+        navbar_store.setActive(newActive);
+        active_item.value = navbar_store.active;
     }
     onBeforeMount(async () => {
-        navbar_store.setProjectsActive('Все проекты');
+        navbar_store.setActive(props.navbar_items[0].name);
     })
 </script>
 

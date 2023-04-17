@@ -27,7 +27,7 @@
       count: Boolean
     })
     const sidebar_store = useSidebarStore();
-    const active_item = ref(props.default_active)
+    const active_item = ref(props.default_active);
 
     function setActive(newActiveItem: any){
         sidebar_store.setActive(newActiveItem);

@@ -13,7 +13,7 @@
         </main-btn>
       </router-link>
     </div>
-    <local-navbar/>
+    <local-navbar  :navbar_items = 'navbar_store.projects_items'  :default_active = 'navbar_store.projects_items[0].name'/>
     <input type="text" class="custom__input" placeholder="ФИО заказчика...">
     <projects-list/>
     <modal-window/>
@@ -26,7 +26,9 @@
 
 <script setup lang="ts">
   import { useSidebarStore } from "@/store/sidebar_store";
+  import { useLocalNavbarStore } from "@/store/local-navbar_store";
 
+  const navbar_store = useLocalNavbarStore();
   const sidebar_store = useSidebarStore();
 </script>
 
