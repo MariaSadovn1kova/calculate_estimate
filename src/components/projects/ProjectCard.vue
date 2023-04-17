@@ -64,7 +64,7 @@
     }
   }
   .card__info{
-    width: 60%;
+    width: 70%;
     display: flex;
     padding: 1rem 4rem;
     justify-content: space-between;
@@ -94,13 +94,19 @@
       background-color: #dcf3ee;
     }
     .project__data{
+      width: 30%;
       padding-top: 0.9rem;
+      text-align: center;
     }
     .project__customer{
+      width: 30%;
       padding-top: 0.9rem;
+      text-align: center;
     }
     .project__address{
+      width: 30%;
       padding-top: 0.9rem;
+      text-align: center;
     }
   }
   .card__btns{

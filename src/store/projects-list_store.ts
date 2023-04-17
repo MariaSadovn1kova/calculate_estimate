@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 export const useProjectsListStore = defineStore("projectsList", () => {
     const projects = [
         { id: "1", date: '12.01.2023', customer: 'Иванов Иван Иванович', address: 'ул. Некрасова 30', status: 'finished'},
-        { id: "2", date: '12.01.2023', customer: 'Иванов Петр Иванович', address: 'ул. Некрасова 35', status: 'unfinished'},
+        { id: "2", date: '12.01.2023', customer: 'Оп Петр Иванович', address: 'ул. Некрасова 35', status: 'unfinished'},
         { id: "3", date: '12.01.2023', customer: 'Иванов Петр Иванович', address: 'ул. Некрасова 35', status: 'unfinished'},
         { id: "4", date: '12.01.2023', customer: 'Иванов Петр Иванович', address: 'ул. Некрасова 35', status: 'unfinished'},
     ]

@@ -31,7 +31,7 @@
     box-shadow: 0px 0px 10px #e1e6e6;
     border-radius: 0.5rem;
     padding: 3rem 4rem;
-    margin-bottom: 5rem;
+    margin-bottom: 4rem;
     .header{
         color: #525252;
         margin-bottom: 1rem;
