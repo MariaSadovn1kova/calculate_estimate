@@ -13,7 +13,7 @@ export const useSidebarStore = defineStore("sidebar", () => {
         { name: "Крыша" }
     ]
     const create_items =[
-        { name: "Здания и клиент" },
+        { name: "Здания и заказчик" },
         { name: "Смета" },
         { name: "Стройматериалы" }
     ]

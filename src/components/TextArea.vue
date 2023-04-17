@@ -1,12 +1,12 @@
 <template>
-   <div class="input__container">
+   <div class="textarea-container">
     <label for="my-input" class="label">{{ props.title }}</label>
-    <input class="my-input" type="text">
+    <textarea class="my-textarea" cols="30" rows="10"></textarea>
   </div>
 </template>
 
 <script lang="ts">
-    export default { name: "custom-input" };
+    export default { name: "custom-textarea" };
 </script>
 <script setup lang="ts">
   import { defineProps } from 'vue';
@@ -17,11 +17,11 @@
 </script>
 
 <style lang="scss" scoped>
-.input__container{
+.textarea-container{
     display: flex;
     flex-direction: column;
     margin: 0.5rem 0 0.5rem 0;
-    .my-input{
+    .my-textarea{
         background-color: #FBFFFA;
         border: 1px solid #6BBF54;
         border-radius: 0.3rem;

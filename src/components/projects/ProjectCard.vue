@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-export default {name: "project-card" };
+  export default {name: "project-card" };
 </script>
 
 <script setup lang="ts">
@@ -70,6 +70,7 @@ export default {name: "project-card" };
     justify-content: space-between;
     color: #828282;
     font-weight: 500;
+    cursor:default;
     .xlsx__btn{
       height: 3rem;
       border-radius: 0.5rem;
@@ -105,12 +106,12 @@ export default {name: "project-card" };
   .card__btns{
     color: black;
     height: 100%;
-    padding: 1.3rem 3rem;
+    padding: 1.2rem 3rem;
     margin-left: auto;
 
     button{
       background-color: #fff;
-      padding: 0.3rem;
+      padding: 0.35rem;
       border-radius: 0.4rem;
       transition: 0.5s;
     }
