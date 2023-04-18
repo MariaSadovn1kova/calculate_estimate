@@ -44,12 +44,12 @@ const itemLinks = [
         .nav__link.active{
             text-decoration: none;
             font-weight: 600;
-            color: #6BBF54;
-            border-bottom: 3px solid #6BBF54;
+            color: #77AF68;
+            border-bottom: 3px solid #77AF68;
         }
         .nav__link:hover{
-            background-color: #f3f8f1;
-            color: #6BBF54;
+            background-color: #f4faf1;
+            color: #77AF68;
         }
         .user__container{
             display: flex;
@@ -57,7 +57,7 @@ const itemLinks = [
         }
         .user__name{
             font-weight: 600;
-            color: #6BBF54;
+            color: #77AF68;
             padding: 1rem;
         }
         .user__container:hover{

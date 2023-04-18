@@ -53,11 +53,11 @@
         color: #828282;
     }
     .local-navbar__item.active{
-        color:#6BBF54;
-        border-bottom: 3px solid #6BBF54;
+        color:#77AF68;
+        border-bottom: 3px solid #77AF68;
     }
     .local-navbar__item:hover{
-        color: #6BBF54;
+        color: #77AF68;
         cursor: pointer;
     }
 }

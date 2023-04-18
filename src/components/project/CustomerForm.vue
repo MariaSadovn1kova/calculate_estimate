@@ -5,10 +5,7 @@
     </div>
     <div class="content__container">
         <div class="left__container">
-            <custom-input class="custom__input" :title="'ФИО'"/>
-            <custom-input class="custom__input" :title="'Адрес'"/>
-            <custom-input class="custom__input" :title="'Телефонный номер'"/>
-            <custom-input class="custom__input" :title="'Электронная почта'"/>
+            <custom-input v-for="item in inputs_items" :key="item.name" class="custom__input" :title="item.name"/>
         </div>
         <div class="right__container">
             <custom-textarea :title="'Комментарий'"/>
@@ -22,6 +19,14 @@
 
 <script lang="ts">
   export default {name: "customer-form" };
+</script>
+<script setup lang="ts">
+    const inputs_items = [
+        { name: "ФИО" },
+        { name: "Адрес" },
+        { name: "Телефонный номер" },
+        { name: "Электронная почта" },
+    ]
 </script>
 
 <style lang="scss" scoped>

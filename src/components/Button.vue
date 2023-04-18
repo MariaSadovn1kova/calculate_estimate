@@ -10,7 +10,7 @@
 
 <style lang="scss" scoped>
 .btn-container{
-    background-color: #6BBF54;
+    background-color: #77AF68;
     border: none;
     color: #fff;
     font-weight: 600;
@@ -20,6 +20,6 @@
 }
 .btn-container:hover{
     cursor: pointer;
-    background-color: #6cb458;
+    background-color: #649258;
 }
 </style>

@@ -11,8 +11,8 @@
 <style lang="scss" scoped>
 .btn-container{
     background-color: #fff;
-    border: 1px solid #6BBF54;
-    color: #6BBF54;
+    border: 1px solid #77AF68;
+    color: #77AF68;
     font-weight: 600;
     padding: 0.8em 1rem;
     border-radius: 0.5rem;
@@ -20,7 +20,7 @@
 }
 .btn-container:hover{
     cursor: pointer;
-    background-color: #6cb458;
+    background-color: #77AF68;
     color: #fff;
 }
 </style>
