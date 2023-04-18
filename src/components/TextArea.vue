@@ -23,7 +23,7 @@
     margin: 0.5rem 0 0.5rem 0;
     .my-textarea{
         background-color: #FBFFFA;
-        border: 1px solid #6BBF54;
+        border: 1px solid #77AF68;
         border-radius: 0.3rem;
         padding: 0.5rem;
         outline: none;

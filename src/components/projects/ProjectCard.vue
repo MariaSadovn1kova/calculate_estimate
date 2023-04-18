@@ -68,7 +68,7 @@
     display: flex;
     padding: 1rem 4rem;
     justify-content: space-between;
-    color: #828282;
+    color: #5f5e5e;
     font-weight: 500;
     cursor:default;
     .xlsx__btn{

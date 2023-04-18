@@ -50,7 +50,8 @@
     .local-navbar__item{
         padding: 1rem 0rem 1rem 0;
         margin-right: 2rem;
-        color: #828282;
+        color: #5f5e5e;
+        font-weight: 500;
     }
     .local-navbar__item.active{
         color:#77AF68;
