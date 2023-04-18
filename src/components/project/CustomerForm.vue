@@ -10,7 +10,7 @@
         <div class="right__container">
             <custom-textarea :title="'Комментарий'"/>
             <div>
-                <sub-btn class="sub__button">Очистить</sub-btn>
+                <sub-btn class="sub__button">Сбросить</sub-btn>
             </div>
         </div>
     </div>

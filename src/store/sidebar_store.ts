@@ -8,9 +8,14 @@ export const useSidebarStore = defineStore("sidebar", () => {
         { name: "2021" }
     ]
     const materials_items =[
-        { name: "Фундамент" },
-        { name: "Коробка" },
-        { name: "Крыша" }
+        { name: "Арматура" },
+        { name: "Доска" },
+        { name: "Бетон" },
+        { name: "Блок" },
+        { name: "Брус" },
+        { name: "Отделка" },
+        { name: "Работы" },
+
     ]
     const create_items =[
         { name: "Здания и заказчик" },

@@ -35,8 +35,9 @@
     justify-content: space-between;
     margin-bottom: 2rem;
     .header__title{
+      font-weight: 500;
       font-size: 1.1rem;
-      color: #525252;
+      color: #5f5e5e;
     }
     .btn__content{
       display: flex;

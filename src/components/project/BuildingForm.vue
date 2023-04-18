@@ -1,15 +1,12 @@
 <template>
 <div class="container">
   <div class="tab__container">
-    <div class="tab">
-      Здание 1
+    <div v-for="tab in tabs" :key="tab.name" class="tab" :class = "{'active' :tab.name == activeTab}" @click="setActiveTab(tab.name)">
+      {{ tab.name }}
     </div>
-    <div class="tab active">
-      Здание 2
-    </div>
-    <div class="add__tab">
-      +
-    </div>
+    <button class="add__tab">
+      <img src="@/assets/logo/plus_dark.svg">
+    </button>
   </div>
   <div class="building__container">
     <local-navbar :navbar_items = 'navbar_store.buildings_items'  :default_active = 'navbar_store.buildings_items[0].name'>
@@ -24,7 +21,7 @@
         <div class="right__container">
             <custom-textarea :title="'Комментарий'"/>
             <div>
-                <sub-btn class="sub__button">Очистить</sub-btn>
+                <sub-btn class="sub__button">Сбросить</sub-btn>
             </div>
         </div>
     </div>
@@ -39,6 +36,7 @@
 <script setup lang="ts">
   import { useLocalNavbarStore } from "@/store/local-navbar_store";
   import { useCreateProjectStore } from "@/store/create-project_store";
+  import { ref } from "vue";
 
   const create_project_store =  useCreateProjectStore();
   const navbar_store = useLocalNavbarStore();
@@ -48,31 +46,49 @@
     { name: "Материал" },
     { name: "Наличие крыльца" },
   ]
+  const tabs = [
+    { name: "Здание 1" },
+    { name: "Здание 2" },
+  ]
+  const activeTab = ref(tabs[0].name)
+  
+  function setActiveTab( newActive: any){
+    activeTab.value = newActive
+  }
 </script>
 
 <style lang="scss" scoped>
 .container{
-  background-color: #f3f8f1;
-  box-shadow: 0px 0px 10px #e1e6e6;  
+  background-color: #f3f8f1; 
   border-radius: 0.5rem;
 }
 .tab__container{
-  display: flex;
+  display: flex;  
   .tab{
-    background-color: #f3f8f1;
+    background-color: #e6eee6;
     width: 10%;
     padding: 1rem;
     text-align: center;
     border-radius: 0.5rem 0.5rem 0 0;
-    font-weight: 500;
+    font-weight: 600;
+    color: #5f5e5e;
   }
   .tab.active{
     background-color: #fff;
     color: #77AF68;
+    box-shadow: 0px -5px 10px #e1e6e6;  
   }
   .add__tab{
     padding: 1rem;
     margin-left: auto;
+    background: none;
+    border: none;
+    transition: 0.3s;
+    border-radius:  0.3rem 0.3rem 0 0;
+  }
+  .add__tab:hover{
+    cursor: pointer;
+    background-color: #e7f1e7;
   }
 }
 .tab:hover{
@@ -83,13 +99,15 @@
     background-color: #fff;
     padding: 3rem 4rem;
     margin-bottom: 5rem;
-    border-radius: 0 0 1rem 1rem;
+    transition: 0.3s;
+    box-shadow: 0px 0px 10px #e1e6e6;
     .delete{
       background-color: #fff;
       padding: 0.35rem;
       border-radius: 0.4rem;
       transition: 0.5s;
-      border: 1px solid #FFADAD;
+      border: none;
+      margin-top: 0.5rem;
     }
     .delete:hover{
       cursor: pointer;
