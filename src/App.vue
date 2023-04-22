@@ -29,7 +29,7 @@ const route = useRoute();
     font-size: 0.9rem;
     .app{
       min-height: 100vh;
-      background-color: #f3f8f3;
+      background-color: #F4F4F4;
       .main__navbar{
         position: absolute;
         width: 100%;

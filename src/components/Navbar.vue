@@ -37,7 +37,7 @@ const itemLinks = [
         }
         .nav__link{
             text-decoration: none;
-            color: #5f5e5e;
+            color: #4A4F48;
             font-weight: 600;
             padding: 1rem; 
         }

@@ -38,7 +38,7 @@
     padding: 3rem 4rem;
     margin-bottom: 4rem;
     .header{
-        color: #525252;
+        color: #4A4F48;
         margin-bottom: 1rem;
     }
     .content__container{

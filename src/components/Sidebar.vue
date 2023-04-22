@@ -48,7 +48,7 @@
         min-height: 100vh;
         .sidebar__element{
             padding: 0.8rem 2rem;
-            color: #868585;
+            color: #4A4F48;
             font-weight: 600;
             display: flex;
             justify-content: space-between;

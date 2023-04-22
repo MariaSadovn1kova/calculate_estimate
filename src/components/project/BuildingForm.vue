@@ -59,7 +59,7 @@
 
 <style lang="scss" scoped>
 .container{
-  background-color: #f3f8f1; 
+  background-color: #F4F4F4; 
   border-radius: 0.5rem;
 }
 .tab__container{
@@ -71,7 +71,7 @@
     text-align: center;
     border-radius: 0.5rem 0.5rem 0 0;
     font-weight: 600;
-    color: #5f5e5e;
+    color: #4A4F48;
   }
   .tab.active{
     background-color: #fff;
