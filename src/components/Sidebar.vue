@@ -68,16 +68,13 @@
             font-weight: 600;
         }
         .active{
-            background-color: #f3f8f1;
-            color: #77AF68;
-            border-left: 5px solid #77AF68;
-            .projects__count{
-                margin-right:0;
-                padding: 0.2rem 0.8rem;
-                border-radius: 0.5rem;
-                background: #77AF68;
-                color: #fff;
-            }
+            background-color: #77AF68;
+            color: #fff;
+
+        }
+        .active:hover{
+            background-color: #77AF68;
+            color: #fff;
         }
     }
 </style>

@@ -37,7 +37,7 @@
     .header__title{
       font-weight: 500;
       font-size: 1.1rem;
-      color: #5f5e5e;
+      color: #4A4F48;
     }
     .btn__content{
       display: flex;
