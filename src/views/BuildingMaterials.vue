@@ -29,17 +29,22 @@
         <material-card/>
       </div>
     </div>
-    <modal-window></modal-window>
+    <modal-window>
+      <div class="material-modal__container">
+        <local-navbar class="material__navbar" :navbar_items = 'navbar_store.material_items'  :default_active = 'navbar_store.material_items[0].name'/>
+      </div>
+    </modal-window>
   </div>
 </template>
 
 <script lang="ts">
-export default {name: "building-materials" };
+export default { name: "building-materials" };
 </script>
 <script setup lang="ts">
   import { useSidebarStore } from "@/store/sidebar_store";
   import { useLocalNavbarStore } from "@/store/local-navbar_store";
-import MaterialCard from '@/components/materials/MaterialCard.vue';
+  import MaterialCard from '@/components/materials/MaterialCard.vue';
+  import LocalNavbar from '@/components/LocalNavbar.vue';
 
   const navbar_store = useLocalNavbarStore();
   const sidebar_store = useSidebarStore();
@@ -69,6 +74,15 @@ import MaterialCard from '@/components/materials/MaterialCard.vue';
       display: flex;
       justify-content: space-between;
       margin-bottom: 2rem;
+    }
+  }
+
+  .material-modal__container{
+    width: 60rem;
+    height: 50rem;
+    padding: 2rem 3rem;
+    .material__navbar{
+      margin-top: 0;
     }
   }
 }

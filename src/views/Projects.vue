@@ -74,6 +74,7 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    padding: 2rem 3rem;
     .header{
       font-size: 1.1rem;
       border-bottom: 1px solid #D9D9D9;

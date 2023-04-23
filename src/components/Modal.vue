@@ -25,7 +25,6 @@
     position: fixed;
     display: flex;
     .dialog__content{
-      padding: 4rem 3rem;
       margin: auto;
       background: white;
       border-radius:0.3rem;
