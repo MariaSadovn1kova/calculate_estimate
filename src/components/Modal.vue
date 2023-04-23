@@ -29,8 +29,6 @@
       margin: auto;
       background: white;
       border-radius:0.3rem;
-      height: 30rem;
-      width: 35rem;
   }
 }
 </style>

@@ -7,8 +7,8 @@
     <div class="material__count"> Количество</div>
     <div class="material__price"> Цена материала</div>
     <div class="btn__container">
-        <main-btn class="open__material"  @click.stop="modal_store.setShow">Открыть</main-btn>
         <sub-btn class="sub__button">Удалить</sub-btn>
+        <main-btn class="open__material"  @click.stop="modal_store.setShow">Открыть</main-btn>
     </div>
   </div>
 </template>

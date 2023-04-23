@@ -55,12 +55,14 @@
     width: 2.5rem;
     height: 100%;
     border-radius: 0.5rem 0 0 0.5rem;
-    padding: 1.7rem 0.4rem;
+    padding: 1.4rem 0.2rem;
     &.finished{
-      background-color: #C8E9BD;
+      background-color: #D6F3CC;
+      border: 3px solid #ffffff;  
     }
     &.unfinished{
       background-color: #FFDAD1;
+      border: 3px solid #ffffff; 
     }
   }
   .card__info{
@@ -75,9 +77,9 @@
       height: 3rem;
       border-radius: 0.5rem;
       border: none;
-      background-color: #E8F6F3;
+      background-color: #F3F8F1;
       display: flex;
-      color: #34CAA5;
+      color: #7FAF68;
       font-weight: 600;
       padding: 0 0.8rem 0 1rem;
       transition: 0.2s;
@@ -91,7 +93,7 @@
     }
     .xlsx__btn:hover{
       cursor: pointer;
-      background-color: #dcf3ee;
+      background-color: #d5f0cb;
     }
     .project__data{
       width: 30%;
@@ -122,7 +124,7 @@
       transition: 0.5s;
     }
     button.edit{
-      border: 1px solid #6BBF54;
+      border: 1px solid #7FAF68;
       margin-right: 0.6rem;
     }
     button.delete{

@@ -88,7 +88,7 @@
       margin: 1rem 0;
     }
     .modal-btn__container{
-      margin-top:auto;
+      margin-top: 2rem;
       display: flex;
       .cancel__btn{
         margin-left: auto;
