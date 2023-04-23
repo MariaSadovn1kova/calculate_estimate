@@ -1,11 +1,75 @@
 <template>
-  <div>Строительные материалы</div>
+  <div class="materials__container">
+    <div class="header">
+      <div class="header__title">
+        {{ sidebar_store.active }} 
+      </div>
+      <router-link to="/create">
+        <main-btn>
+          <div class="btn__content">
+            <img src="@/assets/logo/plus.svg" class="btn__img">
+            <div class="btn__text">Материал</div>
+          </div>
+        </main-btn>
+      </router-link>
+    </div>
+    <div class="material-cards__container">
+      <div class="material-cards__row">
+        <material-card/>
+        <material-card/>
+        <material-card/>
+        <material-card/>
+        <material-card/>
+      </div>
+      <div class="material-cards__row">
+        <material-card/>
+        <material-card/>
+        <material-card/>
+        <material-card/>
+        <material-card/>
+      </div>
+    </div>
+    <modal-window></modal-window>
+  </div>
 </template>
 
 <script lang="ts">
-export default { name: "building-materials" };
+export default {name: "building-materials" };
+</script>
+<script setup lang="ts">
+  import { useSidebarStore } from "@/store/sidebar_store";
+  import { useLocalNavbarStore } from "@/store/local-navbar_store";
+import MaterialCard from '@/components/materials/MaterialCard.vue';
+
+  const navbar_store = useLocalNavbarStore();
+  const sidebar_store = useSidebarStore();
 </script>
 
-<style>
+<style lang="scss" scoped>
+.materials__container{
+  .header{
+    display: flex;
+    justify-content: space-between;
+    .header__title{
+      font-size: 1.1rem;           
+      color: #4A4F48;
+      font-weight: 500;
+    }
+    .btn__content{
+      display: flex;
+      .btn__img{
+        margin-right: 0.5rem;
+      }
+    }
+  }
 
+  .material-cards__container{
+    margin: 2rem 0;
+    .material-cards__row{
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+  }
+}
 </style>

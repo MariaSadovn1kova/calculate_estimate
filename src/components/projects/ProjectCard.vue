@@ -57,7 +57,7 @@
     border-radius: 0.5rem 0 0 0.5rem;
     padding: 1.7rem 0.4rem;
     &.finished{
-      background-color: #CCF3E9;
+      background-color: #C8E9BD;
     }
     &.unfinished{
       background-color: #FFDAD1;

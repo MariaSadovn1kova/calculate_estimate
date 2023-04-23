@@ -10,6 +10,7 @@ import CustomerForm from "@/components/project/CustomerForm.vue"
 import TextArea from "@/components/TextArea.vue"
 import SubButton from "@/components/SubButton.vue"
 import BuildingForm from "@/components/project/BuildingForm.vue"
+import MaterialCard from "@/components/materials/MaterialCard.vue"
 
 export default[
     Navbar,
@@ -23,6 +24,7 @@ export default[
     CustomerForm,
     TextArea,
     SubButton,
-    BuildingForm
+    BuildingForm,
+    MaterialCard
 ]
 
