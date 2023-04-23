@@ -25,13 +25,18 @@
         <material-card/>
         <material-card/>
         <material-card/>
-        <material-card/>
-        <material-card/>
+
       </div>
     </div>
     <modal-window>
       <div class="material-modal__container">
-        <local-navbar class="material__navbar" :navbar_items = 'navbar_store.material_items'  :default_active = 'navbar_store.material_items[0].name'/>
+        <local-navbar class="material__navbar" :navbar_items = 'navbar_store.material_items' :default_active = 'navbar_store.material_items[0].name'/>
+        <div class="general-information__container">
+          <div class="left"></div>
+          <div class="right">
+            <custom-input/>
+          </div>
+        </div>
       </div>
     </modal-window>
   </div>
@@ -83,6 +88,15 @@ export default { name: "building-materials" };
     padding: 2rem 3rem;
     .material__navbar{
       margin-top: 0;
+    }
+    .general-information__container{
+      display: flex;
+      .left{
+        width: 50%;
+      }
+      .right{
+        width: 50%;
+      }
     }
   }
 }
