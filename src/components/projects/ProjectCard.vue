@@ -87,7 +87,7 @@
         margin-top: 1rem;
       }
       img{
-        margin-top: 0.7rem;
+        margin-top: 0.6rem;
         margin-left: 0.4rem;
       }
     }

@@ -7,8 +7,7 @@
       <router-link to="/create">
         <main-btn>
           <div class="btn__content">
-            <img src="@/assets/logo/plus.svg" class="btn__img">
-            <div class="btn__text">Новый проект</div>
+            <div class="btn__text">Создать проект</div>
           </div>
         </main-btn>
       </router-link>
@@ -20,9 +19,9 @@
       <div class="modal__content">
         <div class="header">Удалить проект</div>
         <div class="modal__text">Вы уверены, что хотите удалить этот проект?</div>
-        <div class="info">Заказчик:</div>
-        <div class="info">Адрес:</div>
-        <div class="info">Дата:</div>
+        <div class="info">Заказчик: <span>Иванов Иван Иванович</span></div>
+        <div class="info">Адрес: <span>Иванов Иван Иванович</span></div>
+        <div class="info">Дата: <span>Иванов Иван Иванович</span></div>
         <div class="modal-btn__container">
           <sub-btn class="cancel__btn">Отмена</sub-btn>
           <main-btn class="delete__btn">Удалить</main-btn>
@@ -87,6 +86,11 @@
       font-weight: 600;
       color: #77AF68;
       margin: 1rem 0;
+      display: flex;
+      span{
+        color:#4A4F48;
+        margin-left: auto;
+      }
     }
     .modal-btn__container{
       margin-top: 2rem;

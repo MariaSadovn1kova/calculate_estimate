@@ -16,6 +16,9 @@
       <customer-form/>
       <building-form/>
     </div>
+    <div v-if="sidebar_store.active == 'Смета'">
+      <project-estimate/>
+    </div>
   </div>
 </template>
 

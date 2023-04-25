@@ -7,8 +7,7 @@
       <router-link to="/create">
         <main-btn>
           <div class="btn__content">
-            <img src="@/assets/logo/plus.svg" class="btn__img">
-            <div class="btn__text">Материал</div>
+            <div class="btn__text">Создать материал</div>
           </div>
         </main-btn>
       </router-link>
@@ -25,7 +24,8 @@
         <material-card/>
         <material-card/>
         <material-card/>
-
+        <material-card/>
+        <material-card/>
       </div>
     </div>
     <modal-window>
@@ -48,8 +48,6 @@ export default { name: "building-materials" };
 <script setup lang="ts">
   import { useSidebarStore } from "@/store/sidebar_store";
   import { useLocalNavbarStore } from "@/store/local-navbar_store";
-  import MaterialCard from '@/components/materials/MaterialCard.vue';
-  import LocalNavbar from '@/components/LocalNavbar.vue';
 
   const navbar_store = useLocalNavbarStore();
   const sidebar_store = useSidebarStore();

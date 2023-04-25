@@ -54,6 +54,7 @@
             justify-content: space-between;
             height: 3.2rem;
             border-bottom: 1px solid #DEE1E0;
+            transition: 0.2s;
             .item__name{
                 padding-top: 0.1rem;
             }
