@@ -39,6 +39,19 @@
                     </button>
                 </div>
             </div>
+            <div class="table__row">
+                <div class="row__item first__item">1</div>
+                <div class="row__item">Доска 40*180*6м</div>
+                <div class="row__item">м3</div>
+                <div class="row__item">6,5</div>
+                <div class="row__item">7 000,00</div>
+                <div class="row__item">45 500,00</div>
+                <div class="row__item last__item">
+                    <button>
+                        <img src="@/assets/logo/delete.svg">
+                    </button>
+                </div>
+            </div>
             <div class="row__header">
                 <span>Работы</span>
                 <button>
@@ -78,6 +91,12 @@
                 </div>
             </div>
         </div>
+        <div class="final__price">
+            <div class="row__item first__item"></div>
+            <div class="row__item">Итого фундамент:</div>
+            <div class="row__item">45 500,00</div>
+            <div class="row__item last__item"></div>
+         </div>
     </div>
     </div>
   </div>
@@ -211,6 +230,7 @@
                 width: 100%;
                 height: 4rem;
                 border: 2px solid #d5f0cb;
+                background-color: #fff;
                 margin-bottom: 0.5rem;
                 display: flex;
                 padding: 0.7rem 1rem;
@@ -225,17 +245,39 @@
                         width: 5%;
                         padding-top: 0;
                     }
+                    &:hover{
+                        cursor:default;
+                    }
+
                 }
                 button{
                     padding: 0.3rem;
                     border: 1px solid #FFADAD;
-                    background-color: #fff;
+                    background-color: #f8fcf8;
                     border-radius: 0.4rem;
                     transition: 0.5s;
                     &:hover{
                         cursor: pointer;
                         background-color: #fce7e7;
                     }
+                }
+                &:hover{
+                    background-color: #f8fcf8;
+                }
+            }
+        }
+        .final__price{
+            display: flex;
+            padding:  2rem 1rem 0 1rem;
+            text-align: center;
+            font-weight: 500;
+            .row__item{
+                width: 18%;
+                &.first__item{
+                    width: 59%;
+                }
+                &.last__item{
+                    width: 5%;
                 }
             }
         }

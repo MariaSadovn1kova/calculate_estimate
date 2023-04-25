@@ -4,6 +4,10 @@
       <div class="header__title">
         Создать новый проект
       </div>
+      <button class="xlsx__btn" v-if="sidebar_store.active == 'Смета'">
+          <div>XLSX</div>
+          <img src="@/assets/logo/dawnload.svg">
+      </button>
       <router-link to="/create">
         <main-btn>
           <div class="btn__content">
@@ -44,9 +48,30 @@
     }
     .btn__content{
       display: flex;
-      .btn__img{
-        margin-right: 0.5rem;
+    }
+    .xlsx__btn{
+      border-radius: 0.5rem;
+      border: none;
+      background-color: #F3F8F1;
+      display: flex;
+      color: #7FAF68;
+      font-weight: 600;
+      padding: 0 0.8rem 0 1rem;
+      transition: 0.2s;
+      margin-left: auto;
+      margin-right: 1rem;
+      border: 1px solid #7FAF68;
+      div{
+        margin-top: 0.7rem;
       }
+      img{
+        margin-top: 0.3rem;
+        margin-left: 0.4rem;
+      }
+    }
+    .xlsx__btn:hover{
+      cursor: pointer;
+      background-color: #d5f0cb;
     }
   }
 </style>
