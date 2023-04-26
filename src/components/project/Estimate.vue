@@ -154,7 +154,7 @@
     width: 100%;
     background-color: #fff;
     box-shadow: 0px 0px 10px #e1e6e6;
-    border-radius: 0.5rem;
+    border-radius: 0 0.5rem 0.5rem 0.5rem;
     padding: 1rem 4rem 3rem 4rem;
     .navbar__container{
         display: flex;
@@ -217,6 +217,7 @@
                     display: flex;
                     color: #7FAF68;   
                     padding: 0.8rem;
+                    transition: 0.2s;
                     &:hover{
                         cursor: pointer;
                         background-color: #d5f0cb;

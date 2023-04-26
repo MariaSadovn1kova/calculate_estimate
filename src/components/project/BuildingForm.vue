@@ -16,7 +16,7 @@
     </local-navbar>
     <div class="content__container" v-if="navbar_store.active == 'Общая информация'">
         <div class="left__container">
-            <custom-input v-for="item in inputs_items" :key="item.name" class="custom__input" :title="item.name"/>
+            <custom-input v-for="item in general_inputs_items" :key="item.name" class="custom__input" :title="item.name"/>
         </div>
         <div class="right__container">
             <custom-textarea :title="'Комментарий'"/>
@@ -24,6 +24,23 @@
                 <sub-btn class="sub__button">Сбросить</sub-btn>
             </div>
         </div>
+    </div>
+    <div class="content__container" v-if="navbar_store.active == 'Фундамент'">
+      <div class="left__container">
+        <div class="foundation-type__container">
+          <div class="foundation-type__button" v-for="item in foundation__imgs_row1" :key="item.id" :class = "{'active' :item.id == active_foundation}" @click="setActiveFoundation(item.id)">
+            <img :src="foundation__active[item.id - 1].name" v-if="item.id == active_foundation">
+            <img :src="item.name" v-else>
+          </div>
+        </div>
+        <div class="foundation-type__container">
+          <div class="foundation-type__button" v-for="item in foundation__imgs_row2" :key="item.id" :class = "{'active' :item.id == active_foundation}" @click="setActiveFoundation(item.id)">
+            <img :src="foundation__active[item.id - 1].name" v-if="item.id == active_foundation">
+            <img :src="item.name" v-else>
+          </div>
+        </div>
+      </div>
+      <div class="right__container"></div>
     </div>
   </div>
 </div>
@@ -40,20 +57,44 @@
 
   const create_project_store =  useCreateProjectStore();
   const navbar_store = useLocalNavbarStore();
-  const inputs_items = [
+  const general_inputs_items = [
     { name: "Тип здания" },
     { name: "Количество этажей" },
-    { name: "Материал" },
+    { name: "1 этаж - материал" },
     { name: "Наличие крыльца" },
   ]
   const tabs = [
     { name: "Здание 1" },
     { name: "Здание 2" },
   ]
+  const foundation__imgs_row1 = [
+    { id: 1, name: require('@/assets/img/foundation/foundation_1_0.svg')},
+    { id: 2, name: require('@/assets/img/foundation/foundation_2_0.svg')},
+    { id: 3, name: require('@/assets/img/foundation/foundation_3_0.svg')},
+    { id: 4, name: require('@/assets/img/foundation/foundation_4_0.svg')},
+  ]
+  const foundation__imgs_row2 = [
+    { id: 5, name: require('@/assets/img/foundation/foundation_5_0.svg')},
+    { id: 6, name: require('@/assets/img/foundation/foundation_6_0.svg')},
+    { id: 7, name: require('@/assets/img/foundation/foundation_7_0.svg')},
+  ]
+  const foundation__active = [
+    { id: 1, name: require('@/assets/img/foundation/foundation_1_1.svg')},
+    { id: 2, name: require('@/assets/img/foundation/foundation_2_1.svg')},
+    { id: 3, name: require('@/assets/img/foundation/foundation_3_1.svg')},
+    { id: 4, name: require('@/assets/img/foundation/foundation_4_1.svg')},
+    { id: 5, name: require('@/assets/img/foundation/foundation_5_1.svg')},
+    { id: 6, name: require('@/assets/img/foundation/foundation_6_1.svg')},
+    { id: 7, name: require('@/assets/img/foundation/foundation_7_1.svg')},
+  ]
+  const active_foundation = ref(1);
   const activeTab = ref(tabs[0].name)
   
   function setActiveTab( newActive: any){
     activeTab.value = newActive
+  }
+  function setActiveFoundation( newActive: any){
+    active_foundation.value = newActive
   }
 </script>
 
@@ -99,7 +140,6 @@
     background-color: #fff;
     padding: 3rem 4rem;
     margin-bottom: 5rem;
-    transition: 0.3s;
     box-shadow: 0px 0px 10px #e1e6e6;
     .delete{
       background-color: #fff;
@@ -120,6 +160,26 @@
             padding: 0 15% 0 0;
             .custom__input{
                 margin-bottom: 1.5rem;
+            }
+            .foundation-type__container{
+              display: flex;
+              margin-bottom: 1.5rem;
+              .foundation-type__button{
+                background-color: #FFF7F5;
+                border: 1px solid #FF594B;
+                padding: 1.2rem;
+                width: 6rem;
+                height: 6rem;
+                border-radius: 0.5rem;
+                margin-right: 1.5rem;
+                &:hover{
+                  background-color: #ffede8;
+                  cursor: pointer;
+                }
+                &.active{
+                  background-color: #FF594B;
+                }
+              }
             }
         }
         .right__container{
