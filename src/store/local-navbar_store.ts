@@ -26,7 +26,7 @@ export const useLocalNavbarStore = defineStore("localNavbar", () => {
     const estimate_items = [
         { name: "Фундамент" },
         { name: "Коробка" },
-        { name: "Крыша" },
+        { name: "Крыша и крыльцо" },
     ]
     return {
         active,

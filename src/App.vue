@@ -27,7 +27,7 @@ const route = useRoute();
     padding: 0;
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     .app{
       min-height: 100vh;
       background-color: #F4F4F4;

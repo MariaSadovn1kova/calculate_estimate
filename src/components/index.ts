@@ -12,6 +12,8 @@ import SubButton from "@/components/SubButton.vue"
 import BuildingForm from "@/components/project/BuildingForm.vue"
 import MaterialCard from "@/components/materials/MaterialCard.vue"
 import Estimate from "@/components/project/Estimate.vue"
+import FormulaCard from '@/components/formulas/FormulaCard.vue'
+import Formula from '@/components/formulas/Formula.vue'
 
 export default[
     Navbar,
@@ -27,6 +29,8 @@ export default[
     SubButton,
     BuildingForm,
     MaterialCard,
-    Estimate
+    Estimate,
+    FormulaCard,
+    Formula
 ]
 

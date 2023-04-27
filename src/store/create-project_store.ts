@@ -11,7 +11,7 @@ export const useCreateProjectStore = defineStore("create-project", () => {
           { name: "Толщина" },
         ]},
         {id: 2, board_fields:[
-            { name: "Вид доски" },
+            { name: "Ширина доски" },
         ]},
         {id: 3, reinforcement_fields:[
             { name: "Вид арматуры" },

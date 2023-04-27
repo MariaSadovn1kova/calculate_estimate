@@ -33,7 +33,6 @@
     color: #4A4F48;
     display: flex;
     flex-direction: column;
-    transition: 0.5s;
     
     .material__title{
         text-align: center;

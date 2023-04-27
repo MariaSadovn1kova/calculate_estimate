@@ -1,41 +1,86 @@
 <template>
   <div class="formulas__container">
-    <div v-if="sidebar_store.active == 'Фундамент'" class="foundation-formulas__container">
-      <div class="board__formulas formula__container">
-        <div class="header">Доска</div>
+    <div class="content" v-if="sidebar_store.active == 'Фундамент'">
+      <div class="row">
+        <formula-card :title="'Доска'">
+          <formula-block v-for="item in foundation_types" :key="item.id" :title="item.name"/>
+        </formula-card>
+        <formula-card :title="'Бетон'">
+          <formula-block v-for="item in foundation_types" :key="item.id" :title="item.name"/>
+        </formula-card>
+        <formula-card :title="'Арматура'">
+          <formula-block v-for="item in foundation_types" :key="item.id" :title="item.name"/>
+        </formula-card>
       </div>
-      <div class="board__formulas formula__container">
-        <div class="header">Бетон</div>
-      </div>
-      <div class="board__formulas formula__container">
-        <div class="header">Арматура</div>
-      </div>
-      <div class="board__formulas formula__container">
-        <div class="header">Прут</div>
-      </div>
-    </div>
-    <div v-if="sidebar_store.active == 'Коробка'" class="foundation-formulas__container">
-      <div class="board__formulas formula__container">
-        <div class="header">Брус</div>
-      </div>
-      <div class="board__formulas formula__container">
-        <div class="header">Джут</div>
-      </div>
-      <div class="board__formulas formula__container">
-        <div class="header">Брусок</div>
-      </div>
-      <div class="board__formulas formula__container">
-        <div class="header">Доска</div>
+      <div class="row">
+        <formula-card :title="'Прут'">
+          <formula-block v-for="item in foundation_types" :key="item.id" :title="item.name"/>
+        </formula-card>
       </div>
     </div>
-    <div v-if="sidebar_store.active == 'Крыша и крыльцо'" class="foundation-formulas__container">
-      <div class="board__formulas formula__container">
-        <div class="header">Брус</div>
+    <div class="content" v-if="sidebar_store.active == 'Коробка'">
+        <div class="row">
+          <formula-card :title="'Доска'"/>
+          <formula-card :title="'Блоки'"/>
+          <formula-card :title="'Арматура'"/>
+        </div>
+        <div class="row">
+          <formula-card :title="'Брус'"/>
+          <formula-card :title="'Брусок'"/>
+        </div>
+    </div>
+    <div class="content" v-if="sidebar_store.active == 'Крыша и крыльцо'">
+      <div class="row">
+        <formula-card :title="'Брус'"/>
+        <formula-card :title="'Доска'"/>
+        <formula-card :title="'Карнизная система'"/>
       </div>
-      <div class="board__formulas formula__container">
-        <div class="header">Доска</div>
+      <div class="row">
+        <formula-card :title="'Ондулин'"/>
       </div>
     </div>
+    <modal-window>
+      <div class="calculator__container">
+        <div class="display">Я формулка</div>
+        <div class="calculator__content">
+          <div class="custom__buttons"></div>
+          <div class="standard__buttons">
+            <div class="calculator__row">
+              <div class="btn">1</div>
+              <div class="btn">2</div>
+              <div class="btn">3</div>
+              <div class="btn">
+                +
+              </div>
+            </div>
+            <div class="calculator__row">
+              <div class="btn">4</div>
+              <div class="btn">5</div>
+              <div class="btn">6</div>
+              <div class="btn">
+                -
+              </div>
+            </div>
+            <div class="calculator__row">
+              <div class="btn">7</div>
+              <div class="btn">8</div>
+              <div class="btn">9</div>
+              <div class="btn">
+                /
+              </div>
+            </div>
+            <div class="calculator__row">
+              <div class="btn">(</div>
+              <div class="btn">0</div>
+              <div class="btn">)</div>
+              <div class="btn">
+                *
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </modal-window>
   </div>
 </template>
 
@@ -46,26 +91,61 @@ export default { name: "formulas-for-calculation" };
   import { useSidebarStore } from "@/store/sidebar_store";
 
   const sidebar_store = useSidebarStore();
+  const foundation_types = [
+    {id: 1, name: 'Плита'},
+    {id: 2, name: 'Ленточный'},
+    {id: 3, name: 'Ленточный с перегородкой'},
+    {id: 4, name: 'Нестандартная плита'},
+    {id: 5, name: 'Нестандартный ленточный'},
+    {id: 6, name: 'Нестандартный ленточный с перегородкой'}
+
+  ]
 </script>
 
 <style lang="scss" scoped>
-.formulas__container{
-  .foundation-formulas__container{
-    .formula__container{
-      background-color: #fff;
-      height: 30rem;
-      box-shadow: 0px 0px 10px #e1e6e6;
-      border-radius: 0.5rem;
-      padding: 2rem 3rem;
-      margin-bottom: 2rem;
-      .header{
-        font-size: 1.1rem;           
-        color: #4A4F48;
-        font-weight: 500;
+.row{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+}
+.calculator__container{
+  padding: 2rem;
+  width: 60rem;
+  .display{
+    width: 100%;
+    height: 8rem;;
+    border: 2px solid #bee4b3;
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+  .calculator__content{
+    display: flex;
+    .custom__buttons{
+      width: 60%;
+    } 
+    .standard__buttons{
+      width: 40%;
+      .calculator__row{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1rem;
+        .btn{
+          background-color: #77AF68;
+          font-weight: 600;
+          font-size: 1.5rem;
+          color: #fff;
+          width: 5rem;
+          height: 5rem;
+          border-radius: 0.5rem;
+          text-align: center;
+          padding-top: 1.6rem;
+          transition: 0.2s;
+          &:hover{
+            background-color: #5d8f4f;
+            cursor: pointer; 
+          }
+        }
       }
-    }
-    .board__formulas{
-    
     }
   }
 }
