@@ -1,7 +1,7 @@
 <template>
 <div class="container">
   <div class="tab__container">
-    <div v-for="tab in tabs" :key="tab.name" class="tab" :class = "{'active' :tab.name == activeTab}" @click="setActiveTab(tab.name)">
+    <div v-for="tab in project_store.tabs" :key="tab.name" class="tab" :class = "{'active' :tab.name == project_store.activeTab}" @click="project_store.setActiveTab(tab.name)">
       {{ tab.name }}
     </div>
     <button class="add__tab">
@@ -16,7 +16,7 @@
     </local-navbar>
     <div class="content__container" v-if="navbar_store.active == 'Общая информация'">
         <div class="left__container">
-            <custom-input v-for="item in general_inputs_items" :key="item.name" class="custom__input" :title="item.name"/>
+            <custom-input v-for="item in project_store.general_inputs_items" :key="item.name" class="custom__input" :title="item.name"/>
         </div>
         <div class="right__container">
             <custom-textarea :title="'Комментарий'"/>
@@ -28,19 +28,29 @@
     <div class="content__container" v-if="navbar_store.active == 'Фундамент'">
       <div class="left__container">
         <div class="foundation-type__container">
-          <div class="foundation-type__button" v-for="item in foundation__imgs_row1" :key="item.id" :class = "{'active' :item.id == active_foundation}" @click="setActiveFoundation(item.id)">
-            <img :src="foundation__active[item.id - 1].name" v-if="item.id == active_foundation">
+          <div class="foundation-type__button" v-for="item in project_store.foundation__imgs[0].imgs" :key="item.id" :class = "{'active' :item.id == project_store.active_foundation}" @click="project_store.setActiveFoundation(item.id)">
+            <img :src="project_store.foundation__active[item.id - 1].name" v-if="item.id == project_store.active_foundation">
             <img :src="item.name" v-else>
           </div>
         </div>
         <div class="foundation-type__container">
-          <div class="foundation-type__button" v-for="item in foundation__imgs_row2" :key="item.id" :class = "{'active' :item.id == active_foundation}" @click="setActiveFoundation(item.id)">
-            <img :src="foundation__active[item.id - 1].name" v-if="item.id == active_foundation">
+          <div class="foundation-type__button" v-for="item in project_store.foundation__imgs[1].imgs" :key="item.id" :class = "{'active' :item.id == project_store.active_foundation}" @click="project_store.setActiveFoundation(item.id)">
+            <img :src="project_store.foundation__active[item.id - 1].name" v-if="item.id == project_store.active_foundation">
             <img :src="item.name" v-else>
           </div>
         </div>
+        <custom-input v-for="item in project_store.foundation_inputs_items[0].standard_fields" :key="item.name" class="custom__input" :title="item.name"/>
       </div>
-      <div class="right__container"></div>
+      <div class="right__container">
+        <div class="inputs__header">Опалубка</div>
+        <custom-input v-for="item in project_store.foundation_inputs_items[1].board_fields" :key="item.name" class="custom__input" :title="item.name"/>
+        <div class="inputs__header reinforcement">Арматура</div>
+        <custom-input v-for="item in project_store.foundation_inputs_items[2].reinforcement_fields" :key="item.name" class="custom__input" :title="item.name"/>
+        <div class="btn__container">
+          <sub-btn class="reset">Сбросить</sub-btn>
+          <main-btn class="calculate">Рассчитать</main-btn>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -53,49 +63,9 @@
 <script setup lang="ts">
   import { useLocalNavbarStore } from "@/store/local-navbar_store";
   import { useCreateProjectStore } from "@/store/create-project_store";
-  import { ref } from "vue";
 
-  const create_project_store =  useCreateProjectStore();
+  const project_store =  useCreateProjectStore();
   const navbar_store = useLocalNavbarStore();
-  const general_inputs_items = [
-    { name: "Тип здания" },
-    { name: "Количество этажей" },
-    { name: "1 этаж - материал" },
-    { name: "Наличие крыльца" },
-  ]
-  const tabs = [
-    { name: "Здание 1" },
-    { name: "Здание 2" },
-  ]
-  const foundation__imgs_row1 = [
-    { id: 1, name: require('@/assets/img/foundation/foundation_1_0.svg')},
-    { id: 2, name: require('@/assets/img/foundation/foundation_2_0.svg')},
-    { id: 3, name: require('@/assets/img/foundation/foundation_3_0.svg')},
-    { id: 4, name: require('@/assets/img/foundation/foundation_4_0.svg')},
-  ]
-  const foundation__imgs_row2 = [
-    { id: 5, name: require('@/assets/img/foundation/foundation_5_0.svg')},
-    { id: 6, name: require('@/assets/img/foundation/foundation_6_0.svg')},
-    { id: 7, name: require('@/assets/img/foundation/foundation_7_0.svg')},
-  ]
-  const foundation__active = [
-    { id: 1, name: require('@/assets/img/foundation/foundation_1_1.svg')},
-    { id: 2, name: require('@/assets/img/foundation/foundation_2_1.svg')},
-    { id: 3, name: require('@/assets/img/foundation/foundation_3_1.svg')},
-    { id: 4, name: require('@/assets/img/foundation/foundation_4_1.svg')},
-    { id: 5, name: require('@/assets/img/foundation/foundation_5_1.svg')},
-    { id: 6, name: require('@/assets/img/foundation/foundation_6_1.svg')},
-    { id: 7, name: require('@/assets/img/foundation/foundation_7_1.svg')},
-  ]
-  const active_foundation = ref(1);
-  const activeTab = ref(tabs[0].name)
-  
-  function setActiveTab( newActive: any){
-    activeTab.value = newActive
-  }
-  function setActiveFoundation( newActive: any){
-    active_foundation.value = newActive
-  }
 </script>
 
 <style lang="scss" scoped>
@@ -158,6 +128,7 @@
         .left__container{
             width: 50%;
             padding: 0 15% 0 0;
+            height: 100%;
             .custom__input{
                 margin-bottom: 1.5rem;
             }
@@ -172,6 +143,7 @@
                 height: 6rem;
                 border-radius: 0.5rem;
                 margin-right: 1.5rem;
+                transition: 0.2s;
                 &:hover{
                   background-color: #ffede8;
                   cursor: pointer;
@@ -184,6 +156,8 @@
         }
         .right__container{
             width: 50%;
+            display: flex;
+            flex-direction: column;
             div{
                 width: 100%;
                 display: flex;
@@ -192,6 +166,27 @@
                     margin-left: auto;
                 }
             }
+            .custom__input{
+                margin-bottom: 1.5rem;
+              }
+            .inputs__header{
+              color: #77AF68;
+              font-weight: 500;
+              padding-bottom: 1rem;
+              border-bottom: 1px solid #77AF68;
+              margin-bottom: 2rem;
+              &.reinforcement{
+                margin-top: 2rem;
+              }
+            }
+          .btn__container{
+            margin-top: 4.5rem;
+            display: flex;
+          .reset{
+              margin-left: auto;
+              margin-right: 0.5rem;
+            }
+          }
         }
     }
 }

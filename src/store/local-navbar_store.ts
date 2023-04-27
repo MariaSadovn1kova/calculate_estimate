@@ -15,15 +15,13 @@ export const useLocalNavbarStore = defineStore("localNavbar", () => {
     const buildings_items =[
         { name: "Общая информация" },
         { name: "Фундамент" },
-        { name: "Стены" },
-        { name: "Перекрытие" },
+        { name: "Коробка" },
         { name: "Крыша" },
     ]
     const material_items =[
         { name: "Общая информация" },
         { name: "Проекты" },
-        { name: "История закупок" },
-        { name: "Добавить" }
+        { name: "История закупок" }
     ]
     const estimate_items = [
         { name: "Фундамент" },
