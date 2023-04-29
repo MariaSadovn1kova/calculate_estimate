@@ -14,28 +14,17 @@
         <img src="@/assets/logo/delete.svg">
       </button>
     </local-navbar>
-    <div class="content__container" v-if="navbar_store.active == 'Общая информация'">
-        <div class="left__container">
-            <custom-input v-for="item in project_store.general_inputs_items" :key="item.name" class="custom__input" :title="item.name"/>
-        </div>
-        <div class="right__container">
-            <custom-textarea :title="'Комментарий'"/>
-            <div>
-                <sub-btn class="sub__button">Сбросить</sub-btn>
-            </div>
-        </div>
-    </div>
     <div class="content__container" v-if="navbar_store.active == 'Фундамент'">
       <div class="left__container">
-        <div class="foundation-type__container">
-          <div class="foundation-type__button" v-for="item in project_store.foundation__imgs[0].imgs" :key="item.id" :class = "{'active' :item.id == project_store.active_foundation}" @click="project_store.setActiveFoundation(item.id)">
-            <img :src="project_store.foundation__active[item.id - 1].name" v-if="item.id == project_store.active_foundation">
+        <div class="type__container">
+          <div class="type__button" v-for="item in project_store.foundation__imgs[0].imgs" :key="item.id" :class = "{'active' :item.id == project_store.active_foundation}" @click="project_store.setActiveFoundation(item.id)">
+            <img :src="project_store.foundation__active__imgs[item.id - 1].name" v-if="item.id == project_store.active_foundation">
             <img :src="item.name" v-else>
           </div>
         </div>
-        <div class="foundation-type__container">
-          <div class="foundation-type__button" v-for="item in project_store.foundation__imgs[1].imgs" :key="item.id" :class = "{'active' :item.id == project_store.active_foundation}" @click="project_store.setActiveFoundation(item.id)">
-            <img :src="project_store.foundation__active[item.id - 1].name" v-if="item.id == project_store.active_foundation">
+        <div class="type__container">
+          <div class="type__button" v-for="item in project_store.foundation__imgs[1].imgs" :key="item.id" :class = "{'active' :item.id == project_store.active_foundation}" @click="project_store.setActiveFoundation(item.id)">
+            <img :src="project_store.foundation__active__imgs[item.id - 1].name" v-if="item.id == project_store.active_foundation">
             <img :src="item.name" v-else>
           </div>
         </div>
@@ -49,6 +38,26 @@
         <div class="btn__container">
           <sub-btn class="reset">Сбросить</sub-btn>
           <main-btn class="calculate">Рассчитать</main-btn>
+        </div>
+      </div>
+    </div>
+    <div class="content__container" v-if="navbar_store.active == 'Коробка'">
+      <div class="left__container">
+        <div>1 этаж</div>
+        <custom-input v-for="item in project_store.box_inputs[0].standard_fields" :key="item.name" class="custom__input" :title="item.name"/>
+        <div>Добавить этаж</div>
+      </div>
+      <div class="right__container">
+
+      </div>
+    </div>
+    <div class="content__container" v-if="navbar_store.active == 'Крыша'">
+      <div class="left__container"> 
+        <div class="type__container">
+          <div class="type__button" v-for="item in project_store.roof__imgs" :key="item.id" :class = "{'active' :item.id == project_store.active_roof}" @click="project_store.setActiveRoof(item.id)">
+            <img :src="project_store.roof__active__imgs[item.id - 1].name" v-if="item.id == project_store.active_roof">
+            <img :src="item.name" v-else>
+          </div>
         </div>
       </div>
     </div>
@@ -132,10 +141,10 @@
             .custom__input{
                 margin-bottom: 1.5rem;
             }
-            .foundation-type__container{
+            .type__container{
               display: flex;
               margin-bottom: 1.5rem;
-              .foundation-type__button{
+              .type__button{
                 background-color: #FFF7F5;
                 border: 1px solid #FF594B;
                 padding: 1.2rem;
@@ -158,6 +167,7 @@
             width: 50%;
             display: flex;
             flex-direction: column;
+            padding-left: 4rem;
             div{
                 width: 100%;
                 display: flex;

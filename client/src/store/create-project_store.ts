@@ -42,7 +42,7 @@ export const useCreateProjectStore = defineStore("create-project", () => {
         { name: "Здание 2" },
     ]
     const activeTab = ref(tabs[0].name)
-    const foundation__active = [
+    const foundation__active__imgs = [
         { id: 1, name: require('@/assets/img/foundation/foundation_1_1.svg')},
         { id: 2, name: require('@/assets/img/foundation/foundation_2_1.svg')},
         { id: 3, name: require('@/assets/img/foundation/foundation_3_1.svg')},
@@ -51,10 +51,49 @@ export const useCreateProjectStore = defineStore("create-project", () => {
         { id: 6, name: require('@/assets/img/foundation/foundation_6_1.svg')},
         { id: 7, name: require('@/assets/img/foundation/foundation_7_1.svg')},
       ]
+    const roof__imgs = [
+        { id: 1, name: require('@/assets/img/roof/roof_1_0.svg')},
+        { id: 2, name: require('@/assets/img/roof/roof_2_0.svg')},
+        { id: 3, name: require('@/assets/img/roof/roof_3_0.svg')},
+        { id: 4, name: require('@/assets/img/roof/roof_4_0.svg')},
+      ]
+      const roof__active__imgs = [
+        { id: 1, name: require('@/assets/img/roof/roof_1_1.svg')},
+        { id: 2, name: require('@/assets/img/roof/roof_2_1.svg')},
+        { id: 3, name: require('@/assets/img/roof/roof_3_1.svg')},
+        { id: 4, name: require('@/assets/img/roof/roof_4_1.svg')},
+      ]
     const active_foundation = ref(1);
-      
+    const active_roof = ref(1);
+    const box_inputs = [
+        {id: 1, standard_fields:[
+            { name: "Материал" },
+            { name: "Суммарная длина стен" },
+            { name: "Высота стен" },
+            { name: "Толщина стен" },
+            { name: "Суммарная площадь окон и дверей" },
+        ]},
+        {id: 2, board_fields:[
+            { name: "Ширина бруса" },
+            { name: "Высота бруса" },
+        ]},
+        {id: 3, brick_fields:[
+            { name: "Толщина раствора в кладке" },
+            { name: "Кладочная сетка" },
+        ]},
+        {id: 4, brick_fields:[
+            { name: "Длина блока" },
+            { name: "Ширина блока" },
+            { name: "Высота блока" },
+            { name: "Толщина раствора в кладке" },
+        ]}
+    ]
+
     function setActiveFoundation( newActive: any){
         active_foundation.value = newActive
+    }
+    function setActiveRoof( newActive: any){
+        active_roof.value = newActive
     }
     function setActiveBuildingTab(newActive: any){
         activeBuildingTab.value = newActive 
@@ -69,8 +108,13 @@ export const useCreateProjectStore = defineStore("create-project", () => {
         foundation__imgs,
         tabs,
         activeTab,
-        foundation__active,
+        foundation__active__imgs,
         active_foundation,
+        active_roof,
+        box_inputs,
+        roof__imgs,
+        roof__active__imgs,
+        setActiveRoof,
         setActiveFoundation,
         setActiveBuildingTab,
         setActiveTab

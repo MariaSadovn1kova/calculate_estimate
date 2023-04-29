@@ -2,7 +2,7 @@
   <div>
     <div class="header">
       <div class="header__title">
-        Создать новый проект
+        Создать проект
       </div>
       <button class="xlsx__btn" v-if="sidebar_store.active == 'Смета'">
           <div>XLSX</div>
@@ -22,6 +22,9 @@
     </div>
     <div v-if="sidebar_store.active == 'Смета'">
       <project-estimate/>
+    </div>
+    <div v-if="sidebar_store.active == 'Стройматериалы'">
+      <material-form/>
     </div>
   </div>
 </template>
