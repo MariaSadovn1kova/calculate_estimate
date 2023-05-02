@@ -20,13 +20,16 @@
     </div>
     <div class="content" v-if="sidebar_store.active == 'Коробка'">
         <div class="row">
-          <formula-card :title="'Доска'"/>
-          <formula-card :title="'Блоки'"/>
+          <formula-card :title="'Доска'">
+          
+          </formula-card>
+          <formula-card :title="'Брусок'"/>
           <formula-card :title="'Арматура'"/>
         </div>
         <div class="row">
+          <formula-card :title="'Кирпич'"/>
+          <formula-card :title="'Блок'"/>
           <formula-card :title="'Брус'"/>
-          <formula-card :title="'Брусок'"/>
         </div>
     </div>
     <div class="content" v-if="sidebar_store.active == 'Крыша и крыльцо'">
@@ -36,7 +39,7 @@
         <formula-card :title="'Карнизная система'"/>
       </div>
       <div class="row">
-        <formula-card :title="'Ондулин'"/>
+        <formula-card :title="'Кровельный материал'"/>
       </div>
     </div>
     <modal-window>
