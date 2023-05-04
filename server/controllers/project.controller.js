@@ -30,7 +30,9 @@ class ProjectController{
     }
 
     async deleteProject(req, res){
-
+        const ID = req.params.id
+        const project = await db.query('DELETE FROM "Project" WHERE "ID" = $1', [ID])
+        res.json(project.rows[0])   
     }
 }
 

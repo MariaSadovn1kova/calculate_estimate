@@ -16,14 +16,15 @@
       <div class="project__address">{{ project.Address }}</div>
     </div>
     <div class="card__btns">
-      <button class="edit">
+      <button class="edit"> 
         <img src="@/assets/logo/edit.svg">
       </button>
-      <button class="delete" @click.stop="modal_store.setShow">
+      <button class="delete" @click.stop="modal_store.setShow(), modal_store.setProject(project)" >
         <img src="@/assets/logo/delete.svg">
       </button>
     </div>
   </div>
+  
 </template>
 
 <script lang="ts">
