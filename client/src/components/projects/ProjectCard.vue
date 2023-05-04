@@ -1,9 +1,9 @@
 <template>
   <div class="card__container">
-    <div v-if="project.status == 'unfinished'" class="status__mark unfinished">
+    <div v-if="project.Status == 'unfinished'" class="status__mark unfinished">
       <img src="@/assets/logo/unfinished.svg">
     </div>
-    <div v-if="project.status == 'finished'" class="status__mark finished">
+    <div v-if="project.Status == 'finished'" class="status__mark finished">
       <img src="@/assets/logo/finished.svg">
     </div>
     <div class="card__info">
@@ -11,9 +11,9 @@
         <div>XLSX</div>
         <img src="@/assets/logo/dawnload.svg">
       </button>
-      <div class="project__data">{{ project.date }}</div>
-      <div class="project__customer">{{ project.customer }}</div>
-      <div class="project__address">{{ project.address }}</div>
+      <div class="project__data">{{ project.Date.slice(0,10) }}</div>
+      <div class="project__customer">{{ project.СustomerFullName }}</div>
+      <div class="project__address">{{ project.Address }}</div>
     </div>
     <div class="card__btns">
       <button class="edit">
@@ -77,7 +77,7 @@
       height: 3rem;
       border-radius: 0.5rem;
       border: none;
-      background-color: #F3F8F1;
+      background-color: #e4f7dd;
       display: flex;
       color: #7FAF68;
       font-weight: 600;

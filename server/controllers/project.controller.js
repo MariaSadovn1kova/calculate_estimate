@@ -12,6 +12,14 @@ class ProjectController{
         const projects = await db.query('SELECT * FROM "Project"')
         res.json(projects.rows)
     }
+    async getProjectFinished(req, res){
+        const projects = await db.query('SELECT * FROM "Project" WHERE "Status" = $1', ['finished'])
+        res.json(projects.rows)
+    }
+    async getProjectUnfinished(req, res){
+        const projects = await db.query('SELECT * FROM "Project" WHERE "Status" = $1', ['unfinished'])
+        res.json(projects.rows)
+    }
     
     async getOneProject(req, res){
 

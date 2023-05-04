@@ -12,9 +12,9 @@
         </main-btn>
       </router-link>
     </div>
-    <local-navbar  :navbar_items = 'navbar_store.projects_items'  :default_active = 'navbar_store.projects_items[0].name'/>
+    <local-navbar  :navbar_items = 'navbar_store.projects_items'  :default_active = 'navbar_store.projects_items[0].name' @click="setData()"/>
     <input type="text" class="custom__input" placeholder="ФИО заказчика...">
-    <projects-list/>
+    <projects-list :data = 'data'/>
     <modal-window>
       <div class="modal__content">
         <div class="header">Удалить проект</div>
@@ -38,9 +38,36 @@
 <script setup lang="ts">
   import { useSidebarStore } from "@/store/sidebar_store";
   import { useLocalNavbarStore } from "@/store/local-navbar_store";
+  import { useProjectsStore } from "@/store/projects_store";
+  import { onBeforeMount, onUpdated, ref } from 'vue';
 
   const navbar_store = useLocalNavbarStore();
   const sidebar_store = useSidebarStore();
+  const projectsStore = useProjectsStore();
+  const data = ref()
+
+  function setData(){
+    if(navbar_store.active == 'Все проекты'){
+      fetchEvents()
+    } else if (navbar_store.active == 'Текущие проекты'){
+      fetchUnfinishedEvents()
+    } else if (navbar_store.active == 'Завершенные проекты'){
+      fetchFinishedEvents()
+    }
+  }
+
+  onBeforeMount(async () => {
+    fetchEvents()
+  })
+  async function fetchFinishedEvents() {
+    data.value = await projectsStore.fetchFinishedProjects()
+  }
+  async function fetchUnfinishedEvents() {
+    data.value = await projectsStore.fetchUnfinishedProjects()
+  }
+  async function fetchEvents() {
+    data.value = await projectsStore.fetchProjects()
+  }
 </script>
 
 <style lang="scss" scoped>

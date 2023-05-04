@@ -1,8 +1,13 @@
 const express = require('express')
 const projectRouter = require('./routes/project.routes')
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 3000
+const cors = require('cors') 
 
 const app = express()
+
+app.use(cors ({
+    origin: "http://localhost:8080"
+}))
 
 app.use('/api', projectRouter)
 app.use(express.json())
