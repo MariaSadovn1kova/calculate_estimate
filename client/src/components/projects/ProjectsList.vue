@@ -1,16 +1,7 @@
 <template>
-  <!-- <div v-if="navbar_store.active == 'Все проекты'" class="list__container">
-    <project-card v-for="project in projects_list_store.projects" :key="project.id" :project = 'project'/>
-  </div>
-  <div v-if="navbar_store.active == 'Текущие проекты'" class="list__container">
-    <project-card v-for="project in projects_list_store.unfinishedProjects" :key="project.id" :project = 'project'/>
-  </div>
-  <div v-if="navbar_store.active == 'Завершенные проекты'" class="list__container">
-    <project-card v-for="project in projects_list_store.finishedProjects" :key="project.id" :project = 'project'/>
-  </div> -->
-  <div>
+  <transition-group name="project-list">
     <project-card v-for="project in data" :key="project.Id" :project = 'project'/>
-  </div>
+  </transition-group>
 </template>
 
 <script lang="ts">
@@ -27,6 +18,19 @@ const props = defineProps({
 const navbar_store = useLocalNavbarStore();
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+ .project-list-item{
+    display: inline-block;
+    margin-right: 10px;
+  }
+  .project-list-enter-active, .project-list-leave-active{
+    transition: all 0.5s ease;
+  }
+  .project-list-enter-from, .project-list-leave-to{
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  .project-list-move{
+    transition: transform 0.4s ease;
+  }
 </style>
