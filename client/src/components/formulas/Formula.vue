@@ -34,7 +34,9 @@
     font-weight: 600;
   }
   .formula{
-    margin-top: 0.5rem;
+    margin: 0.5rem 0;
+    word-break: break-all;
+
   }
 }
 </style>

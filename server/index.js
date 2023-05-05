@@ -10,8 +10,9 @@ app.use(cors ({
     origin: "http://localhost:8080"
 }))
 
+app.use(express.json())
+
 app.use('/api', projectRouter)
 app.use('/api', formulaRouter)
 
-app.use(express.json())
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`))   

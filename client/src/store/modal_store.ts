@@ -17,8 +17,19 @@ export const useModalStore = defineStore("modal", () => {
         formula.value = newFormula
         formulaContent.value = newFormula.Content.split(" ")
     }
-    function addFormulaContent(x: number){
+    function addFormulaContent(x: string){
         formulaContent.value.push(x)
+    }
+    function deleteFormulaContent(){
+        formulaContent.value.pop()
+    }
+
+    function formulaToString(){
+        const str = ref('')
+        formulaContent.value.forEach((element: string) => {
+            str.value += element
+        });
+        return str
     }
 
     return {
@@ -29,6 +40,8 @@ export const useModalStore = defineStore("modal", () => {
         setProject,
         setShow,
         setFormula,
-        addFormulaContent
+        addFormulaContent,
+        deleteFormulaContent,
+        formulaToString
     }
 })

@@ -49,7 +49,7 @@
     <modal-window>
       <div class="calculator__container">
         <div class="calculator__header">{{ modal_store.formula.Category }} <span>{{ modal_store.formula.Material }}</span></div>
-        <div class="display">{{ modal_store.formulaContent }}</div>
+        <div class="display">{{ modal_store.formulaToString() }}</div>
         <div class="calculator__content">
           <div class="custom__buttons">
             <div class="custom__btn" v-for="field in foundationFields" :key="field">
@@ -58,14 +58,14 @@
           </div>
           <div class="standard__buttons">
             <div class="calculator__row delete">
-              <div class="btn">
+              <div class="btn" @click="modal_store.deleteFormulaContent()">
                 <img src="@/assets/logo/delete__text.svg" >
               </div>
             </div>
             <div class="calculator__row">
-              <div class="btn" @click="modal_store.addFormulaContent(1)">1</div>
-              <div class="btn">2</div>
-              <div class="btn">3</div>
+              <div class="btn" @click="modal_store.addFormulaContent(' 1')">1</div>
+              <div class="btn" @click="modal_store.addFormulaContent(' 2')">2</div>
+              <div class="btn" @click="modal_store.addFormulaContent(' 3')">3</div>
               <div class="btn">
                 +
               </div>
@@ -98,7 +98,9 @@
         </div>
         <div class="btns">
           <sub-btn class="sub__button">Отмена</sub-btn>
-          <main-btn class="save__button">Сохранить</main-btn>
+          <form @submit.prevent="onUpdateFormula( modal_store.formula.ID, modal_store.formulaContent.toString()), modal_store.setShow()">
+            <main-btn class="save__button">Сохранить</main-btn>
+          </form>
         </div>
       </div>
     </modal-window>
@@ -111,7 +113,7 @@ export default { name: "formulas-for-calculation" };
 <script setup lang="ts">
   import { useSidebarStore } from "@/store/sidebar_store";
   import { useFormulasStore } from "@/store/formulas_store";
-  import { onBeforeMount, ref } from 'vue';
+  import { onBeforeMount, onUpdated, ref } from 'vue';
   import { useModalStore } from "@/store/modal_store";
 
   const modal_store = useModalStore();
@@ -123,7 +125,10 @@ export default { name: "formulas-for-calculation" };
   async function fetchFormulas() {
     data.value = await formulas_store.fetchFormulas()
   }
-
+  async function onUpdateFormula(ID: number, Content: string){
+    await formulas_store.updateFormula(ID, Content)
+    fetchFormulas()
+  }
   onBeforeMount(async () => {
     fetchFormulas()
   })
