@@ -1,7 +1,7 @@
 <template>
-  <div class="formula__container" @click.stop="modal_store.setShow">
-    <div class="title">{{ title }}</div>
-    <div class="formula">3*Ширина*Выоста  </div>
+  <div class="formula__container" @click.stop="modal_store.setShow(), modal_store.setFormula(formula)">
+    <div class="title">{{ formula.Category }}</div>
+    <div class="formula">{{ formula.Content }}</div>
   </div>
 </template>
 
@@ -14,7 +14,7 @@
 
   const modal_store = useModalStore();
   const props = defineProps({
-    title: String
+      formula: Object
   })
 </script>
 
