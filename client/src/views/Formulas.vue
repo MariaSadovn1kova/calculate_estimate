@@ -28,22 +28,54 @@
     </div>
     <div class="content" v-if="sidebar_store.active == 'Коробка'">
         <div class="row">
-          <formula-card :title="'Блок'"/>
-          <formula-card :title="'Брус'"/>
-          <formula-card :title="'Арматура'"/>
+          <formula-card :title="'Блок'">
+            <div v-for="item in data" :key="item.id">
+              <formula-block v-if="item.Material == 'Блок' && item.BuildingPart == 'Коробка'" :key="item.id" :formula = "item"/>
+            </div>
+          </formula-card>
+          <formula-card :title="'Брус'">
+            <div v-for="item in data" :key="item.id">
+              <formula-block v-if="item.Material == 'Брус' && item.BuildingPart == 'Коробка'" :key="item.id" :formula = "item"/>
+            </div>
+          </formula-card>
+          <formula-card :title="'Арматура'">
+            <div v-for="item in data" :key="item.id">
+              <formula-block v-if="item.Material == 'Арматура' && item.BuildingPart == 'Коробка'" :key="item.id" :formula = "item"/>
+            </div>
+          </formula-card>
         </div>
         <div class="row">
-          <formula-card :title="'Кирпич'"/>
+          <formula-card :title="'Кирпич'">
+            <div v-for="item in data" :key="item.id">
+              <formula-block v-if="item.Material == 'Кирпич' && item.BuildingPart == 'Коробка'" :key="item.id" :formula = "item"/>
+            </div>
+          </formula-card>
         </div>
     </div>
     <div class="content" v-if="sidebar_store.active == 'Крыша'">
       <div class="row">
-        <formula-card :title="'Брус'"/>
-        <formula-card :title="'Доска'"/>
-        <formula-card :title="'Карнизная система'"/>
+        <formula-card :title="'Брус'">
+          <div v-for="item in data" :key="item.id">
+            <formula-block v-if="item.Material == 'Брус' && item.BuildingPart == 'Крыша'" :key="item.id" :formula = "item"/>
+          </div>
+        </formula-card>
+        <formula-card :title="'Доска'">
+          <div v-for="item in data" :key="item.id">
+            <formula-block v-if="item.Material == 'Доска' && item.BuildingPart == 'Крыша'" :key="item.id" :formula = "item"/>
+          </div>
+        </formula-card>
+        <formula-card :title="'Карнизная система'">
+          <div v-for="item in data" :key="item.id">
+            <formula-block v-if="item.Material == 'Карнизная система' && item.BuildingPart == 'Крыша'" :key="item.id" :formula = "item"/>
+          </div>
+        </formula-card>
       </div>
       <div class="row">
-        <formula-card :title="'Кровельный материал'"/>
+        <formula-card :title="'Кровельный материал'">
+          <div v-for="item in data" :key="item.id">
+            <formula-block v-if="item.Material == 'Кровельный материал' && item.BuildingPart == 'Крыша'" :key="item.id" :formula = "item"/>
+          </div>
+        </formula-card>
       </div>
     </div>
     <modal-window>
@@ -51,9 +83,19 @@
         <div class="calculator__header">{{ modal_store.formula.Category }} <span>{{ modal_store.formula.Material }}</span></div>
         <div class="display">{{ modal_store.formulaToString() }}</div>
         <div class="calculator__content">
-          <div class="custom__buttons">
-            <div class="custom__btn" v-for="field in foundationFields" :key="field">
-              {{ field }}
+          <div class="custom__buttons" v-if="sidebar_store.active == 'Фундамент'">
+            <div class="custom__btn" v-for="item in formulas_store.subButtons[0].buttons" :key="item.id" @click="modal_store.addFormulaContent(item.value)">{{ item.value }}</div>
+          </div>
+          <div class="custom__buttons" v-if="sidebar_store.active == 'Коробка'">
+            <div class="custom__btn" v-for="item in formulas_store.subButtons[1].buttons" :key="item.id" @click="modal_store.addFormulaContent(item.value)">{{ item.value }}</div>
+            <div v-if="modal_store.formula.Material == 'Блок'" class="custom">
+              <div class="custom__btn" v-for="item in formulas_store.subButtons[2].buttons" :key="item.id" @click="modal_store.addFormulaContent(item.value)">{{ item.value }}</div>
+            </div>
+            <div v-if="modal_store.formula.Material == 'Брус'" class="custom">
+              <div class="custom__btn" v-for="item in formulas_store.subButtons[3].buttons" :key="item.id" @click="modal_store.addFormulaContent(item.value)">{{ item.value }}</div>
+            </div>
+            <div v-if="modal_store.formula.Material == 'Кирпич'" class="custom">
+              <div class="custom__btn" v-for="item in formulas_store.subButtons[2].buttons" :key="item.id" @click="modal_store.addFormulaContent(item.value)">{{ item.value }}</div>
             </div>
           </div>
           <div class="standard__buttons">
@@ -62,43 +104,14 @@
                 <img src="@/assets/logo/delete__text.svg" >
               </div>
             </div>
-            <div class="calculator__row">
-              <div class="btn" @click="modal_store.addFormulaContent(' 1')">1</div>
-              <div class="btn" @click="modal_store.addFormulaContent(' 2')">2</div>
-              <div class="btn" @click="modal_store.addFormulaContent(' 3')">3</div>
-              <div class="btn">
-                +
-              </div>
-            </div>
-            <div class="calculator__row">
-              <div class="btn">4</div>
-              <div class="btn">5</div>
-              <div class="btn">6</div>
-              <div class="btn">
-                -
-              </div>
-            </div>
-            <div class="calculator__row">
-              <div class="btn">7</div>
-              <div class="btn">8</div>
-              <div class="btn">9</div>
-              <div class="btn">
-                /
-              </div>
-            </div>
-            <div class="calculator__row">
-              <div class="btn">(</div>
-              <div class="btn">0</div>
-              <div class="btn">)</div>
-              <div class="btn">
-                *
-              </div>
+            <div class="calculator__row" v-for="item in formulas_store.calculatorRows" :key="item.row">
+              <div class="btn" v-for="btn in item.buttons" :key="btn.id"  @click="modal_store.addFormulaContent(btn.value)">{{ btn.value }}</div>
             </div>
           </div>
         </div>
         <div class="btns">
           <sub-btn class="sub__button">Отмена</sub-btn>
-          <form @submit.prevent="onUpdateFormula( modal_store.formula.ID, modal_store.formulaContent.toString()), modal_store.setShow()">
+          <form @submit.prevent="onUpdateFormula( modal_store.formula.ID, modal_store.formulaToString().value), modal_store.setShow()">
             <main-btn class="save__button">Сохранить</main-btn>
           </form>
         </div>
@@ -120,7 +133,6 @@ export default { name: "formulas-for-calculation" };
   const sidebar_store = useSidebarStore();
   const formulas_store = useFormulasStore();
   const data = ref();
-  const foundationFields = ['Ширина', 'Длина', 'Высота', 'Толщина', 'Ширина доски', 'Вид арматуры', 'Количество прутьев в кольце']
 
   async function fetchFormulas() {
     data.value = await formulas_store.fetchFormulas()
@@ -164,10 +176,18 @@ export default { name: "formulas-for-calculation" };
   }
   .calculator__content{
     display: flex;
+    height: 35rem;
+    .custom{
+      height: 50%;
+      display: flex;
+      flex-direction: column;
+      .custom__btn{
+        margin-bottom: 1rem;
+      }
+    }
     .custom__buttons{
       width: 60%;
-      margin-top: 1rem;
-      padding-right: 3rem;
+      padding: 1rem 3rem 1rem 0;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -188,10 +208,13 @@ export default { name: "formulas-for-calculation" };
     } 
     .standard__buttons{
       width: 40%;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      padding: 1rem 0;
       .calculator__row{
         display: flex;
         justify-content: space-between;
-        margin-top: 1rem;
         &.delete{
           justify-content: end;
         }

@@ -27,6 +27,7 @@ export const useModalStore = defineStore("modal", () => {
     function formulaToString(){
         const str = ref('')
         formulaContent.value.forEach((element: string) => {
+            str.value += " "
             str.value += element
         });
         return str
