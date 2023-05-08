@@ -1,11 +1,13 @@
 <template>
   <div class="material-card__container">
-    <div class="material__title"> Название материала</div>
+    <div class="material__title">{{ material.Name }}</div>
     <div class="img__container">
-        <img src="@/assets/img/materials/construction_board.svg">
+        <img v-if="material.Type == 'Арматура'" src="@/assets/img/materials/reinforcement.svg">
+        <img v-else-if="material.Type == 'Кирпич'" src="@/assets/img/materials/brick.svg">
+
     </div>
-    <div class="material__count"> Количество</div>
-    <div class="material__price"> Цена материала</div>
+    <div class="material__count"> {{ material.Quantity }} {{material.UnitOfMeasurement}}</div>
+    <div class="material__price">{{ Intl.NumberFormat('ru-RU').format(material.DeclaredValue) }} рублей</div>
     <div class="btn__container">
         <sub-btn class="sub__button">Удалить</sub-btn>
         <main-btn class="open__material"  @click.stop="modal_store.setShow">Открыть</main-btn>
@@ -18,8 +20,12 @@
 </script>
 <script setup lang="ts">
   import { useModalStore } from "@/store/modal_store";
+  import { defineProps } from 'vue';
 
   const modal_store = useModalStore();
+  const props = defineProps({
+      material: Object
+  })
 </script>
 
 <style lang="scss" scoped>
@@ -49,10 +55,12 @@
     .material__count{
         margin-top: 2rem;
         text-align: center;
+        font-size: 1.1rem;
     }
     .material__price{
         margin-top: 1rem;
         text-align: center;
+        font-size: 1.1rem;
     }
     .btn__container{
         display: flex;

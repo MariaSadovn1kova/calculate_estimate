@@ -13,19 +13,8 @@
       </router-link>
     </div>
     <div class="material-cards__container">
-      <div class="material-cards__row">
-        <material-card/>
-        <material-card/>
-        <material-card/>
-        <material-card/>
-        <material-card/>
-      </div>
-      <div class="material-cards__row">
-        <material-card/>
-        <material-card/>
-        <material-card/>
-        <material-card/>
-        <material-card/>
+      <div class="material-cards__row" v-if="sidebar_store.active == 'Арматура'">
+        <material-card v-for="material in data" :key="material.id" :material = "material"/>
       </div>
     </div>
     <modal-window>
@@ -88,10 +77,14 @@ export default { name: "building-materials" };
 <script setup lang="ts">
   import { useSidebarStore } from "@/store/sidebar_store";
   import { useLocalNavbarStore } from "@/store/local-navbar_store";
+  import { useMaterialStore } from "@/store/materials_store"
+  import { onBeforeMount, onUpdated, ref } from 'vue';
 
   const navbar_store = useLocalNavbarStore();
   const sidebar_store = useSidebarStore();
-  
+  const material_store = useMaterialStore();
+  const data = ref()
+
   const header_projects = [
       { id: 1, name: "Адрес проекта" },
       { id: 2, name: "Заказчик" },
@@ -102,6 +95,15 @@ export default { name: "building-materials" };
       { id: 2, name: "Количество" },
       { id: 3, name: "Цена" }
   ]
+
+  async function fetchMaterials() {
+    data.value = await material_store.fetchReinforcement()
+  }
+  
+  onBeforeMount(async () => {
+    fetchMaterials()
+  })
+
 </script>
 
 <style lang="scss" scoped>
