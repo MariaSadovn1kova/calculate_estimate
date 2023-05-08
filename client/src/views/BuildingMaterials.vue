@@ -14,7 +14,25 @@
     </div>
     <div class="material-cards__container">
       <div class="material-cards__row" v-if="sidebar_store.active == 'Арматура'">
-        <material-card v-for="material in data" :key="material.id" :material = "material"/>
+        <material-card v-for="material in dataReinforcement" :key="material.id" :material = "material"/>
+      </div>
+      <div class="material-cards__row" v-else-if="sidebar_store.active == 'Кирпич'">
+        <material-card v-for="material in dataBrick" :key="material.id" :material = "material"/>
+      </div>
+      <div class="material-cards__row" v-else-if="sidebar_store.active == 'Доска'">
+        <material-card v-for="material in dataBoard" :key="material.id" :material = "material"/>
+      </div>
+      <div class="material-cards__row" v-else-if="sidebar_store.active == 'Бетон'">
+        <material-card v-for="material in dataConcrete" :key="material.id" :material = "material"/>
+      </div>
+      <div class="material-cards__row" v-else-if="sidebar_store.active == 'Блок'">
+        <material-card v-for="material in dataBlock" :key="material.id" :material = "material"/>
+      </div>
+      <div class="material-cards__row" v-else-if="sidebar_store.active == 'Брус'">
+        <material-card v-for="material in dataBeam" :key="material.id" :material = "material"/>
+      </div>
+      <div class="material-cards__row" v-else>
+        <material-card v-for="material in dataOther" :key="material.id" :material = "material"/>
       </div>
     </div>
     <modal-window>
@@ -83,7 +101,14 @@ export default { name: "building-materials" };
   const navbar_store = useLocalNavbarStore();
   const sidebar_store = useSidebarStore();
   const material_store = useMaterialStore();
-  const data = ref()
+  const dataReinforcement = ref()
+  const dataBrick = ref()
+  const dataBoard = ref()
+  const dataConcrete = ref()
+  const dataBlock = ref()
+  const dataBeam = ref()
+  const dataOther = ref()
+
 
   const header_projects = [
       { id: 1, name: "Адрес проекта" },
@@ -97,7 +122,13 @@ export default { name: "building-materials" };
   ]
 
   async function fetchMaterials() {
-    data.value = await material_store.fetchReinforcement()
+    dataReinforcement.value = await material_store.fetchReinforcement()
+    dataBrick.value = await material_store.fetchBrick()
+    dataBoard.value = await material_store.fetchBoard()
+    dataConcrete.value = await material_store.fetchConcrete()
+    dataBlock.value = await material_store.fetchBlock()
+    dataBeam.value = await material_store.fetchBeam()
+    dataOther.value = await material_store.fetchOther()
   }
   
   onBeforeMount(async () => {

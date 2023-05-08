@@ -4,7 +4,11 @@
     <div class="img__container">
         <img v-if="material.Type == 'Арматура'" src="@/assets/img/materials/reinforcement.svg">
         <img v-else-if="material.Type == 'Кирпич'" src="@/assets/img/materials/brick.svg">
-
+        <img v-else-if="material.Type == 'Доска'" src="@/assets/img/materials/construction_board.svg">
+        <img v-else-if="material.Type == 'Бетон'" src="@/assets/img/materials/concrete.svg">
+        <img v-else-if="material.Type == 'Блок'" src="@/assets/img/materials/block.svg"> 
+        <img v-else-if="material.Type == 'Брус'" src="@/assets/img/materials/beam.svg">   
+        <img v-else src="@/assets/img/materials/other.svg">        
     </div>
     <div class="material__count"> {{ material.Quantity }} {{material.UnitOfMeasurement}}</div>
     <div class="material__price">{{ Intl.NumberFormat('ru-RU').format(material.DeclaredValue) }} рублей</div>
@@ -47,6 +51,7 @@
     .img__container{
         margin-top: 2rem;
         display: flex;
+        height: 5rem;
         justify-content: center;
         img{
             width: 10rem;
