@@ -9,6 +9,8 @@ router.get('/materials/concrete', materialController.getConcrete)
 router.get('/materials/block', materialController.getBlock)
 router.get('/materials/beam', materialController.getBeam)
 router.get('/materials/other', materialController.getOther)
+router.put('/materials', materialController.updateMaterial)
+router.delete('/materials/:id', materialController.deleteMaterial)
 
 module.exports = router
 

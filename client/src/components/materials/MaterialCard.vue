@@ -13,8 +13,8 @@
     <div class="material__count"> {{ material.Quantity }} {{material.UnitOfMeasurement}}</div>
     <div class="material__price">{{ Intl.NumberFormat('ru-RU').format(material.DeclaredValue) }} рублей</div>
     <div class="btn__container">
-        <sub-btn class="sub__button">Удалить</sub-btn>
-        <main-btn class="open__material"  @click.stop="modal_store.setShow">Открыть</main-btn>
+        <sub-btn class="sub__button" @click="deleteMaterial(material.ID)">Удалить</sub-btn>
+        <main-btn class="open__material"  @click.stop="modal_store.setShow(), modal_store.setMaterial(material)">Открыть</main-btn>
     </div>
   </div>
 </template>
@@ -25,11 +25,17 @@
 <script setup lang="ts">
   import { useModalStore } from "@/store/modal_store";
   import { defineProps } from 'vue';
+  import { useMaterialStore } from "@/store/materials_store"
+  const material_store = useMaterialStore()
 
   const modal_store = useModalStore();
   const props = defineProps({
-      material: Object
+    material: Object
   })
+
+  function deleteMaterial(ID: number){
+    material_store.deleteMaterial(ID)
+  }
 </script>
 
 <style lang="scss" scoped>

@@ -4,6 +4,23 @@ import axios from "axios";
 
 
 export const useMaterialStore = defineStore("materials", () => {
+    const dataReinforcement = ref()
+    const dataBrick = ref()
+    const dataBoard = ref()
+    const dataConcrete = ref()
+    const dataBlock = ref()
+    const dataBeam = ref()
+    const dataOther = ref()
+
+    async function fetchMaterials() {
+        dataReinforcement.value = await fetchReinforcement()
+        dataBrick.value = await fetchBrick()
+        dataBoard.value = await fetchBoard()
+        dataConcrete.value = await fetchConcrete()
+        dataBlock.value = await fetchBlock()
+        dataBeam.value = await fetchBeam()
+        dataOther.value = await fetchOther()
+    }
     async function fetchReinforcement():Promise<any> {
         const res = await axios.get('http://localhost:3000/api/materials/reinforcement')
         const data = res.data
@@ -46,14 +63,30 @@ export const useMaterialStore = defineStore("materials", () => {
     
         return data
     }
+    async function updateMaterial(Type: string, Name: string, UnitOfMeasurement: string, DeclaredValue: number, ID: number):Promise<any> {
+        const res = await axios.put('http://localhost:3000/api/materials', { Type: Type, Name: Name, UnitOfMeasurement: UnitOfMeasurement, DeclaredValue: DeclaredValue, ID: ID})
+    }
+    async function deleteMaterial(ID: number):Promise<any> {
+        const res = await axios.delete(`http://localhost:3000/api/materials/${ID}`)
+    }
 
     return{
+        dataReinforcement,
+        dataBrick, 
+        dataBoard, 
+        dataConcrete,
+        dataBlock,
+        dataBeam,
+        dataOther,
         fetchReinforcement,
         fetchBrick,
         fetchBoard,
         fetchConcrete,
         fetchBlock,
         fetchBeam,
-        fetchOther
+        fetchOther,
+        updateMaterial,
+        deleteMaterial,
+        fetchMaterials
     }
 })

@@ -14,25 +14,25 @@
     </div>
     <div class="material-cards__container">
       <div class="material-cards__row" v-if="sidebar_store.active == 'Арматура'">
-        <material-card v-for="material in dataReinforcement" :key="material.id" :material = "material"/>
+        <material-card v-for="material in material_store.dataReinforcement" :key="material.id" :material = "material"/>
       </div>
       <div class="material-cards__row" v-else-if="sidebar_store.active == 'Кирпич'">
-        <material-card v-for="material in dataBrick" :key="material.id" :material = "material"/>
+        <material-card v-for="material in material_store.dataBrick" :key="material.id" :material = "material"/>
       </div>
       <div class="material-cards__row" v-else-if="sidebar_store.active == 'Доска'">
-        <material-card v-for="material in dataBoard" :key="material.id" :material = "material"/>
+        <material-card v-for="material in material_store.dataBoard" :key="material.id" :material = "material"/>
       </div>
       <div class="material-cards__row" v-else-if="sidebar_store.active == 'Бетон'">
-        <material-card v-for="material in dataConcrete" :key="material.id" :material = "material"/>
+        <material-card v-for="material in material_store.dataConcrete" :key="material.id" :material = "material"/>
       </div>
       <div class="material-cards__row" v-else-if="sidebar_store.active == 'Блок'">
-        <material-card v-for="material in dataBlock" :key="material.id" :material = "material"/>
+        <material-card v-for="material in material_store.dataBlock" :key="material.id" :material = "material"/>
       </div>
       <div class="material-cards__row" v-else-if="sidebar_store.active == 'Брус'">
-        <material-card v-for="material in dataBeam" :key="material.id" :material = "material"/>
+        <material-card v-for="material in material_store.dataBeam" :key="material.id" :material = "material"/>
       </div>
       <div class="material-cards__row" v-else>
-        <material-card v-for="material in dataOther" :key="material.id" :material = "material"/>
+        <material-card v-for="material in material_store.dataOther" :key="material.id" :material = "material"/>
       </div>
     </div>
     <modal-window>
@@ -42,24 +42,47 @@
           <div class="general-information__container">
             <div class="left">
               <div class="img__container">
-                <img src="@/assets/img/materials/construction_board.svg">
+                <img v-if="modal_store.material.Type == 'Арматура'" src="@/assets/img/materials/reinforcement.svg">
+                <img v-else-if="modal_store.material.Type == 'Кирпич'" src="@/assets/img/materials/brick.svg">
+                <img v-else-if="modal_store.material.Type == 'Доска'" src="@/assets/img/materials/construction_board.svg">
+                <img v-else-if="modal_store.material.Type == 'Бетон'" src="@/assets/img/materials/concrete.svg">
+                <img v-else-if="modal_store.material.Type == 'Блок'" src="@/assets/img/materials/block.svg"> 
+                <img v-else-if="modal_store.material.Type == 'Брус'" src="@/assets/img/materials/beam.svg">   
+                <img v-else src="@/assets/img/materials/other.svg">    
               </div>
-              <div class="count">Количество на складе: </div>
-              <div class="count">Занято на проектах: </div>
+              <div class="count__container">
+                <div class="count">Количество на складе: {{modal_store.material.Quantity}}</div>
+                <div class="count">Занято на проектах: </div>
+              </div>
             </div>
             <div class="right">
               <custom-input :title="'Количество'"/>
               <custom-input :title="'Цена'"/>
               <div class="btn__container">
+                <sub-btn class="sub__button">Удалить</sub-btn>
                 <main-btn class="save__material">Добавить</main-btn>
               </div>
-              <custom-input :title="'Тип материала'"/>
-              <custom-input :title="'Название'"/>
-              <custom-input :title="'Объявленная стоимость'"/>
-              <custom-input :title="'Единица измерения'"/>
+              <div class="input__container">
+                <label for="my-input" class="label">Тип материала</label>
+                <input class="my-input" type="text" v-model="modal_store.materialType">
+              </div>
+              <div class="input__container">
+                <label for="my-input" class="label">Название</label>
+                <input class="my-input" type="text" v-model="modal_store.materialName">
+              </div>
+              <div class="input__container">
+                <label for="my-input" class="label">Единица измерения</label>
+                <input class="my-input" type="text" v-model="modal_store.materialMeasurement">
+              </div>
+              <div class="input__container">
+                <label for="my-input" class="label">Объявленная стоимость</label>
+                <input class="my-input" type="number" v-model="modal_store.materialCost">
+              </div>
               <div class="btn__container">                
-                <sub-btn class="sub__button">Закрыть</sub-btn>
-                <main-btn class="save__material">Сохранить</main-btn>
+                <sub-btn class="sub__button" @click.stop="modal_store.setShow()">Закрыть</sub-btn>
+                <form @submit.prevent="onUpdateMateral(modal_store.materialType, modal_store.materialName, modal_store.materialMeasurement, modal_store.materialCost, modal_store.material.ID)">
+                  <main-btn class="save__material">Сохранить</main-btn>
+                </form>
               </div>
             </div>
           </div>
@@ -96,18 +119,13 @@ export default { name: "building-materials" };
   import { useSidebarStore } from "@/store/sidebar_store";
   import { useLocalNavbarStore } from "@/store/local-navbar_store";
   import { useMaterialStore } from "@/store/materials_store"
+  import { useModalStore } from "@/store/modal_store";
   import { onBeforeMount, onUpdated, ref } from 'vue';
 
-  const navbar_store = useLocalNavbarStore();
-  const sidebar_store = useSidebarStore();
-  const material_store = useMaterialStore();
-  const dataReinforcement = ref()
-  const dataBrick = ref()
-  const dataBoard = ref()
-  const dataConcrete = ref()
-  const dataBlock = ref()
-  const dataBeam = ref()
-  const dataOther = ref()
+  const navbar_store = useLocalNavbarStore()
+  const sidebar_store = useSidebarStore()
+  const material_store = useMaterialStore()
+  const modal_store = useModalStore();
 
 
   const header_projects = [
@@ -120,19 +138,14 @@ export default { name: "building-materials" };
       { id: 2, name: "Количество" },
       { id: 3, name: "Цена" }
   ]
-
-  async function fetchMaterials() {
-    dataReinforcement.value = await material_store.fetchReinforcement()
-    dataBrick.value = await material_store.fetchBrick()
-    dataBoard.value = await material_store.fetchBoard()
-    dataConcrete.value = await material_store.fetchConcrete()
-    dataBlock.value = await material_store.fetchBlock()
-    dataBeam.value = await material_store.fetchBeam()
-    dataOther.value = await material_store.fetchOther()
-  }
   
+  async function onUpdateMateral(Type: string, Name: string,  UnitOfMeasurement: string, DeclaredValue: number, ID: number){
+    await material_store.updateMaterial(Type, Name, UnitOfMeasurement, DeclaredValue, ID)
+    material_store.fetchMaterials()
+  }
+
   onBeforeMount(async () => {
-    fetchMaterials()
+    material_store.fetchMaterials()
   })
 
 </script>
@@ -154,7 +167,22 @@ export default { name: "building-materials" };
       }
     }
   }
-
+  .input__container{
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem 0 0.5rem 0;
+    .my-input{
+        background-color: #FBFFFA;
+        border: 1px solid #77AF68;
+        border-radius: 0.3rem;
+        padding: 0.5rem;
+        outline: none;
+        margin-top: 0.2rem;
+    }
+    .label{
+        color: #868585;
+    }
+}
   .material-cards__container{
     margin: 2rem 0;
     .material-cards__row{
@@ -210,15 +238,21 @@ export default { name: "building-materials" };
       height: 100%;
       .left{
         width: 35%;
+        display: flex;
+        flex-direction: column;
         .img__container{
           display: flex;
-          border-radius: 0.5rem;
-          padding: 5rem 1rem;
-          justify-content: center;
-        }
-        .count{
-          font-size: 1.1rem;
+          height: 8rem;
           margin-top: 2rem;
+          justify-content: center;
+          height: 20%;
+        }
+        .count__container{
+          margin-top: 16rem;
+          .count{
+            font-size: 1.1rem;
+            margin-top: 2rem;
+          }
         }
       }
       .right{
@@ -229,6 +263,7 @@ export default { name: "building-materials" };
         .btn__container{
           margin-top: auto;
           margin-left: auto;
+          display: flex;
           .sub__button{
             margin-right: 0.5rem;
             height: 100%;

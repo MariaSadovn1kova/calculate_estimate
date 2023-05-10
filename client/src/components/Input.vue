@@ -1,7 +1,7 @@
 <template>
    <div class="input__container">
     <label for="my-input" class="label">{{ props.title }}</label>
-    <input class="my-input" type="text">
+    <input class="my-input" type="text" :value="modelValue" >
   </div>
 </template>
 
@@ -10,9 +10,12 @@
 </script>
 <script setup lang="ts">
   import { defineProps } from 'vue';
+  import { onBeforeMount, onUpdated, ref } from 'vue';
 
+  const materialType = ref("Штучка")
   const props = defineProps({
-    title: String
+    title: String,
+    modelValue: Object
   })
 </script>
 
