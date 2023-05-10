@@ -14,6 +14,12 @@ export const useModalStore = defineStore("modal", () => {
     const materialMeasurement = ref("")
     const materialCost = ref()
 
+    const createType = ref("")
+    const createName = ref("")
+    const createMeasurement = ref("")
+    const createCost = ref()
+    const createQuantity = ref()
+
     function setShow(){
         show.value = !show.value
     }
@@ -57,6 +63,11 @@ export const useModalStore = defineStore("modal", () => {
         materialName,
         materialMeasurement,
         materialCost,
+        createType,
+        createName,
+        createMeasurement,
+        createCost,
+        createQuantity,
         setProject,
         setShow,
         setFormula,

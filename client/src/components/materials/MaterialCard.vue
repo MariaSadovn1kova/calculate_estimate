@@ -14,7 +14,7 @@
     <div class="material__price">{{ Intl.NumberFormat('ru-RU').format(material.DeclaredValue) }} рублей</div>
     <div class="btn__container">
         <sub-btn class="sub__button" @click="deleteMaterial(material.ID)">Удалить</sub-btn>
-        <main-btn class="open__material"  @click.stop="modal_store.setShow(), modal_store.setMaterial(material)">Открыть</main-btn>
+        <main-btn class="open__material"  @click.stop="modal_store.setShow(), modal_store.setMaterial(material), material_store.setModalContext('Материал')">Открыть</main-btn>
     </div>
   </div>
 </template>

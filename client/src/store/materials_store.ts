@@ -11,6 +11,11 @@ export const useMaterialStore = defineStore("materials", () => {
     const dataBlock = ref()
     const dataBeam = ref()
     const dataOther = ref()
+    const modalContext = ref()
+
+    function setModalContext (newModalContext: string){
+        modalContext.value = newModalContext
+    }
 
     async function fetchMaterials() {
         dataReinforcement.value = await fetchReinforcement()
@@ -69,6 +74,9 @@ export const useMaterialStore = defineStore("materials", () => {
     async function deleteMaterial(ID: number):Promise<any> {
         const res = await axios.delete(`http://localhost:3000/api/materials/${ID}`)
     }
+    async function insertMaterial(Type: string, Name: string, UnitOfMeasurement: string, DeclaredValue: number, Quantity:number):Promise<any> {
+        const res = await axios.post(`http://localhost:3000/api/materials`, { Type: Type, Name: Name, UnitOfMeasurement: UnitOfMeasurement, DeclaredValue: DeclaredValue,  Quantity: Quantity})
+    }
 
     return{
         dataReinforcement,
@@ -78,7 +86,9 @@ export const useMaterialStore = defineStore("materials", () => {
         dataBlock,
         dataBeam,
         dataOther,
+        modalContext,
         fetchReinforcement,
+        setModalContext,
         fetchBrick,
         fetchBoard,
         fetchConcrete,
@@ -87,6 +97,7 @@ export const useMaterialStore = defineStore("materials", () => {
         fetchOther,
         updateMaterial,
         deleteMaterial,
-        fetchMaterials
+        fetchMaterials,
+        insertMaterial
     }
 })

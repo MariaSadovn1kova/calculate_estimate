@@ -39,6 +39,13 @@ class MaterialController{
         const material = await db.query('DELETE FROM "BuildingMaterial" WHERE "ID" = $1', [ID])
         res.json(material.rows[0])   
     }
+    async createMaterial(req, res){
+        const { Name, Type, DeclaredValue, UnitOfMeasurement, Quantity } = req.body
+        const newMaterial  = await db.query(
+            `INSERT INTO "BuildingMaterial" ("Name", "Type", "DeclaredValue", "UnitOfMeasurement", "Quantity") VALUES ($1, $2, $3, $4, $5) RETURNING *`, [Name, Type, DeclaredValue, UnitOfMeasurement, Quantity]
+        )
+        res.json(newMaterial.rows[0])
+    }
 }
 
 

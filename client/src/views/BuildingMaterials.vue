@@ -4,13 +4,11 @@
       <div class="header__title">
         {{ sidebar_store.active }} 
       </div>
-      <router-link to="/create">
-        <main-btn>
+        <main-btn @click="modal_store.setShow(), material_store.setModalContext('СоздатьМатериал')">
           <div class="btn__content">
             <div class="btn__text">Создать материал</div>
           </div>
         </main-btn>
-      </router-link>
     </div>
     <div class="material-cards__container">
       <div class="material-cards__row" v-if="sidebar_store.active == 'Арматура'">
@@ -36,78 +34,120 @@
       </div>
     </div>
     <modal-window>
-      <div class="material-modal__container">
-        <local-navbar class="material__navbar" :navbar_items = 'navbar_store.material_items' :default_active = 'navbar_store.material_items[0].name'/>
-        <div  class="content" v-if="navbar_store.active == 'Общая информация'">
-          <div class="general-information__container">
-            <div class="left">
-              <div class="img__container">
-                <img v-if="modal_store.material.Type == 'Арматура'" src="@/assets/img/materials/reinforcement.svg">
-                <img v-else-if="modal_store.material.Type == 'Кирпич'" src="@/assets/img/materials/brick.svg">
-                <img v-else-if="modal_store.material.Type == 'Доска'" src="@/assets/img/materials/construction_board.svg">
-                <img v-else-if="modal_store.material.Type == 'Бетон'" src="@/assets/img/materials/concrete.svg">
-                <img v-else-if="modal_store.material.Type == 'Блок'" src="@/assets/img/materials/block.svg"> 
-                <img v-else-if="modal_store.material.Type == 'Брус'" src="@/assets/img/materials/beam.svg">   
-                <img v-else src="@/assets/img/materials/other.svg">    
+      <div v-if="material_store.modalContext == 'Материал'">
+        <div class="material-modal__container">
+          <local-navbar class="material__navbar" :navbar_items = 'navbar_store.material_items' :default_active = 'navbar_store.material_items[0].name'/>
+          <div  class="content" v-if="navbar_store.active == 'Общая информация'">
+            <div class="general-information__container">
+              <div class="left">
+                <div class="img__container">
+                  <img v-if="modal_store.material.Type == 'Арматура'" src="@/assets/img/materials/reinforcement.svg">
+                  <img v-else-if="modal_store.material.Type == 'Кирпич'" src="@/assets/img/materials/brick.svg">
+                  <img v-else-if="modal_store.material.Type == 'Доска'" src="@/assets/img/materials/construction_board.svg">
+                  <img v-else-if="modal_store.material.Type == 'Бетон'" src="@/assets/img/materials/concrete.svg">
+                  <img v-else-if="modal_store.material.Type == 'Блок'" src="@/assets/img/materials/block.svg"> 
+                  <img v-else-if="modal_store.material.Type == 'Брус'" src="@/assets/img/materials/beam.svg">   
+                  <img v-else src="@/assets/img/materials/other.svg">    
+                </div>
+                <div class="count__container">
+                  <div class="count">Количество на складе: {{modal_store.material.Quantity}}</div>
+                  <div class="count">Занято на проектах: </div>
+                </div>
               </div>
-              <div class="count__container">
-                <div class="count">Количество на складе: {{modal_store.material.Quantity}}</div>
-                <div class="count">Занято на проектах: </div>
+              <div class="right">
+                <custom-input :title="'Количество'"/>
+                <custom-input :title="'Цена'"/>
+                <div class="btn__container">
+                  <sub-btn class="sub__button">Удалить</sub-btn>
+                  <main-btn class="save__material">Добавить</main-btn>
+                </div>
+                <div class="input__container">
+                  <label for="my-input" class="label">Тип материала</label>
+                  <input class="my-input" type="text" v-model="modal_store.materialType">
+                </div>
+                <div class="input__container">
+                  <label for="my-input" class="label">Название</label>
+                  <input class="my-input" type="text" v-model="modal_store.materialName">
+                </div>
+                <div class="input__container">
+                  <label for="my-input" class="label">Единица измерения</label>
+                  <input class="my-input" type="text" v-model="modal_store.materialMeasurement">
+                </div>
+                <div class="input__container">
+                  <label for="my-input" class="label">Объявленная стоимость</label>
+                  <input class="my-input" type="number" v-model="modal_store.materialCost">
+                </div>
+                <div class="btn__container">                
+                  <sub-btn class="sub__button" @click.stop="modal_store.setShow()">Закрыть</sub-btn>
+                  <form @submit.prevent="onUpdateMateral(modal_store.materialType, modal_store.materialName, modal_store.materialMeasurement, modal_store.materialCost, modal_store.material.ID)">
+                    <main-btn class="save__material">Сохранить</main-btn>
+                  </form>
+                </div>
               </div>
             </div>
-            <div class="right">
-              <custom-input :title="'Количество'"/>
-              <custom-input :title="'Цена'"/>
-              <div class="btn__container">
-                <sub-btn class="sub__button">Удалить</sub-btn>
-                <main-btn class="save__material">Добавить</main-btn>
+          </div>
+          <div class="content" v-if="navbar_store.active == 'Проекты'">
+            <div class="header">
+              <div class="header__item" v-for="item in header_projects" :key="item.id" :class="{'last__item' : item.id == 1 || item.id == 3}">{{item.name}}</div>
+            </div>
+            <div class="table__row">
+                  <div class="row__item last__item">1</div>
+                  <div class="row__item">Доска 40*180*6м</div>
+                  <div class="row__item last__item">м3</div>
               </div>
-              <div class="input__container">
-                <label for="my-input" class="label">Тип материала</label>
-                <input class="my-input" type="text" v-model="modal_store.materialType">
+          </div>
+          <div class="content" v-if="navbar_store.active == 'История закупок'">
+            <div class="header">
+              <div class="header__item" v-for="item in purchase_projects" :key="item.id" :class="{'last__item' : item.id == 1 || item.id == 3}">{{item.name}}</div>
+            </div>
+            <div class="table__row">
+                  <div class="row__item last__item">1</div>
+                  <div class="row__item">Доска 40*180*6м</div>
+                  <div class="row__item last__item">м3</div>
               </div>
-              <div class="input__container">
-                <label for="my-input" class="label">Название</label>
-                <input class="my-input" type="text" v-model="modal_store.materialName">
+          </div>
+        </div>
+        </div>
+        <div v-if="material_store.modalContext == 'СоздатьМатериал'">
+          <div class="material-modal__container">
+            <div class="title">Создать новый стройматериал</div>
+            <div class="general-information__container">
+              <div class="left">
+                <div class="img__container">
+                  <img src="@/assets/img/materials/other.svg">    
+                </div>
               </div>
-              <div class="input__container">
-                <label for="my-input" class="label">Единица измерения</label>
-                <input class="my-input" type="text" v-model="modal_store.materialMeasurement">
-              </div>
-              <div class="input__container">
-                <label for="my-input" class="label">Объявленная стоимость</label>
-                <input class="my-input" type="number" v-model="modal_store.materialCost">
-              </div>
-              <div class="btn__container">                
-                <sub-btn class="sub__button" @click.stop="modal_store.setShow()">Закрыть</sub-btn>
-                <form @submit.prevent="onUpdateMateral(modal_store.materialType, modal_store.materialName, modal_store.materialMeasurement, modal_store.materialCost, modal_store.material.ID)">
-                  <main-btn class="save__material">Сохранить</main-btn>
-                </form>
+              <div class="right">
+                <div class="input__container">
+                  <label for="my-input" class="label">Тип материала</label>
+                  <input class="my-input" type="text" v-model="modal_store.createType">
+                </div>
+                <div class="input__container">
+                  <label for="my-input" class="label">Название</label>
+                  <input class="my-input" type="text" v-model="modal_store.createName">
+                </div>
+                <div class="input__container">
+                  <label for="my-input" class="label">Единица измерения</label>
+                  <input class="my-input" type="text" v-model="modal_store.createMeasurement">
+                </div>
+                <div class="input__container">
+                  <label for="my-input" class="label">Объявленная стоимость</label>
+                  <input class="my-input" type="number" v-model="modal_store.createCost">
+                </div>
+                <div class="input__container">
+                  <label for="my-input" class="label">Количество на складе</label>
+                  <input class="my-input" type="number" v-model="modal_store.createQuantity">
+                </div>
+                <div class="btn__container"> 
+                  <sub-btn class="sub__button" @click.stop="modal_store.setShow()">Закрыть</sub-btn>
+                  <form @submit.prevent="onInsertMaterial(modal_store.createType, modal_store.createName, modal_store.createMeasurement, modal_store.createCost, modal_store.createQuantity), modal_store.setShow()">
+                    <main-btn class="save__material">Сохранить</main-btn>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="content" v-if="navbar_store.active == 'Проекты'">
-          <div class="header">
-            <div class="header__item" v-for="item in header_projects" :key="item.id" :class="{'last__item' : item.id == 1 || item.id == 3}">{{item.name}}</div>
-          </div>
-          <div class="table__row">
-                <div class="row__item last__item">1</div>
-                <div class="row__item">Доска 40*180*6м</div>
-                <div class="row__item last__item">м3</div>
-            </div>
-        </div>
-        <div class="content" v-if="navbar_store.active == 'История закупок'">
-          <div class="header">
-            <div class="header__item" v-for="item in purchase_projects" :key="item.id" :class="{'last__item' : item.id == 1 || item.id == 3}">{{item.name}}</div>
-          </div>
-          <div class="table__row">
-                <div class="row__item last__item">1</div>
-                <div class="row__item">Доска 40*180*6м</div>
-                <div class="row__item last__item">м3</div>
-            </div>
-        </div>
-      </div>
     </modal-window>
   </div>
 </template>
@@ -127,7 +167,6 @@ export default { name: "building-materials" };
   const material_store = useMaterialStore()
   const modal_store = useModalStore();
 
-
   const header_projects = [
       { id: 1, name: "Адрес проекта" },
       { id: 2, name: "Заказчик" },
@@ -141,6 +180,11 @@ export default { name: "building-materials" };
   
   async function onUpdateMateral(Type: string, Name: string,  UnitOfMeasurement: string, DeclaredValue: number, ID: number){
     await material_store.updateMaterial(Type, Name, UnitOfMeasurement, DeclaredValue, ID)
+    material_store.fetchMaterials()
+  }
+
+  async function onInsertMaterial(Type: string, Name: string,  UnitOfMeasurement: string, DeclaredValue: number, Quantity: number){
+    await material_store.insertMaterial(Type, Name, UnitOfMeasurement, DeclaredValue, Quantity)
     material_store.fetchMaterials()
   }
 
@@ -196,6 +240,12 @@ export default { name: "building-materials" };
     width: 60rem;
     height: 50rem;
     padding: 2rem 3rem;
+    .title{
+      font-size: 1.1rem;           
+      color: #4A4F48;
+      font-weight: 500;
+      margin-bottom: 2rem;
+    }
     .material__navbar{
       margin-top: 0;
     }
@@ -260,6 +310,7 @@ export default { name: "building-materials" };
         flex-direction: column;
         width: 65%;
         padding-left: 4rem;
+        padding-bottom: 3rem;
         .btn__container{
           margin-top: auto;
           margin-left: auto;
