@@ -16,9 +16,11 @@
       <div class="project__address">{{ project.Address }}</div>
     </div>
     <div class="card__btns">
-      <button class="edit"> 
-        <img src="@/assets/logo/edit.svg">
-      </button>
+      <router-link :to="'/project/' + project.ID">
+        <button class="edit" @click="projectsStore.setProject(project)"> 
+          <img src="@/assets/logo/edit.svg">
+        </button>
+      </router-link>
       <button class="delete" @click.stop="modal_store.setShow(), modal_store.setProject(project)" >
         <img src="@/assets/logo/delete.svg">
       </button>
@@ -34,7 +36,9 @@
 <script setup lang="ts">
   import { defineProps } from 'vue';
   import { useModalStore } from "@/store/modal_store";
+  import { useProjectsStore } from "@/store/projects_store";
 
+  const projectsStore = useProjectsStore();
   const modal_store = useModalStore();
   const props = defineProps({
       project: Object

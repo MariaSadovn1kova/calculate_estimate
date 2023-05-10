@@ -22,7 +22,9 @@ class ProjectController{
     }
     
     async getOneProject(req, res){
-
+        const ID = req.params.id
+        const project = await db.query('SELECT * FROM "Project" WHERE "ID" = $1', [ID])
+        res.json(project.rows[0])   
     }
     
     async updateProject(req, res){

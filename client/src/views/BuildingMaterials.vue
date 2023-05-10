@@ -153,7 +153,7 @@
 </template>
 
 <script lang="ts">
-export default { name: "building-materials" };
+  export default { name: "building-materials" };
 </script>
 <script setup lang="ts">
   import { useSidebarStore } from "@/store/sidebar_store";

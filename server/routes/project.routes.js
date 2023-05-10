@@ -9,5 +9,7 @@ router.get('/projects/unfinished', projectController.getProjectUnfinished)
 router.get('/project/:id', projectController.getOneProject)
 router.put('/project', projectController.updateProject)
 router.delete('/project/:id', projectController.deleteProject)
+router.get('/project/:id', projectController.getOneProject)
+
 
 module.exports = router

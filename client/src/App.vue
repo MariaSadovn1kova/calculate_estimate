@@ -6,18 +6,18 @@
       <main-sidebar v-if="route.name == 'materials'" class="main__sidebar" :sidebar_items = 'sidebar_store.materials_items' :default_active = 'sidebar_store.materials_items[0].name'/>
       <main-sidebar v-if="route.name == 'create-project'" class="main__sidebar" :sidebar_items = 'sidebar_store.create_items' :default_active = 'sidebar_store.create_items[0].name'/>
       <main-sidebar v-if="route.name == 'formulas'" class="main__sidebar" :sidebar_items = 'sidebar_store.formulas_items' :default_active = 'sidebar_store.formulas_items[0].name'/>
+      <main-sidebar v-if="route.name == 'project'" class="main__sidebar" :sidebar_items = 'sidebar_store.create_items' :default_active = 'sidebar_store.create_items[0].name'/>
       <router-view class="router-view"/>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useRoute } from "vue-router";
-import { useSidebarStore } from "@/store/sidebar_store";
+  import { useRoute } from "vue-router";
+  import { useSidebarStore } from "@/store/sidebar_store";
 
-const sidebar_store = useSidebarStore();
-const route = useRoute();
-
+  const sidebar_store = useSidebarStore();
+  const route = useRoute();
 </script>
 
 <style lang="scss">

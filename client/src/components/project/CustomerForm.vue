@@ -21,6 +21,9 @@
   export default {name: "customer-form" };
 </script>
 <script setup lang="ts">
+    import { useProjectsStore } from "@/store/projects_store";
+
+    const projectsStore = useProjectsStore();
     const inputs_items = [
         { name: "ФИО" },
         { name: "Адрес" },
