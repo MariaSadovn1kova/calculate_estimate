@@ -46,6 +46,11 @@ class MaterialController{
         )
         res.json(newMaterial.rows[0])
     }
+    async getAccounting(req, res){
+        const ID = req.params.id
+        const accounting = await db.query('select * from "Accounting" WHERE "BuildingMaterial_ID" = $1 AND ("OperationType" = $2 OR "OperationType" = $3) ORDER BY "ID"', [ID, 'Закупка', 'Удаление'])
+        res.json(accounting.rows)
+    }
 }
 
 

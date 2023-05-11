@@ -12,6 +12,7 @@ router.get('/materials/other', materialController.getOther)
 router.put('/materials', materialController.updateMaterial)
 router.delete('/materials/:id', materialController.deleteMaterial)
 router.post('/materials', materialController.createMaterial)
+router.get('/accounting/:id', materialController.getAccounting)
 
 module.exports = router
 

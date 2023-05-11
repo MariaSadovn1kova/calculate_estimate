@@ -98,6 +98,6 @@ export const useMaterialStore = defineStore("materials", () => {
         updateMaterial,
         deleteMaterial,
         fetchMaterials,
-        insertMaterial
+        insertMaterial,
     }
 })

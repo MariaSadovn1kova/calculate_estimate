@@ -98,12 +98,13 @@
           </div>
           <div class="content" v-if="navbar_store.active == 'История закупок'">
             <div class="header">
-              <div class="header__item" v-for="item in purchase_projects" :key="item.id" :class="{'last__item' : item.id == 1 || item.id == 3}">{{item.name}}</div>
+              <div class="header__item" v-for="item in purchase_projects" :key="item.id" :class="{'last__item' : item.id == 1 || item.id == 4}">{{item.name}}</div>
             </div>
-            <div class="table__row">
-                  <div class="row__item last__item">1</div>
-                  <div class="row__item">Доска 40*180*6м</div>
-                  <div class="row__item last__item">м3</div>
+            <div class="table__row" v-for="item in modal_store.accounting" :key = "item.ID">
+                  <div class="row__item last__item">{{ item.OperationType }}</div>
+                  <div class="row__item">{{ item.Date }}</div>
+                  <div class="row__item">{{ item.Quantity }}</div>
+                  <div class="row__item last__item">{{ item.Price }}</div>
               </div>
           </div>
         </div>
@@ -173,9 +174,10 @@
       { id: 3, name: "Количество" }
   ]
   const purchase_projects = [
-      { id: 1, name: "Дата" },
-      { id: 2, name: "Количество" },
-      { id: 3, name: "Цена" }
+      { id: 1, name: "Вид сделки" },
+      { id: 2, name: "Дата" },
+      { id: 3, name: "Количество" },
+      { id: 4, name: "Цена" }
   ]
   
   async function onUpdateMateral(Type: string, Name: string,  UnitOfMeasurement: string, DeclaredValue: number, ID: number){

@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
+import axios from "axios";
 
 export const useModalStore = defineStore("modal", () => {
     const show = ref(false)
@@ -7,7 +8,8 @@ export const useModalStore = defineStore("modal", () => {
     const formula = ref()
     const formulaContent = ref()
     const material = ref()
-
+    const accounting = ref([])
+    
     // Материалы
     const materialType = ref("")
     const materialName = ref("")
@@ -20,6 +22,10 @@ export const useModalStore = defineStore("modal", () => {
     const createCost = ref()
     const createQuantity = ref()
 
+    async function getAccounting(ID: number){
+        const res = await axios.get(`http://localhost:3000/api/accounting/${ID}`)
+        accounting.value = res.data
+    }
     function setShow(){
         show.value = !show.value
     }
@@ -68,12 +74,14 @@ export const useModalStore = defineStore("modal", () => {
         createMeasurement,
         createCost,
         createQuantity,
+        accounting,
         setProject,
         setShow,
         setFormula,
         addFormulaContent,
         deleteFormulaContent,
         formulaToString,
-        setMaterial
+        setMaterial,
+        getAccounting
     }
 })
