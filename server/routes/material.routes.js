@@ -13,6 +13,8 @@ router.put('/materials', materialController.updateMaterial)
 router.delete('/materials/:id', materialController.deleteMaterial)
 router.post('/materials', materialController.createMaterial)
 router.get('/accounting/:id', materialController.getAccounting)
+router.post('/accounting',  materialController.createAccounting)
+router.put('/accounting', materialController.updateMaterialPrice)
 
 module.exports = router
 

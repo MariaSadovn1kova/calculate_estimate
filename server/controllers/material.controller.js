@@ -51,7 +51,16 @@ class MaterialController{
         const accounting = await db.query('select * from "Accounting" WHERE "BuildingMaterial_ID" = $1 AND ("OperationType" = $2 OR "OperationType" = $3) ORDER BY "ID"', [ID, 'Закупка', 'Удаление'])
         res.json(accounting.rows)
     }
+    async createAccounting(req, res){
+        const { BuildingMaterial_ID, Quantity, OperationType, Date, Price } = req.body
+        const accounting = await db.query(`INSERT INTO "Accounting" ("BuildingMaterial_ID","Quantity","OperationType","Date","Price") VALUES ($1, $2, $3, $4, $5) RETURNING *`, [BuildingMaterial_ID, Quantity, OperationType, Date, Price])
+        res.json(accounting.rows)
+    }
+    async updateMaterialPrice(req, res){
+        const { Quantity, ID } = req.body
+        const material = await db.query('UPDATE "BuildingMaterial" SET "Quantity" = $1 WHERE "ID" = $2 RETURNING *', [Quantity, ID])
+        res.json(material.rows[0])
+    }
 }
-
 
 module.exports = new MaterialController()

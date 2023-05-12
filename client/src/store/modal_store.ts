@@ -15,6 +15,9 @@ export const useModalStore = defineStore("modal", () => {
     const materialName = ref("")
     const materialMeasurement = ref("")
     const materialCost = ref()
+    const materialQuantity = ref()
+    const materialPrice = ref()
+    const materialDate = ref()
 
     const createType = ref("")
     const createName = ref("")
@@ -25,6 +28,15 @@ export const useModalStore = defineStore("modal", () => {
     async function getAccounting(ID: number){
         const res = await axios.get(`http://localhost:3000/api/accounting/${ID}`)
         accounting.value = res.data
+    }
+    async function createAccounting(BuildingMaterial_ID: number, Quantity: number, OperationType: string, Date: Date, Price: number){
+        const res = await axios.post(`http://localhost:3000/api/accounting`,  { BuildingMaterial_ID: BuildingMaterial_ID, Quantity: Quantity, OperationType: OperationType, Date: Date, Price: Price})
+        materialQuantity.value = ''
+        materialPrice.value = ''
+        materialDate.value = ''
+    }
+    async function updateMaterialPrice(ID: number, Quantity: number){
+        const res = await axios.put(`http://localhost:3000/api/accounting`,  { ID: ID, Quantity: Quantity })
     }
     function setShow(){
         show.value = !show.value
@@ -75,6 +87,9 @@ export const useModalStore = defineStore("modal", () => {
         createCost,
         createQuantity,
         accounting,
+        materialQuantity,
+        materialPrice,
+        materialDate,
         setProject,
         setShow,
         setFormula,
@@ -82,6 +97,8 @@ export const useModalStore = defineStore("modal", () => {
         deleteFormulaContent,
         formulaToString,
         setMaterial,
-        getAccounting
+        getAccounting,
+        createAccounting,
+        updateMaterialPrice
     }
 })

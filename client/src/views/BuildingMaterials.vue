@@ -55,11 +55,23 @@
                 </div>
               </div>
               <div class="right">
-                <custom-input :title="'Количество'"/>
-                <custom-input :title="'Цена'"/>
+                <div class="input__container">
+                  <label for="my-input" class="label">Количество</label>
+                  <input class="my-input" type="number" v-model="modal_store.materialQuantity">
+                </div>
+                <div class="input__container">
+                  <label for="my-input" class="label">Цена</label>
+                  <input class="my-input" type="number" v-model="modal_store.materialPrice">
+                </div>
+                <div class="input__container">
+                  <label for="my-input" class="label">Дата</label>
+                  <input class="my-input" type="date" v-model="modal_store.materialDate">
+                </div>
                 <div class="btn__container">
                   <sub-btn class="sub__button">Удалить</sub-btn>
-                  <main-btn class="save__material">Добавить</main-btn>
+                  <form @submit.prevent="createAccounting(modal_store.material.ID, modal_store.materialQuantity, 'Закупка', modal_store.materialDate, modal_store.materialPrice)">
+                    <main-btn class="save__material">Добавить</main-btn>
+                  </form>
                 </div>
                 <div class="input__container">
                   <label for="my-input" class="label">Тип материала</label>
@@ -79,7 +91,7 @@
                 </div>
                 <div class="btn__container">                
                   <sub-btn class="sub__button" @click.stop="modal_store.setShow()">Закрыть</sub-btn>
-                  <form @submit.prevent="onUpdateMateral(modal_store.materialType, modal_store.materialName, modal_store.materialMeasurement, modal_store.materialCost, modal_store.material.ID)">
+                  <form @submit.prevent="onUpdateMaterial(modal_store.materialType, modal_store.materialName, modal_store.materialMeasurement, modal_store.materialCost, modal_store.material.ID)">
                     <main-btn class="save__material">Сохранить</main-btn>
                   </form>
                 </div>
@@ -102,7 +114,7 @@
             </div>
             <div class="table__row" v-for="item in modal_store.accounting" :key = "item.ID">
                   <div class="row__item last__item">{{ item.OperationType }}</div>
-                  <div class="row__item">{{ item.Date }}</div>
+                  <div class="row__item">{{ item.Date.slice(0,10)  }}</div>
                   <div class="row__item">{{ item.Quantity }}</div>
                   <div class="row__item last__item">{{ item.Price }}</div>
               </div>
@@ -180,11 +192,14 @@
       { id: 4, name: "Цена" }
   ]
   
-  async function onUpdateMateral(Type: string, Name: string,  UnitOfMeasurement: string, DeclaredValue: number, ID: number){
+  async function onUpdateMaterial(Type: string, Name: string,  UnitOfMeasurement: string, DeclaredValue: number, ID: number){
     await material_store.updateMaterial(Type, Name, UnitOfMeasurement, DeclaredValue, ID)
     material_store.fetchMaterials()
   }
-
+  async function createAccounting(BuildingMaterial_ID: number, Quantity: number, OperationType: string, Date: Date, Price: number){
+    await modal_store.createAccounting(BuildingMaterial_ID, Quantity, OperationType, Date, Price) 
+    await modal_store.updateMaterialPrice(BuildingMaterial_ID, Quantity + modal_store.material.Quantity)
+  }
   async function onInsertMaterial(Type: string, Name: string,  UnitOfMeasurement: string, DeclaredValue: number, Quantity: number){
     await material_store.insertMaterial(Type, Name, UnitOfMeasurement, DeclaredValue, Quantity)
     material_store.fetchMaterials()
