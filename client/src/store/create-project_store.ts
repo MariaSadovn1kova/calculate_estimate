@@ -3,6 +3,27 @@ import { computed, ref } from "vue";
 
 export const useCreateProjectStore = defineStore("create-project", () => {
     const activeBuildingTab = ref('Здание 1')
+
+    // Информация о проекте
+    const customerFullName = ref('Работает')
+    const address = ref()
+    const phoneNumber = ref()
+    const email = ref()
+    const date = ref()
+    const comment = ref('cc')
+
+    // Поля фундамента
+    const foundationWidth = ref()
+    const foundationLength = ref()
+    const foundationHeight = ref()
+    const foundationDepth = ref()
+    const commonPerimeter = ref()
+    const tapeLength = ref()
+    const boardWidth = ref()
+    const reinforcementType = ref()
+    const reinforcementCount = ref()
+
+
     const foundation_inputs_items = [
         {id: 1, standard_fields:[
           { name: "Ширина" },
@@ -114,6 +135,21 @@ export const useCreateProjectStore = defineStore("create-project", () => {
         box_inputs,
         roof__imgs,
         roof__active__imgs,
+        foundationWidth,
+        foundationLength,
+        foundationHeight,
+        foundationDepth,
+        boardWidth,
+        reinforcementType,
+        reinforcementCount,
+        tapeLength,
+        commonPerimeter,
+        customerFullName,
+        address,
+        phoneNumber,
+        email,
+        date,
+        comment,
         setActiveRoof,
         setActiveFoundation,
         setActiveBuildingTab,

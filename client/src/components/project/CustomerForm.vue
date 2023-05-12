@@ -5,12 +5,34 @@
     </div>
     <div class="content__container">
         <div class="left__container">
-            <custom-input v-for="item in inputs_items" :key="item.name" class="custom__input" :title="item.name"/>
+            <div class="input__container">
+                <label for="my-input" class="label">ФИО</label>
+                <input class="my-input" type="text" v-model="project_store.customerFullName">
+            </div>
+            <div class="input__container">
+                <label for="my-input" class="label">Адрес</label>
+                <input class="my-input" type="text" v-model="project_store.address">
+            </div>
+            <div class="input__container">
+                <label for="my-input" class="label">Телефонный номер</label>
+                <input class="my-input" type="text" v-model="project_store.phoneNumber">
+            </div>
+            <div class="input__container">
+                <label for="my-input" class="label">Электронная почта</label>
+                <input class="my-input" type="text" v-model="project_store.email">
+            </div>
         </div>
         <div class="right__container">
-            <custom-textarea :title="'Комментарий'"/>
+            <div class="input__container">
+                <label for="my-input" class="label">Дата</label>
+                <input class="my-input" type="date" v-model="project_store.date">
+            </div>
+            <div class="input__container">
+                <label for="my-textarea" class="label">Комментарий</label>
+                <textarea class="my-textarea" type="text" v-model="project_store.comment"></textarea>
+            </div>
             <div>
-                <sub-btn class="sub__button">Сбросить</sub-btn>
+                <sub-btn class="sub__button" @click="reset()">Сбросить</sub-btn>
             </div>
         </div>
     </div>
@@ -21,15 +43,18 @@
   export default {name: "customer-form" };
 </script>
 <script setup lang="ts">
-    import { useProjectsStore } from "@/store/projects_store";
+    import { useCreateProjectStore } from "@/store/create-project_store";
 
-    const projectsStore = useProjectsStore();
-    const inputs_items = [
-        { name: "ФИО" },
-        { name: "Адрес" },
-        { name: "Телефонный номер" },
-        { name: "Электронная почта" },
-    ]
+    const project_store = useCreateProjectStore();
+
+    function reset(){
+        project_store.customerFullName = ""
+        project_store.address = ""
+        project_store.phoneNumber = ""
+        project_store.email = ""
+        project_store.date = ""
+        project_store.comment = ""
+    }
 </script>
 
 <style lang="scss" scoped>
@@ -40,11 +65,36 @@
     border-radius: 0.5rem;
     padding: 3rem 4rem;
     margin-bottom: 4rem;
+    .my-textarea{
+        background-color: #FBFFFA;
+        border: 1px solid #77AF68;
+        border-radius: 0.3rem;
+        padding: 0.5rem;
+        outline: none;
+        margin-top: 0.2rem;
+        height: 11.5rem;
+    }
     .header{
         color: #4A4F48;
         margin-bottom: 1rem;
     }
     .content__container{
+        .input__container{
+            display: flex;
+            flex-direction: column;
+            margin: 1rem 0 0.5rem 0;
+            .my-input{
+                background-color: #FBFFFA;
+                border: 1px solid #77AF68;
+                border-radius: 0.3rem;
+                padding: 0.5rem;
+                outline: none;
+                margin-top: 0.2rem;
+            }
+            .label{
+                color: #868585;
+            }
+        }
         display: flex;
         .left__container{
             width: 50%;
@@ -55,6 +105,7 @@
         }
         .right__container{
             width: 50%;
+            margin-left: 12rem;
             div{
                 width: 100%;
                 display: flex;

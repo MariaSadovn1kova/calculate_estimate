@@ -28,13 +28,49 @@
             <img :src="item.name" v-else>
           </div>
         </div>
-        <custom-input v-for="item in project_store.foundation_inputs_items[0].standard_fields" :key="item.name" class="custom__input" :title="item.name"/>
+        <!-- Ввод параметров фундамента -->
+        <div v-if="project_store.active_foundation == 1 || project_store.active_foundation == 2 || project_store.active_foundation == 3 || project_store.active_foundation == 4">
+          <div class="input__container">
+            <label for="my-input" class="label">Ширина</label>
+            <input class="my-input" type="number" v-model="project_store.foundationWidth">
+          </div>
+          <div class="input__container">
+            <label for="my-input" class="label">Длина</label>
+            <input class="my-input" type="number" v-model="project_store.foundationLength">
+          </div>
+          <div class="input__container">
+            <label for="my-input" class="label">Высота</label>
+            <input class="my-input" type="number" v-model="project_store.foundationHeight">
+          </div>
+          <div class="input__container">
+            <label for="my-input" class="label">Толщина</label>
+            <input class="my-input" type="number" v-model="project_store.foundationDepth">
+          </div>
+        </div>
+        <div class="input__container" v-if="project_store.active_foundation == 5 || project_store.active_foundation == 6 || project_store.active_foundation == 7">
+          <label for="my-input" class="label">Общий периметр</label>
+          <input class="my-input" type="number" v-model="project_store.commonPerimeter">
+        </div>
+        <div class="input__container" v-if="project_store.active_foundation == 3 || project_store.active_foundation == 4 || project_store.active_foundation == 6">
+          <label for="my-input" class="label">Суммарная длина ленты</label>
+          <input class="my-input" type="number" v-model="project_store.tapeLength">
+        </div>
       </div>
       <div class="right__container">
         <div class="inputs__header">Опалубка</div>
-        <custom-input v-for="item in project_store.foundation_inputs_items[1].board_fields" :key="item.name" class="custom__input" :title="item.name"/>
+        <div class="input__container">
+          <label for="my-input" class="label">Ширина доски</label>
+          <input class="my-input" type="number" v-model="project_store.boardWidth">
+        </div>
         <div class="inputs__header reinforcement">Арматура</div>
-        <custom-input v-for="item in project_store.foundation_inputs_items[2].reinforcement_fields" :key="item.name" class="custom__input" :title="item.name"/>
+        <div class="input__container">
+          <label for="my-input" class="label">Вид арматуры</label>
+          <input class="my-input" type="number" v-model="project_store.reinforcementType">
+        </div>
+        <div class="input__container">
+          <label for="my-input" class="label">Количество прутьев в кольце</label>
+          <input class="my-input" type="number" v-model="project_store.reinforcementCount">
+        </div>
         <div class="btn__container">
           <sub-btn class="reset">Сбросить</sub-btn>
           <main-btn class="calculate">Рассчитать</main-btn>
@@ -78,6 +114,22 @@
 </script>
 
 <style lang="scss" scoped>
+.input__container{
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0 0.5rem 0;
+  .my-input{
+      background-color: #FBFFFA;
+      border: 1px solid #77AF68;
+      border-radius: 0.3rem;
+      padding: 0.5rem;
+      outline: none;
+      margin-top: 0.2rem;
+  }
+  .label{
+      color: #868585;
+  }
+}
 .container{
   background-color: #F4F4F4; 
   border-radius: 0.5rem;
@@ -167,30 +219,20 @@
             width: 50%;
             display: flex;
             flex-direction: column;
-            padding-left: 4rem;
-            div{
-                width: 100%;
-                display: flex;
-                .sub__button{
-                    margin-top: 2.2rem;
-                    margin-left: auto;
-                }
-            }
-            .custom__input{
-                margin-bottom: 1.5rem;
-              }
+            padding-left: 8rem;
+
             .inputs__header{
               color: #77AF68;
               font-weight: 500;
               padding-bottom: 1rem;
               border-bottom: 1px solid #77AF68;
-              margin-bottom: 2rem;
+              margin-bottom: 1rem;
               &.reinforcement{
                 margin-top: 2rem;
               }
             }
           .btn__container{
-            margin-top: 4.5rem;
+            margin-top: auto;
             display: flex;
           .reset{
               margin-left: auto;
