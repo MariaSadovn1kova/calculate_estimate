@@ -73,7 +73,7 @@
         </div>
         <div class="btn__container">
           <sub-btn class="reset" @click="foundationReset()">Сбросить</sub-btn>
-          <main-btn class="calculate">Рассчитать</main-btn>
+          <main-btn class="calculate" @click="project_store.testF()">Рассчитать</main-btn>
         </div>
       </div>
     </div>

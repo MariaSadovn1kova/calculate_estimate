@@ -80,38 +80,38 @@
     </div>
     <modal-window>
       <div class="calculator__container">
-        <div class="calculator__header">{{ modal_store.formula.Category }} <span>{{ modal_store.formula.Material }}</span></div>
-        <div class="display">{{ modal_store.formulaToString() }}</div>
+        <div class="calculator__header">{{ formulas_store.formula.Category }} <span>{{ formulas_store.formula.Material }}</span></div>
+        <div class="display">{{ formulas_store.formulaToString() }}</div>
         <div class="calculator__content">
           <div class="custom__buttons" v-if="sidebar_store.active == 'Фундамент'">
-            <div class="custom__btn" v-for="item in formulas_store.subButtons[0].buttons" :key="item.id" @click="modal_store.addFormulaContent(item.value)">{{ item.value }}</div>
+            <div class="custom__btn" v-for="item in formulas_store.subButtons[0].buttons" :key="item.id" @click="formulas_store.addFormulaContent(item.value, item.technicalValue)">{{ item.value }}</div>
           </div>
           <div class="custom__buttons" v-if="sidebar_store.active == 'Коробка'">
-            <div class="custom__btn" v-for="item in formulas_store.subButtons[1].buttons" :key="item.id" @click="modal_store.addFormulaContent(item.value)">{{ item.value }}</div>
-            <div v-if="modal_store.formula.Material == 'Блок'" class="custom">
-              <div class="custom__btn" v-for="item in formulas_store.subButtons[2].buttons" :key="item.id" @click="modal_store.addFormulaContent(item.value)">{{ item.value }}</div>
+            <div class="custom__btn" v-for="item in formulas_store.subButtons[1].buttons" :key="item.id" @click="formulas_store.addFormulaContent(item.value, item.technicalValue)">{{ item.value }}</div>
+            <div v-if="formulas_store.formula.Material == 'Блок'" class="custom">
+              <div class="custom__btn" v-for="item in formulas_store.subButtons[2].buttons" :key="item.id" @click="formulas_store.addFormulaContent(item.value, item.technicalValue)">{{ item.value }}</div>
             </div>
-            <div v-if="modal_store.formula.Material == 'Брус'" class="custom">
-              <div class="custom__btn" v-for="item in formulas_store.subButtons[3].buttons" :key="item.id" @click="modal_store.addFormulaContent(item.value)">{{ item.value }}</div>
+            <div v-if="formulas_store.formula.Material == 'Брус'" class="custom">
+              <div class="custom__btn" v-for="item in formulas_store.subButtons[3].buttons" :key="item.id" @click="formulas_store.addFormulaContent(item.value, item.technicalValue)">{{ item.value }}</div>
             </div>
-            <div v-if="modal_store.formula.Material == 'Кирпич'" class="custom">
-              <div class="custom__btn" v-for="item in formulas_store.subButtons[2].buttons" :key="item.id" @click="modal_store.addFormulaContent(item.value)">{{ item.value }}</div>
+            <div v-if="formulas_store.formula.Material == 'Кирпич'" class="custom">
+              <div class="custom__btn" v-for="item in formulas_store.subButtons[2].buttons" :key="item.id" @click="formulas_store.addFormulaContent(item.value, item.technicalValue)">{{ item.value }}</div>
             </div>
           </div>
           <div class="standard__buttons">
             <div class="calculator__row delete">
-              <div class="btn" @click="modal_store.deleteFormulaContent()">
+              <div class="btn" @click="formulas_store.deleteFormulaContent()">
                 <img src="@/assets/logo/delete__text.svg" >
               </div>
             </div>
             <div class="calculator__row" v-for="item in formulas_store.calculatorRows" :key="item.row">
-              <div class="btn" v-for="btn in item.buttons" :key="btn.id"  @click="modal_store.addFormulaContent(btn.value)">{{ btn.value }}</div>
+              <div class="btn" v-for="btn in item.buttons" :key="btn.id"  @click="formulas_store.addFormulaContent(btn.value, btn.technicalValue)">{{ btn.value }}</div>
             </div>
           </div>
         </div>
         <div class="btns">
           <sub-btn class="sub__button">Отмена</sub-btn>
-          <form @submit.prevent="onUpdateFormula( modal_store.formula.ID, modal_store.formulaToString().value), modal_store.setShow()">
+          <form @submit.prevent="onUpdateFormula( formulas_store.formula.ID, formulas_store.formulaToString().value, formulas_store.formulaTechnicalToString().value), modal_store.setShow()">
             <main-btn class="save__button">Сохранить</main-btn>
           </form>
         </div>
@@ -137,8 +137,8 @@ export default { name: "formulas-for-calculation" };
   async function fetchFormulas() {
     data.value = await formulas_store.fetchFormulas()
   }
-  async function onUpdateFormula(ID: number, Content: string){
-    await formulas_store.updateFormula(ID, Content)
+  async function onUpdateFormula(ID: number, Content: string,  TechnicalContent: string){
+    await formulas_store.updateFormula(ID, Content, TechnicalContent)
     fetchFormulas()
   }
   onBeforeMount(async () => {

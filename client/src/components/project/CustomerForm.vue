@@ -28,6 +28,10 @@
                 <input class="my-input" type="date" v-model="project_store.date">
             </div>
             <div class="input__container">
+                <label for="my-input" class="label">Составитель проекта</label>
+                <input class="my-input" type="text" v-model="project_store.compiler">
+            </div>
+            <div class="input__container">
                 <label for="my-textarea" class="label">Комментарий</label>
                 <textarea class="my-textarea" type="text" v-model="project_store.comment"></textarea>
             </div>
@@ -54,6 +58,7 @@
         project_store.email = ""
         project_store.date = ""
         project_store.comment = ""
+        project_store.compiler = ""
     }
 </script>
 
@@ -72,7 +77,7 @@
         padding: 0.5rem;
         outline: none;
         margin-top: 0.2rem;
-        height: 11.5rem;
+        height: 6.5rem;
     }
     .header{
         color: #4A4F48;

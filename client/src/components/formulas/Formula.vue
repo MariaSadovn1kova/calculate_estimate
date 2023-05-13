@@ -1,5 +1,5 @@
 <template>
-  <div class="formula__container" @click.stop="modal_store.setShow(), modal_store.setFormula(formula)">
+  <div class="formula__container" @click.stop="modal_store.setShow(), formulas_store.setFormula(formula)">
     <div class="title">{{ formula.Category }}</div>
     <div class="formula">{{ formula.Content }}</div>
   </div>
@@ -11,7 +11,9 @@
 <script setup lang="ts">
   import { defineProps } from 'vue';
   import { useModalStore } from "@/store/modal_store";
-
+  import { useFormulasStore } from "@/store/formulas_store";
+  
+  const formulas_store = useFormulasStore();
   const modal_store = useModalStore();
   const props = defineProps({
       formula: Object

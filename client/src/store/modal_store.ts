@@ -5,8 +5,6 @@ import axios from "axios";
 export const useModalStore = defineStore("modal", () => {
     const show = ref(false)
     const project = ref()
-    const formula = ref()
-    const formulaContent = ref()
     const material = ref()
     const accounting = ref([])
     
@@ -51,31 +49,10 @@ export const useModalStore = defineStore("modal", () => {
         materialMeasurement.value = material.value.UnitOfMeasurement
         materialCost.value = material.value.DeclaredValue
     }
-    function setFormula(newFormula: any){
-        formula.value = newFormula
-        formulaContent.value = newFormula.Content.split(" ")
-    }
-    function addFormulaContent(x: string){
-        formulaContent.value.push(x)
-    }
-    function deleteFormulaContent(){
-        formulaContent.value.pop()
-    }
-
-    function formulaToString(){
-        const str = ref('')
-        formulaContent.value.forEach((element: string) => {
-            str.value += " "
-            str.value += element
-        });
-        return str
-    }
 
     return {
         show,
         project,
-        formula,
-        formulaContent,
         material,
         materialType,
         materialName,
@@ -92,10 +69,6 @@ export const useModalStore = defineStore("modal", () => {
         materialDate,
         setProject,
         setShow,
-        setFormula,
-        addFormulaContent,
-        deleteFormulaContent,
-        formulaToString,
         setMaterial,
         getAccounting,
         createAccounting,

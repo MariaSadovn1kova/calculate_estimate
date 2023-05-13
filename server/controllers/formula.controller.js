@@ -5,8 +5,8 @@ class FormulaController{
         res.json(projects.rows)
     }
     async updateFormula(req, res){
-        const { ID, Content } = req.body
-        const projects = await db.query('UPDATE "Formula" set "Content" = $1 WHERE "ID" = $2 RETURNING *', [Content, ID])
+        const { ID, Content, TechnicalContent } = req.body
+        const projects = await db.query('UPDATE "Formula" set "Content" = $1, "TechnicalContent" = $2 WHERE "ID" = $3 RETURNING *', [Content, TechnicalContent, ID])
         res.json(projects.rows[0])
     }
 }
