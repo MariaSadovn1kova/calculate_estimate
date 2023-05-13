@@ -5,12 +5,12 @@ export const useCreateProjectStore = defineStore("create-project", () => {
     const activeBuildingTab = ref('Здание 1')
 
     // Информация о проекте
-    const customerFullName = ref('Работает')
+    const customerFullName = ref()
     const address = ref()
     const phoneNumber = ref()
     const email = ref()
     const date = ref()
-    const comment = ref('cc')
+    const comment = ref()
 
     // Поля фундамента
     const foundationWidth = ref()
@@ -23,22 +23,19 @@ export const useCreateProjectStore = defineStore("create-project", () => {
     const reinforcementType = ref()
     const reinforcementCount = ref()
 
-
-    const foundation_inputs_items = [
-        {id: 1, standard_fields:[
-          { name: "Ширина" },
-          { name: "Длина" },
-          { name: "Высота" },
-          { name: "Толщина" },
-        ]},
-        {id: 2, board_fields:[
-            { name: "Ширина доски" },
-        ]},
-        {id: 3, reinforcement_fields:[
-            { name: "Вид арматуры" },
-            { name: "Количество прутьев в кольце" },
-        ]}
-    ]
+    // Поля коробки
+    const totalWallsLength = ref()
+    const wallHeight = ref()
+    const wallDepth = ref()
+    const windowsAndDoors = ref()
+    const blockWidth = ref()
+    const blockLength = ref()
+    const blockHeight = ref()
+    const mortar = ref()
+    const beamWidth = ref()
+    const beamLength = ref()
+    const beamHeight = ref()
+    
     const general_inputs_items = [
         { name: "Тип здания" },
         { name: "Количество этажей" },
@@ -84,8 +81,20 @@ export const useCreateProjectStore = defineStore("create-project", () => {
         { id: 3, name: require('@/assets/img/roof/roof_3_1.svg')},
         { id: 4, name: require('@/assets/img/roof/roof_4_1.svg')},
       ]
+      const material__imgs = [
+        { id: 1, name: require('@/assets/img/floor/material_1_0.svg')},
+        { id: 2, name: require('@/assets/img/floor/material_2_0.svg')},
+        { id: 3, name: require('@/assets/img/floor/material_3_0.svg')}
+      ]
+      const material__active__imgs = [
+        { id: 1, name: require('@/assets/img/floor/material_1_1.svg')},
+        { id: 2, name: require('@/assets/img/floor/material_2_1.svg')},
+        { id: 3, name: require('@/assets/img/floor/material_3_1.svg')}
+      ]
     const active_foundation = ref(1);
     const active_roof = ref(1);
+    const active_floor = ref(1);
+
     const box_inputs = [
         {id: 1, standard_fields:[
             { name: "Материал" },
@@ -116,6 +125,9 @@ export const useCreateProjectStore = defineStore("create-project", () => {
     function setActiveRoof( newActive: any){
         active_roof.value = newActive
     }
+    function setActiveFloor( newActive: any){
+        active_floor.value = newActive
+    }
     function setActiveBuildingTab(newActive: any){
         activeBuildingTab.value = newActive 
     }
@@ -124,7 +136,6 @@ export const useCreateProjectStore = defineStore("create-project", () => {
     }
     return {
         activeBuildingTab,
-        foundation_inputs_items,
         general_inputs_items,
         foundation__imgs,
         tabs,
@@ -150,6 +161,21 @@ export const useCreateProjectStore = defineStore("create-project", () => {
         email,
         date,
         comment,
+        material__imgs,
+        active_floor,
+        material__active__imgs,
+        totalWallsLength,
+        wallHeight,
+        wallDepth,
+        windowsAndDoors,
+        blockWidth,
+        blockLength,
+        blockHeight,
+        mortar,
+        beamWidth,
+        beamLength,
+        beamHeight,
+        setActiveFloor,
         setActiveRoof,
         setActiveFoundation,
         setActiveBuildingTab,

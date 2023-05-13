@@ -72,19 +72,76 @@
           <input class="my-input" type="number" v-model="project_store.reinforcementCount">
         </div>
         <div class="btn__container">
-          <sub-btn class="reset">Сбросить</sub-btn>
+          <sub-btn class="reset" @click="foundationReset()">Сбросить</sub-btn>
           <main-btn class="calculate">Рассчитать</main-btn>
         </div>
       </div>
     </div>
     <div class="content__container" v-if="navbar_store.active == 'Коробка'">
+      <!-- Ввод параметров фундамента -->
       <div class="left__container">
-        <div>1 этаж</div>
-        <custom-input v-for="item in project_store.box_inputs[0].standard_fields" :key="item.name" class="custom__input" :title="item.name"/>
-        <div>Добавить этаж</div>
+        <sub-btn class="add_floor">Добавить этаж</sub-btn> 
+        <div class="inputs__header">1 этаж</div>
+        <div class="type__container">
+          <div class="type__button" v-for="item in project_store.material__imgs" :key="item.id" :class = "{'active' :item.id == project_store.active_floor}" @click="project_store.setActiveFloor(item.id)">
+            <img :src="project_store.material__active__imgs[item.id - 1].name" v-if="item.id == project_store.active_floor">
+            <img :src="item.name" v-else>
+          </div>
+        </div>
+        <div class="input__container">
+          <label for="my-input" class="label">Суммарная длина стен</label>
+          <input class="my-input" type="number" v-model="project_store.totalWallsLength">
+        </div>
+        <div class="input__container">
+          <label for="my-input" class="label">Высота стен</label>
+          <input class="my-input" type="number" v-model="project_store.wallHeight">
+        </div>
+        <div class="input__container">
+          <label for="my-input" class="label">Толщина стен</label>
+          <input class="my-input" type="number" v-model="project_store.wallDepth">
+        </div>
+        <div class="input__container">
+          <label for="my-input" class="label">Суммарная площадь окон и дверей</label>
+          <input class="my-input" type="number" v-model="project_store.windowsAndDoors">
+        </div>
       </div>
       <div class="right__container">
-
+        <div v-if="project_store.active_floor == 1 || project_store.active_floor == 3">
+          <div class="input__container">
+            <label for="my-input" class="label">Ширина блока</label>
+            <input class="my-input" type="number" v-model="project_store.blockWidth">
+          </div>
+          <div class="input__container">
+            <label for="my-input" class="label">Длина блока</label>
+            <input class="my-input" type="number" v-model="project_store.blockLength">
+          </div>
+          <div class="input__container">
+            <label for="my-input" class="label">Высота блока</label>
+            <input class="my-input" type="number" v-model="project_store.blockHeight">
+          </div>
+          <div class="input__container">
+            <label for="my-input" class="label">Толщина раствора в кладке</label>
+            <input class="my-input" type="number" v-model="project_store.mortar">
+          </div>
+        </div>
+        <div v-if="project_store.active_floor == 2">
+          <div class="input__container">
+            <label for="my-input" class="label">Ширина бруса</label>
+            <input class="my-input" type="number" v-model="project_store.beamWidth">
+          </div>
+          <div class="input__container">
+            <label for="my-input" class="label">Длина бруса</label>
+            <input class="my-input" type="number" v-model="project_store.beamLength">
+          </div>
+          <div class="input__container">
+            <label for="my-input" class="label">Высота бруса</label>
+            <input class="my-input" type="number" v-model="project_store.beamHeight">
+          </div>
+        </div>
+        <div class="btn__container">
+          <sub-btn class="reset" @click="floorReset()">Сбросить</sub-btn>
+          <main-btn class="calculate">Рассчитать</main-btn>
+        </div>
       </div>
     </div>
     <div class="content__container" v-if="navbar_store.active == 'Крыша'">
@@ -111,6 +168,31 @@
 
   const project_store =  useCreateProjectStore();
   const navbar_store = useLocalNavbarStore();
+
+  function foundationReset(){
+    project_store.foundationWidth = ""
+    project_store.foundationLength = ""
+    project_store.foundationHeight = ""
+    project_store.foundationDepth = ""
+    project_store.commonPerimeter = ""
+    project_store.tapeLength = ""
+    project_store.boardWidth = ""
+    project_store.reinforcementType = ""
+    project_store.reinforcementCount = ""
+  }
+  function floorReset(){
+    project_store.totalWallsLength = ""
+    project_store.wallHeight = ""
+    project_store.wallDepth = ""
+    project_store.windowsAndDoors = ""
+    project_store.blockWidth = ""
+    project_store.blockLength = ""
+    project_store.blockHeight = ""
+    project_store.mortar = ""
+    project_store.beamWidth = ""
+    project_store.beamLength = ""
+    project_store.beamHeight = ""
+  }
 </script>
 
 <style lang="scss" scoped>
@@ -172,6 +254,9 @@
     padding: 3rem 4rem;
     margin-bottom: 5rem;
     box-shadow: 0px 0px 10px #e1e6e6;
+    .add_floor{
+      margin-bottom: 1rem;
+    }
     .delete{
       background-color: #fff;
       padding: 0.35rem;
@@ -215,13 +300,7 @@
               }
             }
         }
-        .right__container{
-            width: 50%;
-            display: flex;
-            flex-direction: column;
-            padding-left: 8rem;
-
-            .inputs__header{
+        .inputs__header{
               color: #77AF68;
               font-weight: 500;
               padding-bottom: 1rem;
@@ -231,6 +310,12 @@
                 margin-top: 2rem;
               }
             }
+        .right__container{
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            padding-left: 8rem;
+
           .btn__container{
             margin-top: auto;
             display: flex;
