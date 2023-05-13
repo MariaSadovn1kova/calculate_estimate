@@ -194,7 +194,7 @@
         </div>
         <div class="btn__container">
           <sub-btn class="reset" @click="roofReset()">Сбросить</sub-btn>
-          <main-btn class="calculate">Рассчитать</main-btn>
+          <main-btn class="calculate" @click="test()">Рассчитать</main-btn>
         </div>
       </div>
     </div>
@@ -209,9 +209,17 @@
 <script setup lang="ts">
   import { useLocalNavbarStore } from "@/store/local-navbar_store";
   import { useCreateProjectStore } from "@/store/create-project_store";
+  import { useFormulasStore } from "@/store/formulas_store";
 
+  const formulas_store = useFormulasStore();
   const project_store =  useCreateProjectStore();
   const navbar_store = useLocalNavbarStore();
+
+  async function test(){
+    const str =  await formulas_store.fetchTechnicalFormula(1)
+    console.log(eval(str))
+  }
+
 
   function foundationReset(){
     project_store.foundationWidth = ""
