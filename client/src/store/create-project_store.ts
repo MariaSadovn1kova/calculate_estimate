@@ -35,7 +35,16 @@ export const useCreateProjectStore = defineStore("create-project", () => {
     const beamWidth = ref()
     const beamLength = ref()
     const beamHeight = ref()
-    
+
+    // Поля крыши
+    const baseWidth = ref()
+    const baseLength = ref()
+    const liftingHeight = ref()
+    const eavesOverhang = ref()
+    const corniceIndentation = ref()
+    const baseAdditionalWidth = ref()
+    const liftingAdditionalHeight = ref()
+
     const general_inputs_items = [
         { name: "Тип здания" },
         { name: "Количество этажей" },
@@ -175,6 +184,13 @@ export const useCreateProjectStore = defineStore("create-project", () => {
         beamWidth,
         beamLength,
         beamHeight,
+        baseWidth,
+        baseLength,
+        liftingHeight,
+        eavesOverhang,
+        corniceIndentation,
+        baseAdditionalWidth,
+        liftingAdditionalHeight,
         setActiveFloor,
         setActiveRoof,
         setActiveFoundation,

@@ -152,6 +152,50 @@
             <img :src="item.name" v-else>
           </div>
         </div>
+        <div class="input__container">
+            <label for="my-input" class="label">Ширина основания</label>
+            <input class="my-input" type="number" v-model="project_store.baseWidth">
+          </div>
+          <div class="input__container">
+            <label for="my-input" class="label">Длина основания</label>
+            <input class="my-input" type="number" v-model="project_store.baseLength">
+          </div>
+          <div class="input__container">
+            <label for="my-input" class="label">Высота подъема</label>
+            <input class="my-input" type="number" v-model="project_store.liftingHeight">
+          </div>
+          <div class="input__container">
+            <label for="my-input" class="label">Свес карниза</label>
+            <input class="my-input" type="number" v-model="project_store.eavesOverhang">
+          </div>
+      </div>
+      <div class="right__container">
+        <div v-if="project_store.active_roof == 1 || project_store.active_roof == 2 || project_store.active_roof == 3">
+          <div class="input__container">
+            <label for="my-input" class="label">Выпуск карниза</label>
+            <input class="my-input" type="number" v-model="project_store.corniceIndentation">
+          </div>
+        </div>
+        <div v-if="project_store.active_roof == 3">
+          <div class="input__container">
+            <label for="my-input" class="label">Высота дополнительного подъема</label>
+            <input class="my-input" type="number" v-model="project_store.liftingAdditionalHeight">
+          </div>
+          <div class="input__container">
+            <label for="my-input" class="label">Ширина дополнительного основания</label>
+            <input class="my-input" type="number" v-model="project_store.baseAdditionalWidth">
+          </div>
+        </div>
+        <div v-if="project_store.active_roof == 4">
+          <div class="input__container">
+            <label for="my-input" class="label">Ширина заложения</label>
+            <input class="my-input" type="number" v-model="project_store.baseAdditionalWidth">
+          </div>
+        </div>
+        <div class="btn__container">
+          <sub-btn class="reset" @click="roofReset()">Сбросить</sub-btn>
+          <main-btn class="calculate">Рассчитать</main-btn>
+        </div>
       </div>
     </div>
   </div>
@@ -192,6 +236,15 @@
     project_store.beamWidth = ""
     project_store.beamLength = ""
     project_store.beamHeight = ""
+  }
+  function roofReset(){
+    project_store.baseWidth = ""
+    project_store.baseLength = ""
+    project_store.liftingHeight = ""
+    project_store.eavesOverhang = ""
+    project_store.corniceIndentation = ""
+    project_store.baseAdditionalWidth = ""
+    project_store.liftingAdditionalHeight = ""
   }
 </script>
 
