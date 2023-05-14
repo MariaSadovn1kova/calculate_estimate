@@ -123,6 +123,22 @@ export const useFormulasStore = defineStore("formulas", () => {
           { id: 2, value: ('ДлинаБруса'), technicalValue: ('project_store.beamLength')},
           { id: 3, value: ('ВысотаБруса'), technicalValue: ('project_store.beamHeight')},
         ]},
+        {part: 'roof', buttons:[
+          { id: 1, value: ('ШиринаОснования'), technicalValue: ('project_store.baseWidth')},
+          { id: 2, value: ('ДлинаОснования'), technicalValue: ('project_store.baseLength')},
+          { id: 3, value: ('ВысотаПодъема'), technicalValue: ('project_store.liftingHeight')},
+          { id: 4, value: ('СвесКарниза'), technicalValue: ('project_store.eavesOverhang')},
+          { id: 5, value: ('ВыпускКарниза'), technicalValue: ('project_store.corniceIndentation')}
+        ], buttons_additional:[
+          { id: 1, value: ('ВысотаДополнительногоПодъема'), technicalValue: ('project_store.baseAdditionalWidth')},
+          { id: 2, value: ('ШиринаДополнительногоОснования'), technicalValue: ('project_store.liftingAdditionalHeight')},
+        ], buttons_gable:[
+          { id: 1, value: ('ШиринаОснования'), technicalValue: ('project_store.baseWidth')},
+          { id: 2, value: ('ДлинаОснования'), technicalValue: ('project_store.baseLength')},
+          { id: 3, value: ('ВысотаПодъема'), technicalValue: ('project_store.liftingHeight')},
+          { id: 4, value: ('СвесКарниза'), technicalValue: ('project_store.eavesOverhang')},
+          { id: 5, value: ('ШиринаЗаложения'), technicalValue: ('project_store.baseAdditionalWidth')}
+        ]},
       ]
 
     const calculatorRows = [

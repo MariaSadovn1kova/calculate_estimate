@@ -110,6 +110,18 @@
               <div class="custom__btn" v-for="item in formulas_store.subButtons[1].buttons_beam" :key="item.id" @click="formulas_store.addFormulaContent(item.value, item.technicalValue)">{{ item.value }}</div>
             </div>
           </div>
+          <div class="custom__buttons" v-if="sidebar_store.active == 'Крыша'">
+            <div v-if="formulas_store.formula.Category == 'Односкатная крыша' || formulas_store.formula.Category == 'Двускатная крыша'" class="custom">
+              <div class="custom__btn" v-for="item in formulas_store.subButtons[2].buttons" :key="item.id" @click="formulas_store.addFormulaContent(item.value, item.technicalValue)">{{ item.value }}</div>
+            </div>
+            <div v-if="formulas_store.formula.Category == 'Мансардная крыша'" class="custom">
+              <div class="custom__btn" v-for="item in formulas_store.subButtons[2].buttons" :key="item.id" @click="formulas_store.addFormulaContent(item.value, item.technicalValue)">{{ item.value }}</div>
+              <div class="custom__btn" v-for="item in formulas_store.subButtons[2].buttons_additional" :key="item.id" @click="formulas_store.addFormulaContent(item.value, item.technicalValue)">{{ item.value }}</div>
+            </div>
+            <div v-if="formulas_store.formula.Category == 'Вальмовая крыша'" class="custom">
+              <div class="custom__btn" v-for="item in formulas_store.subButtons[2]. buttons_gable" :key="item.id" @click="formulas_store.addFormulaContent(item.value, item.technicalValue)">{{ item.value }}</div>
+            </div>
+          </div>
           <div class="standard__buttons">
             <div class="calculator__row delete">
               <div class="btn" @click="formulas_store.deleteFormulaContent()">
