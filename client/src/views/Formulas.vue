@@ -84,7 +84,22 @@
         <div class="display">{{ formulas_store.formulaToString() }}</div>
         <div class="calculator__content">
           <div class="custom__buttons" v-if="sidebar_store.active == 'Фундамент'">
-            <div class="custom__btn" v-for="item in formulas_store.subButtons[0].buttons" :key="item.id" @click="formulas_store.addFormulaContent(item.value, item.technicalValue)">{{ item.value }}</div>
+            <div class="custom__buttons-container" v-if="formulas_store.formula.Category == 'Плита'">
+              <div class="custom__btn" v-for="item in formulas_store.subButtons[0].buttons" :key="item.id" @click="formulas_store.addFormulaContent(item.value, item.technicalValue)">{{ item.value }}</div>
+            </div>
+            <div class="custom__buttons-container" v-if="formulas_store.formula.Category == 'Ленточный с перегородкой' || formulas_store.formula.Category == 'Ленточный'">
+              <div class="custom__btn" v-for="item in formulas_store.subButtons[0].buttons" :key="item.id" @click="formulas_store.addFormulaContent(item.value, item.technicalValue)">{{ item.value }}</div>
+              <div class="custom__btn" v-for="item in formulas_store.subButtons[0].tape_buttons" :key="item.id" @click="formulas_store.addFormulaContent(item.value, item.technicalValue)">{{ item.value }}</div>
+            </div>
+            <div class="custom__buttons-container" v-if="formulas_store.formula.Category == 'Нестандартная плита'">
+              <div class="custom__btn" v-for="item in formulas_store.subButtons[0].nonstandard_buttons" :key="item.id" @click="formulas_store.addFormulaContent(item.value, item.technicalValue)">{{ item.value }}</div>
+            </div>
+            <div class="custom__buttons-container" v-if="formulas_store.formula.Category == 'Нестандартный ленточный'">
+              <div class="custom__btn" v-for="item in formulas_store.subButtons[0].nonstandard_tape_buttons" :key="item.id" @click="formulas_store.addFormulaContent(item.value, item.technicalValue)">{{ item.value }}</div>
+            </div>
+            <div class="custom__buttons-container" v-if="formulas_store.formula.Category == 'Нестандартный ленточный с перегородкой'">
+              <div class="custom__btn" v-for="item in formulas_store.subButtons[0].nonstandard_tape_buttons_2" :key="item.id" @click="formulas_store.addFormulaContent(item.value, item.technicalValue)">{{ item.value }}</div>
+            </div>
           </div>
           <div class="custom__buttons" v-if="sidebar_store.active == 'Коробка'">
             <div class="custom__btn" v-for="item in formulas_store.subButtons[1].buttons" :key="item.id" @click="formulas_store.addFormulaContent(item.value, item.technicalValue)">{{ item.value }}</div>
@@ -176,7 +191,7 @@ export default { name: "formulas-for-calculation" };
   }
   .calculator__content{
     display: flex;
-    height: 35rem;
+    height: 40rem;
     .custom{
       height: 50%;
       display: flex;
@@ -187,10 +202,10 @@ export default { name: "formulas-for-calculation" };
     }
     .custom__buttons{
       width: 60%;
-      padding: 1rem 3rem 1rem 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      padding: 3rem 3rem 1rem 0;
+      .custom__buttons-container{
+        height: 100%;
+      }
       .custom__btn{
         border: 2px solid #77AF68;
         color:#77AF68;
@@ -199,6 +214,7 @@ export default { name: "formulas-for-calculation" };
         text-align: center;
         border-radius: 0.5rem;
         transition: 0.3s;
+        margin-bottom: 1rem;
         &:hover{
           background-color: #77AF68;
           color: #fff;
@@ -211,7 +227,7 @@ export default { name: "formulas-for-calculation" };
       display: flex;
       justify-content: space-between;
       flex-direction: column;
-      padding: 1rem 0;
+      padding: 3rem 0 1rem 0;
       .calculator__row{
         display: flex;
         justify-content: space-between;

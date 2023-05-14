@@ -17,13 +17,13 @@
     <div class="content__container" v-if="navbar_store.active == 'Фундамент'">
       <div class="left__container">
         <div class="type__container">
-          <div class="type__button" v-for="item in project_store.foundation__imgs[0].imgs" :key="item.id" :class = "{'active' :item.id == project_store.active_foundation}" @click="project_store.setActiveFoundation(item.id)">
+          <div class="type__button" v-for="item in project_store.foundation__imgs[0].imgs" :key="item.id" :class = "{'active' :item.id == project_store.active_foundation}" @click="project_store.setActiveFoundation(item.id), show_material_foundation = false">
             <img :src="project_store.foundation__active__imgs[item.id - 1].name" v-if="item.id == project_store.active_foundation">
             <img :src="item.name" v-else>
           </div>
         </div>
         <div class="type__container">
-          <div class="type__button" v-for="item in project_store.foundation__imgs[1].imgs" :key="item.id" :class = "{'active' :item.id == project_store.active_foundation}" @click="project_store.setActiveFoundation(item.id)">
+          <div class="type__button" v-for="item in project_store.foundation__imgs[1].imgs" :key="item.id" :class = "{'active' :item.id == project_store.active_foundation}" @click="project_store.setActiveFoundation(item.id), show_material_foundation = false">
             <img :src="project_store.foundation__active__imgs[item.id - 1].name" v-if="item.id == project_store.active_foundation">
             <img :src="item.name" v-else>
           </div>
@@ -38,14 +38,14 @@
             <label for="my-input" class="label">Длина</label>
             <input class="my-input" type="number" v-model="project_store.foundationLength">
           </div>
-          <div class="input__container">
-            <label for="my-input" class="label">Высота</label>
-            <input class="my-input" type="number" v-model="project_store.foundationHeight">
-          </div>
-          <div class="input__container">
-            <label for="my-input" class="label">Толщина</label>
-            <input class="my-input" type="number" v-model="project_store.foundationDepth">
-          </div>
+        </div>
+        <div class="input__container" v-if="project_store.active_foundation == 2 || project_store.active_foundation == 3 || project_store.active_foundation == 4|| project_store.active_foundation == 6 || project_store.active_foundation == 7">
+          <label for="my-input" class="label">Толщина</label>
+          <input class="my-input" type="number" v-model="project_store.foundationDepth">
+        </div>
+        <div class="input__container">
+          <label for="my-input" class="label">Высота</label>
+          <input class="my-input" type="number" v-model="project_store.foundationHeight">
         </div>
         <div class="input__container" v-if="project_store.active_foundation == 5 || project_store.active_foundation == 6 || project_store.active_foundation == 7">
           <label for="my-input" class="label">Общий периметр</label>
@@ -73,7 +73,7 @@
         </div>
         <div class="btn__container">
           <sub-btn class="reset" @click="foundationReset()">Сбросить</sub-btn>
-          <main-btn class="calculate" @click="project_store.testF()">Рассчитать</main-btn>
+          <main-btn class="calculate" @click="calculateFoundation(project_store.active_foundation)">Рассчитать</main-btn>
         </div>
       </div>
     </div>
@@ -83,7 +83,7 @@
         <sub-btn class="add_floor">Добавить этаж</sub-btn> 
         <div class="inputs__header">1 этаж</div>
         <div class="type__container">
-          <div class="type__button" v-for="item in project_store.material__imgs" :key="item.id" :class = "{'active' :item.id == project_store.active_floor}" @click="project_store.setActiveFloor(item.id)">
+          <div class="type__button" v-for="item in project_store.material__imgs" :key="item.id" :class = "{'active' :item.id == project_store.active_floor}" @click="project_store.setActiveFloor(item.id), show_material_foundation = false">
             <img :src="project_store.material__active__imgs[item.id - 1].name" v-if="item.id == project_store.active_floor">
             <img :src="item.name" v-else>
           </div>
@@ -147,7 +147,7 @@
     <div class="content__container" v-if="navbar_store.active == 'Крыша'">
       <div class="left__container"> 
         <div class="type__container">
-          <div class="type__button" v-for="item in project_store.roof__imgs" :key="item.id" :class = "{'active' :item.id == project_store.active_roof}" @click="project_store.setActiveRoof(item.id)">
+          <div class="type__button" v-for="item in project_store.roof__imgs" :key="item.id" :class = "{'active' :item.id == project_store.active_roof}" @click="project_store.setActiveRoof(item.id), show_material_foundation = false">
             <img :src="project_store.roof__active__imgs[item.id - 1].name" v-if="item.id == project_store.active_roof">
             <img :src="item.name" v-else>
           </div>
@@ -194,7 +194,41 @@
         </div>
         <div class="btn__container">
           <sub-btn class="reset" @click="roofReset()">Сбросить</sub-btn>
-          <main-btn class="calculate" @click="test()">Рассчитать</main-btn>
+          <main-btn class="calculate">Рассчитать</main-btn>
+        </div>
+      </div>
+    </div>
+    <div v-if="navbar_store.active == 'Фундамент' && show_material_foundation" class="building__material-container">
+      <div class="building__material">
+        <span class="name">Бетон</span>
+        <span class="material__count"> {{ project_store.estimateConcrete }} кг</span>
+        <div class="formula__container">
+          <span class="formula__name">Рассчитано по формуле:</span>
+          <span class="material__formula">{{ project_store.formulaFoundationConcrete }}</span>
+        </div>
+      </div>
+      <div class="building__material">
+        <span class="name">Доска</span>
+        <span class="material__count"> {{ project_store.estimateBoard }} м</span>
+        <div class="formula__container">
+          <span class="formula__name">Рассчитано по формуле:</span>
+          <span class="material__formula">{{ project_store.formulaFoundationBoard }}</span>
+        </div>
+      </div>
+      <div class="building__material">
+        <span class="name">Арматура</span>
+        <span class="material__count"> {{ project_store.estimateReinforcement }} кг</span>
+        <div class="formula__container">
+          <span class="formula__name">Рассчитано по формуле:</span>
+          <span class="material__formula">{{ project_store.formulaFoundationReinforcement }}</span>
+        </div>
+      </div>
+      <div class="building__material">
+        <span class="name">Прут</span>
+        <span class="material__count"> {{ project_store.estimateRod }} м</span>
+        <div class="formula__container">
+          <span class="formula__name">Рассчитано по формуле:</span>
+          <span class="material__formula">{{ project_store.formulaFoundationRod }}</span>
         </div>
       </div>
     </div>
@@ -210,14 +244,50 @@
   import { useLocalNavbarStore } from "@/store/local-navbar_store";
   import { useCreateProjectStore } from "@/store/create-project_store";
   import { useFormulasStore } from "@/store/formulas_store";
+  import { ref } from "vue";
 
   const formulas_store = useFormulasStore();
   const project_store =  useCreateProjectStore();
   const navbar_store = useLocalNavbarStore();
+  const show_material_foundation = ref(false)
+  
+  async function calculateFoundation(foundationType: number){
+    const formulaBoard = ref()
+    const formulaConcrete = ref()
+    const formulaReinforcement = ref()
+    const formulaRod = ref()
+    const formulas = ref([])
 
-  async function test(){
-    const str =  await formulas_store.fetchTechnicalFormula(1)
-    console.log(eval(str))
+    if(foundationType == 1){
+     formulas.value = [1, 7, 13, 19]
+    } else if(foundationType == 2){
+      formulas.value = [2, 8, 14, 20]
+    } else if(foundationType == 3 || foundationType == 4){
+      formulas.value = [3, 9, 15, 21]
+    } else if(foundationType == 5){
+      formulas.value = [4, 10, 16, 22]
+    } else if(foundationType == 6){
+      formulas.value = [6, 12, 18, 24]
+    } else if (foundationType == 7){
+      formulas.value = [5, 11, 17, 23]
+    } 
+
+    formulaBoard.value = await formulas_store.fetchTechnicalFormula(formulas.value[0])
+    formulaConcrete.value =  await formulas_store.fetchTechnicalFormula(formulas.value[1])
+    formulaReinforcement.value =  await formulas_store.fetchTechnicalFormula(formulas.value[2])
+    formulaRod.value =  await formulas_store.fetchTechnicalFormula(formulas.value[3])
+
+    project_store.formulaFoundationBoard = await formulas_store.fetchFormula(formulas.value[0])
+    project_store.formulaFoundationConcrete = await formulas_store.fetchFormula(formulas.value[1])
+    project_store.formulaFoundationReinforcement = await formulas_store.fetchFormula(formulas.value[2])
+    project_store.formulaFoundationRod = await formulas_store.fetchFormula(formulas.value[3])
+
+    project_store.estimateReinforcement = eval(formulaReinforcement.value)
+    project_store.estimateConcrete = eval(formulaConcrete.value)
+    project_store.estimateBoard = eval(formulaBoard.value)
+    project_store.estimateRod = eval(formulaRod.value)
+
+    show_material_foundation.value = true
   }
 
 
@@ -231,6 +301,7 @@
     project_store.boardWidth = ""
     project_store.reinforcementType = ""
     project_store.reinforcementCount = ""
+    show_material_foundation.value = false
   }
   function floorReset(){
     project_store.totalWallsLength = ""
@@ -257,6 +328,45 @@
 </script>
 
 <style lang="scss" scoped>
+.building__material-container{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4rem;
+  .building__material{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    width: 24%;
+    border: 1px solid #77AF68;
+    border-radius: 0.3rem;
+    hyphens: auto;
+    .formula__container{
+      display: flex;
+      flex-direction: column;
+    }
+    .name{
+      color: #77AF68;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .formula__name{
+      color: #77AF68;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+    .material__count{
+      width: 100%;
+      text-align: center;
+      font-size: 1.6rem;
+      color: #4A4F48;
+      margin-bottom: 2rem;
+    }
+    .material__formula{
+      word-wrap: break-word;
+    }
+  }
+}
 .input__container{
   display: flex;
   flex-direction: column;

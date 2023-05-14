@@ -46,8 +46,19 @@ export const useCreateProjectStore = defineStore("create-project", () => {
     const baseAdditionalWidth = ref()
     const liftingAdditionalHeight = ref()
 
-    const test1 = ref('2')
-    const test = ref('test1.value + 1')
+
+    // Расчет фундамента
+    const estimateReinforcement = ref()
+    const estimateConcrete = ref()
+    const estimateBoard = ref()
+    const estimateRod = ref()
+
+    // Формулы
+    // Фундамент
+    const formulaFoundationBoard = ref()
+    const formulaFoundationConcrete = ref()
+    const formulaFoundationReinforcement = ref()
+    const formulaFoundationRod = ref()
 
     const general_inputs_items = [
         { name: "Тип здания" },
@@ -148,9 +159,6 @@ export const useCreateProjectStore = defineStore("create-project", () => {
         activeTab.value = newActive
     }
 
-    function testF (){
-       console.log(eval(test.value))
-    }
     return {
         activeBuildingTab,
         general_inputs_items,
@@ -200,11 +208,18 @@ export const useCreateProjectStore = defineStore("create-project", () => {
         baseAdditionalWidth,
         liftingAdditionalHeight,
         compiler,
+        estimateReinforcement,
+        estimateConcrete,
+        estimateBoard,
+        estimateRod,
+        formulaFoundationBoard,
+        formulaFoundationConcrete,
+        formulaFoundationReinforcement,
+        formulaFoundationRod,
         setActiveFloor,
         setActiveRoof,
         setActiveFoundation,
         setActiveBuildingTab,
         setActiveTab,
-        testF
     }
 })
