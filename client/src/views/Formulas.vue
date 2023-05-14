@@ -103,14 +103,11 @@
           </div>
           <div class="custom__buttons" v-if="sidebar_store.active == 'Коробка'">
             <div class="custom__btn" v-for="item in formulas_store.subButtons[1].buttons" :key="item.id" @click="formulas_store.addFormulaContent(item.value, item.technicalValue)">{{ item.value }}</div>
-            <div v-if="formulas_store.formula.Material == 'Блок'" class="custom">
-              <div class="custom__btn" v-for="item in formulas_store.subButtons[2].buttons" :key="item.id" @click="formulas_store.addFormulaContent(item.value, item.technicalValue)">{{ item.value }}</div>
+            <div v-if="formulas_store.formula.Material == 'Блок' || formulas_store.formula.Material == 'Кирпич'" class="custom">
+              <div class="custom__btn" v-for="item in formulas_store.subButtons[1].buttons_block" :key="item.id" @click="formulas_store.addFormulaContent(item.value, item.technicalValue)">{{ item.value }}</div>
             </div>
             <div v-if="formulas_store.formula.Material == 'Брус'" class="custom">
-              <div class="custom__btn" v-for="item in formulas_store.subButtons[3].buttons" :key="item.id" @click="formulas_store.addFormulaContent(item.value, item.technicalValue)">{{ item.value }}</div>
-            </div>
-            <div v-if="formulas_store.formula.Material == 'Кирпич'" class="custom">
-              <div class="custom__btn" v-for="item in formulas_store.subButtons[2].buttons" :key="item.id" @click="formulas_store.addFormulaContent(item.value, item.technicalValue)">{{ item.value }}</div>
+              <div class="custom__btn" v-for="item in formulas_store.subButtons[1].buttons_beam" :key="item.id" @click="formulas_store.addFormulaContent(item.value, item.technicalValue)">{{ item.value }}</div>
             </div>
           </div>
           <div class="standard__buttons">

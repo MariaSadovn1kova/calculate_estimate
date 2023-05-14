@@ -109,21 +109,20 @@ export const useFormulasStore = defineStore("formulas", () => {
           { id: 7, value: ('КоличествоПрутьевВКольце'), technicalValue: ('project_store.reinforcementCount')},
         ]},
         {part: 'floor', buttons:[
-          { id: 1, value: ('СуммарнаяДлинаСтен'), technicalValue: ('foundationWidth.value')},
-          { id: 2, value: ('ВысотаСтен'), technicalValue: ('foundationWidth.value')},
-          { id: 3, value: ('ТолщинаСтен'), technicalValue: ('foundationWidth.value')},
-          { id: 4, value: ('СуммарнаяПлощадьОконИДверей'), technicalValue: ('foundationWidth.value')}
+          { id: 1, value: ('СуммарнаяДлинаСтен'), technicalValue: ('project_store.totalWallsLength')},
+          { id: 2, value: ('ВысотаСтен'), technicalValue: ('project_store.wallHeight')},
+          { id: 3, value: ('ТолщинаСтен'), technicalValue: ('project_store.wallDepth')},
+          { id: 4, value: ('СуммарнаяПлощадьОконИДверей'), technicalValue: ('project_store.windowsAndDoors')}
+        ], buttons_block:[
+          { id: 1, value: ('ШиринаБлока'), technicalValue: ('project_store.blockWidth')},
+          { id: 2, value: ('ДлинаБлока'), technicalValue: ('project_store.blockLength')},
+          { id: 3, value: ('ВысотаБлока'), technicalValue: ('project_store.blockHeight')},
+          { id: 4, value: ('ТолщинаРаствораВКладке'), technicalValue: ('project_store.mortar')}
+        ], buttons_beam:[
+          { id: 1, value: ('ШиринаБруса'), technicalValue: ('project_store.beamWidth')},
+          { id: 2, value: ('ДлинаБруса'), technicalValue: ('project_store.beamLength')},
+          { id: 3, value: ('ВысотаБруса'), technicalValue: ('project_store.beamHeight')},
         ]},
-        {part: 'floor_block', buttons:[
-          { id: 1, value: ('ДлинаБлока'), technicalValue: ('foundationWidth.value')},
-          { id: 2, value: ('ШиринаБлока'), technicalValue: ('foundationWidth.value')},
-          { id: 3, value: ('ВысотаБлока'), technicalValue: ('foundationWidth.value')},
-          { id: 4, value: ('ТолщинаРаствораВКладке'), technicalValue: ('foundationWidth.value')}
-        ]},
-        {part: 'floor_beam', buttons:[
-          { id: 1, value: ('ШиринаБруса'), technicalValue: ('foundationWidth.value')},
-          { id: 2, value: ('ДлинаБруса'), technicalValue: ('foundationWidth.value')}
-        ]}
       ]
 
     const calculatorRows = [

@@ -83,7 +83,7 @@
         <sub-btn class="add_floor">Добавить этаж</sub-btn> 
         <div class="inputs__header">1 этаж</div>
         <div class="type__container">
-          <div class="type__button" v-for="item in project_store.material__imgs" :key="item.id" :class = "{'active' :item.id == project_store.active_floor}" @click="project_store.setActiveFloor(item.id), show_material_foundation = false">
+          <div class="type__button" v-for="item in project_store.material__imgs" :key="item.id" :class = "{'active' :item.id == project_store.active_floor}" @click="project_store.setActiveFloor(item.id), show_material_floor = false">
             <img :src="project_store.material__active__imgs[item.id - 1].name" v-if="item.id == project_store.active_floor">
             <img :src="item.name" v-else>
           </div>
@@ -140,7 +140,7 @@
         </div>
         <div class="btn__container">
           <sub-btn class="reset" @click="floorReset()">Сбросить</sub-btn>
-          <main-btn class="calculate">Рассчитать</main-btn>
+          <main-btn class="calculate" @click="calculateFloor(project_store.active_floor)">Рассчитать</main-btn>
         </div>
       </div>
     </div>
@@ -232,6 +232,52 @@
         </div>
       </div>
     </div>
+    <div v-if="navbar_store.active == 'Коробка' && show_material_floor && project_store.active_floor == 1" class="building__material-container floor">
+      <div class="building__material">
+        <span class="name">Блок</span>
+        <span class="material__count"> {{ project_store.estimateBlock }} шт</span>
+        <div class="formula__container">
+          <span class="formula__name">Рассчитано по формуле:</span>
+          <span class="material__formula">{{ project_store.formulaFloorBlock }}</span>
+        </div>
+      </div>
+      <div class="building__material">
+        <span class="name">Арматура</span>
+        <span class="material__count"> {{ project_store.estimateFloorReinforcement }} кг</span>
+        <div class="formula__container">
+          <span class="formula__name">Рассчитано по формуле:</span>
+          <span class="material__formula">{{ project_store.formulaFloorReinforcement }}</span>
+        </div>
+      </div>
+    </div>
+    <div v-if="navbar_store.active == 'Коробка' && show_material_floor && project_store.active_floor == 2" class="building__material-container floor">
+      <div class="building__material">
+        <span class="name">Брус</span>
+        <span class="material__count"> {{ project_store.estimateBeam }} м</span>
+        <div class="formula__container">
+          <span class="formula__name">Рассчитано по формуле:</span>
+          <span class="material__formula">{{ project_store.formulaFloorBeam }}</span>
+        </div>
+      </div>
+    </div>
+    <div v-if="navbar_store.active == 'Коробка' && show_material_floor && project_store.active_floor == 3" class="building__material-container floor">
+      <div class="building__material">
+        <span class="name">Кирпич</span>
+        <span class="material__count"> {{ project_store.estimateBrick }} шт</span>
+        <div class="formula__container">
+          <span class="formula__name">Рассчитано по формуле:</span>
+          <span class="material__formula">{{ project_store.formulaFloorBrick }}</span>
+        </div>
+      </div>
+      <div class="building__material">
+        <span class="name">Арматура</span>
+        <span class="material__count"> {{ project_store.estimateFloorReinforcement }} кг</span>
+        <div class="formula__container">
+          <span class="formula__name">Рассчитано по формуле:</span>
+          <span class="material__formula">{{ project_store.formulaFloorReinforcement }}</span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 </template>
@@ -250,6 +296,7 @@
   const project_store =  useCreateProjectStore();
   const navbar_store = useLocalNavbarStore();
   const show_material_foundation = ref(false)
+  const show_material_floor = ref(false)
   
   async function calculateFoundation(foundationType: number){
     const formulaBoard = ref()
@@ -290,6 +337,37 @@
     show_material_foundation.value = true
   }
 
+  async function calculateFloor(materialType: number){
+    const formulaBlock = ref()
+    const formulaBeam = ref()
+    const formulaBrick = ref()
+    const formulaReinforcement = ref()
+
+    if(materialType == 1){
+      formulaBlock.value = await formulas_store.fetchTechnicalFormula(25)
+      formulaReinforcement.value = await formulas_store.fetchTechnicalFormula(27)
+
+      project_store.formulaFloorBlock = await formulas_store.fetchFormula(25)
+      project_store.formulaFloorReinforcement = await formulas_store.fetchFormula(27)
+    } else if (materialType == 2){
+      formulaBeam.value = await formulas_store.fetchTechnicalFormula(26)
+
+      project_store.formulaFloorBeam = await formulas_store.fetchFormula(26)
+    } else if (materialType == 3) {
+      formulaBrick.value = await formulas_store.fetchTechnicalFormula(28)
+      formulaReinforcement.value = await formulas_store.fetchTechnicalFormula(27)
+
+      project_store.formulaFloorBrick = await formulas_store.fetchFormula(28)
+      project_store.formulaFloorReinforcement = await formulas_store.fetchFormula(27)
+    }
+
+    project_store.estimateBlock = eval(formulaBlock.value)
+    project_store.estimateBeam = eval(formulaBeam.value)
+    project_store.estimateFloorReinforcement = eval(formulaReinforcement.value)
+    project_store.estimateBrick = eval(formulaBrick.value)
+
+    show_material_floor.value = true
+  }
 
   function foundationReset(){
     project_store.foundationWidth = ""
@@ -333,6 +411,12 @@
   display: flex;
   justify-content: space-between;
   margin-top: 4rem;
+  &.floor{
+    justify-content: flex-start;
+    .building__material{
+      margin-right: 1.5rem;
+    }
+  }
   .building__material{
     display: flex;
     flex-direction: column;
