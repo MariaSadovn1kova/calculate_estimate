@@ -15,7 +15,7 @@
     <div class="material__price">{{ Intl.NumberFormat('ru-RU').format(material.DeclaredValue) }} рублей</div>
     <div class="input__container">
       <label for="my-input" class="label">Количество</label>
-      <input class="my-input" type="number" :max="3">
+      <input class="my-input" type="number" :max="max_size">
       <main-btn class="appoint__material">Назначить</main-btn>
     </div>
   </div>
@@ -28,7 +28,8 @@
   import { defineProps } from 'vue';
 
   const props = defineProps({
-    material: Object
+    material: Object,
+    max_size: Number
   })
 </script>
 <style lang="scss" scoped>

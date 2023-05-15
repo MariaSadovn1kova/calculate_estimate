@@ -18,10 +18,18 @@
             <span class="name">Арматура - Коробка</span>
             <span class="material__count"> {{ project_store.estimateFloorReinforcement }} кг</span>
           </div>
+          <div class="counts">
+            <div class="total__count">
+              Всего требуется: <span>{{ project_store.estimateReinforcement +  project_store.estimateFloorReinforcement }}</span>
+            </div>
+            <div class="total__count">
+              Назначено: <span>{{ 3 }}</span>
+            </div>
+          </div>
         </div>
         <div class="title">Доступные материалы:</div>
         <div class="card__container">
-          <estimate_material-card v-for="item in material_store.dataReinforcement" :key="item.ID" :material ="item" class="card"/>
+          <estimate_material-card v-for="item in material_store.dataReinforcement" :key="item.ID" :material ="item" class="card" :max_size = "project_store.estimateReinforcement +  project_store.estimateFloorReinforcement"/>
         </div>
       </div>
 
@@ -38,7 +46,7 @@
         </div>
         <div class="title">Доступные материалы:</div>
         <div class="card__container">
-          <estimate_material-card v-for="item in material_store.dataBoard" :key="item.ID" :material ="item" class="card"/>
+          <estimate_material-card v-for="item in material_store.dataBoard" :key="item.ID" :material ="item" class="card" :max_size = "project_store.estimateBoard +  project_store.estimateRoofBoard"/>
         </div>
       </div>
 
@@ -172,6 +180,18 @@
       font-size: 1.6rem;
       color: #4A4F48;
       margin-bottom: 2rem;
+    }
+  }
+  .counts{
+    display: flex;
+    flex-direction: column;
+    .total__count{
+      font-size: 1.1rem;
+      color: #4A4F48;
+    }
+    span{
+      color: #77AF68;
+      font-weight: 600;
     }
   }
 }
