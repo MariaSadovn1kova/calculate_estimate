@@ -20,7 +20,9 @@
           </div>
         </div>
         <div class="title">Доступные материалы:</div>
-        <estimate_material-card/>
+        <div class="card__container">
+          <estimate_material-card v-for="item in material_store.dataReinforcement" :key="item.ID" :material ="item" class="card"/>
+        </div>
       </div>
 
       <div v-if="navbar_store.active == 'Доска'">
@@ -34,7 +36,10 @@
             <span class="material__count"> {{ project_store.estimateRoofBoard }} м</span>
           </div>
         </div>
-        <estimate_material-card/>
+        <div class="title">Доступные материалы:</div>
+        <div class="card__container">
+          <estimate_material-card v-for="item in material_store.dataBoard" :key="item.ID" :material ="item" class="card"/>
+        </div>
       </div>
 
       <div v-if="navbar_store.active == 'Бетон'">
@@ -44,7 +49,10 @@
             <span class="material__count"> {{ project_store.estimateConcrete }} кг</span>
           </div>
         </div>
-        <estimate_material-card/>
+        <div class="title">Доступные материалы:</div>
+        <div class="card__container">
+          <estimate_material-card v-for="item in material_store.dataConcrete" :key="item.ID" :material ="item" class="card"/>
+        </div>
       </div>
 
       <div v-if="navbar_store.active == 'Блок'">
@@ -54,7 +62,10 @@
             <span class="material__count"> {{ project_store.estimateBlock }} шт</span>
           </div>
         </div>
-        <estimate_material-card/>
+        <div class="title">Доступные материалы:</div>
+        <div class="card__container">
+          <estimate_material-card v-for="item in material_store.dataBlock" :key="item.ID" :material ="item" class="card"/>
+        </div>
       </div>
 
       <div v-if="navbar_store.active == 'Брус'">
@@ -68,7 +79,10 @@
             <span class="material__count"> {{ project_store.estimateRoofBeam }} м</span>
           </div>
         </div>
-        <estimate_material-card/>
+        <div class="title">Доступные материалы:</div>
+        <div class="card__container">
+          <estimate_material-card v-for="item in material_store.dataBeam" :key="item.ID" :material ="item" class="card"/>
+        </div>
       </div>
 
       <div v-if="navbar_store.active == 'Кирпич'">
@@ -78,7 +92,10 @@
             <span class="material__count"> {{ project_store.estimateBrick }} шт</span>
           </div>
         </div>
-        <estimate_material-card/>
+        <div class="title">Доступные материалы:</div>
+        <div class="card__container">
+          <estimate_material-card v-for="item in material_store.dataBrick" :key="item.ID" :material ="item" class="card"/>
+        </div>
       </div>
 
       <div v-if="navbar_store.active == 'Кровельный материал'">
@@ -88,7 +105,10 @@
             <span class="material__count"> {{ project_store.estimateRoofingMaterial }} м</span>
           </div>
         </div>
-        <estimate_material-card/>
+        <div class="title">Доступные материалы:</div>
+        <div class="card__container">
+          <estimate_material-card v-for="item in material_store.dataBrick" :key="item.ID" :material ="item" class="card"/>
+        </div>
       </div>
 
       <div v-if="navbar_store.active == 'Карнизная система'">
@@ -98,7 +118,10 @@
             <span class="material__count"> {{ project_store.estimateEaves }} м</span>
           </div>
         </div>
-        <estimate_material-card/>
+        <div class="title">Доступные материалы:</div>
+        <div class="card__container">
+          <estimate_material-card v-for="item in material_store.dataOther" :key="item.ID" :material ="item" class="card"/>
+        </div>
       </div>
 
     </div>
@@ -152,6 +175,12 @@
     }
   }
 }
+.card__container{
+  display: flex;
+  .card{
+    margin-right: 1rem;
+  }
+  }
 .title{
   color: #4A4F48;
   font-size: 1.1rem;

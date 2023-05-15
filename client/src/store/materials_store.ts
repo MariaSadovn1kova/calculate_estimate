@@ -15,7 +15,6 @@ export const useMaterialStore = defineStore("materials", () => {
     const modalContext = ref()
     const active_material = ref('Блок')
 
-    
     function setModalContext (newModalContext: string){
         modalContext.value = newModalContext
     }
