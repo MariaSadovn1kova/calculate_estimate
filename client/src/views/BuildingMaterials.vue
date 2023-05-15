@@ -202,7 +202,7 @@
   import { useLocalNavbarStore } from "@/store/local-navbar_store";
   import { useMaterialStore } from "@/store/materials_store"
   import { useModalStore } from "@/store/modal_store";
-  import { onBeforeMount, onUpdated, ref } from 'vue';
+  import { onBeforeMount } from 'vue';
 
   const navbar_store = useLocalNavbarStore()
   const sidebar_store = useSidebarStore()

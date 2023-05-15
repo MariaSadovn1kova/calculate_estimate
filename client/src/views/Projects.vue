@@ -39,7 +39,7 @@
   import { useSidebarStore } from "@/store/sidebar_store";
   import { useLocalNavbarStore } from "@/store/local-navbar_store";
   import { useProjectsStore } from "@/store/projects_store";
-  import { onBeforeMount, onUpdated, ref } from 'vue';
+  import { onBeforeMount, ref } from 'vue';
   import { useModalStore } from "@/store/modal_store";
 
   const modal_store = useModalStore();
@@ -61,16 +61,6 @@
   function deleteProject(ID: number){
     projectsStore.deleteProject(ID)
   }
-
-  onUpdated(async () => {
-    if(navbar_store.active == 'Все проекты'){
-      fetchEvents()
-    } else if (navbar_store.active == 'Текущие проекты'){
-      fetchUnfinishedEvents()
-    } else if (navbar_store.active == 'Завершенные проекты'){
-      fetchFinishedEvents()
-    }
-  })
 
   onBeforeMount(async () => {
     fetchEvents()

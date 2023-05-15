@@ -13,6 +13,8 @@ import Estimate from "@/components/project/Estimate.vue"
 import FormulaCard from '@/components/formulas/FormulaCard.vue'
 import Formula from '@/components/formulas/Formula.vue'
 import MateralForm from '@/components/project/MaterialForm.vue'
+import EstimateMaterialCard from '@/components/materials/EstimateMaterialCard.vue';
+
 
 export default[
     Navbar,
@@ -29,6 +31,7 @@ export default[
     Estimate,
     FormulaCard,
     Formula,
-    MateralForm
+    MateralForm,
+    EstimateMaterialCard
 ]
 

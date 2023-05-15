@@ -33,7 +33,9 @@ export const useLocalNavbarStore = defineStore("localNavbar", () => {
         { name: "Бетон" },
         { name: "Блок" },
         { name: "Брус" },
-        { name: "Прочее" },
+        { name: "Кирпич" },
+        { name: "Кровельный материал" },
+        { name: "Карнизная система" },
     ]
     return {
         active,

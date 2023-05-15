@@ -48,22 +48,22 @@ export const useCreateProjectStore = defineStore("create-project", () => {
 
 
     // Расчет фундамента
-    const estimateReinforcement = ref()
-    const estimateConcrete = ref()
-    const estimateBoard = ref()
-    const estimateRod = ref()
+    const estimateReinforcement = ref(0)
+    const estimateConcrete = ref(0)
+    const estimateBoard = ref(0)
+    const estimateRod = ref(0)
 
     // Расчет коробки
-    const estimateBlock = ref()
-    const estimateBeam = ref()
-    const estimateFloorReinforcement = ref()
-    const estimateBrick = ref()
+    const estimateBlock = ref(0)
+    const estimateBeam = ref(0)
+    const estimateFloorReinforcement = ref(0)
+    const estimateBrick = ref(0)
 
     // Расчет крыши
-    const estimateRoofBeam = ref()
-    const estimateRoofBoard = ref()
-    const estimateEaves = ref()
-    const estimateRoofingMaterial = ref()
+    const estimateRoofBeam = ref(0)
+    const estimateRoofBoard = ref(0)
+    const estimateEaves = ref(0)
+    const estimateRoofingMaterial = ref(0)
 
     // Формулы
     // Фундамент
@@ -104,8 +104,7 @@ export const useCreateProjectStore = defineStore("create-project", () => {
         ]},
     ]
     const tabs = [
-        { name: "Здание 1" },
-        { name: "Здание 2" },
+        { name: "Здание 1" }
     ]
     const activeTab = ref(tabs[0].name)
     const foundation__active__imgs = [
