@@ -14,6 +14,7 @@ export const useSidebarStore = defineStore("sidebar", () => {
         { name: "Блок" },
         { name: "Брус" },
         { name: "Кирпич" },
+        { name: "Кровельный материал" },
         { name: "Прочее" },
 
     ]

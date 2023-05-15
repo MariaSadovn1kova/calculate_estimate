@@ -59,6 +59,12 @@ export const useCreateProjectStore = defineStore("create-project", () => {
     const estimateFloorReinforcement = ref()
     const estimateBrick = ref()
 
+    // Расчет крыши
+    const estimateRoofBeam = ref()
+    const estimateRoofBoard = ref()
+    const estimateEaves = ref()
+    const estimateRoofingMaterial = ref()
+
     // Формулы
     // Фундамент
     const formulaFoundationBoard = ref()
@@ -71,6 +77,12 @@ export const useCreateProjectStore = defineStore("create-project", () => {
     const formulaFloorBeam = ref()
     const formulaFloorReinforcement = ref()
     const formulaFloorBrick = ref()
+
+    // Крыша
+    const formulaRoofBeam = ref()
+    const formulaRoofBoard = ref()
+    const formulaRoofEaves = ref()
+    const formulaRoofRoofingMaterial = ref()
 
     const general_inputs_items = [
         { name: "Тип здания" },
@@ -236,6 +248,14 @@ export const useCreateProjectStore = defineStore("create-project", () => {
         formulaFloorBeam,
         formulaFloorReinforcement,
         formulaFloorBrick,
+        estimateRoofBeam,
+        estimateRoofBoard,
+        estimateEaves,
+        estimateRoofingMaterial,
+        formulaRoofBeam,
+        formulaRoofBoard,
+        formulaRoofEaves,
+        formulaRoofRoofingMaterial,
         setActiveFloor,
         setActiveRoof,
         setActiveFoundation,

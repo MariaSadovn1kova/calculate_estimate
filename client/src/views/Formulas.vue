@@ -124,6 +124,7 @@
           </div>
           <div class="standard__buttons">
             <div class="calculator__row delete">
+              <div class="btn dot" @click="formulas_store.addFormulaContent('.', '.')">.</div>
               <div class="btn" @click="formulas_store.deleteFormulaContent()">
                 <img src="@/assets/logo/delete__text.svg" >
               </div>
@@ -200,7 +201,7 @@ export default { name: "formulas-for-calculation" };
   }
   .calculator__content{
     display: flex;
-    height: 40rem;
+    height: 35rem;
     .custom{
       height: 50%;
       display: flex;
@@ -254,6 +255,9 @@ export default { name: "formulas-for-calculation" };
           text-align: center;
           padding-top: 1.6rem;
           transition: 0.2s;
+          &.dot{
+            margin-right: 0.8rem;
+          }
           &:hover{
             background-color: #5d8f4f;
             cursor: pointer; 

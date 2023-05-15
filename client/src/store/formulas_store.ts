@@ -165,10 +165,7 @@ export const useFormulasStore = defineStore("formulas", () => {
           { id: 2, value: ('0'), technicalValue: ('0')},
           { id: 3, value: (' ) '), technicalValue: (')')},
           { id: 4, value: (' * '), technicalValue: ('*')},
-        ]},
-        {row:5, buttons:[
-          { id: 1, value: ('.'), technicalValue: ('.')}
-        ]},
+        ]}
     ]
 
     return{

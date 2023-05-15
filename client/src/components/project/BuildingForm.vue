@@ -147,7 +147,7 @@
     <div class="content__container" v-if="navbar_store.active == 'Крыша'">
       <div class="left__container"> 
         <div class="type__container">
-          <div class="type__button" v-for="item in project_store.roof__imgs" :key="item.id" :class = "{'active' :item.id == project_store.active_roof}" @click="project_store.setActiveRoof(item.id), show_material_foundation = false">
+          <div class="type__button" v-for="item in project_store.roof__imgs" :key="item.id" :class = "{'active' :item.id == project_store.active_roof}" @click="project_store.setActiveRoof(item.id), show_material_roof = false">
             <img :src="project_store.roof__active__imgs[item.id - 1].name" v-if="item.id == project_store.active_roof">
             <img :src="item.name" v-else>
           </div>
@@ -194,7 +194,7 @@
         </div>
         <div class="btn__container">
           <sub-btn class="reset" @click="roofReset()">Сбросить</sub-btn>
-          <main-btn class="calculate">Рассчитать</main-btn>
+          <main-btn class="calculate" @click="calculateRoof(project_store.active_roof)">Рассчитать</main-btn>
         </div>
       </div>
     </div>
@@ -278,6 +278,40 @@
         </div>
       </div>
     </div>
+    <div v-if="navbar_store.active == 'Крыша' && show_material_roof" class="building__material-container">
+      <div class="building__material">
+        <span class="name">Брус</span>
+        <span class="material__count"> {{ project_store.estimateRoofBeam }} м</span>
+        <div class="formula__container">
+          <span class="formula__name">Рассчитано по формуле:</span>
+          <span class="material__formula">{{ project_store.formulaRoofBeam  }}</span>
+        </div>
+      </div>
+      <div class="building__material">
+        <span class="name">Доска</span>
+        <span class="material__count"> {{ project_store.estimateRoofBoard }} м</span>
+        <div class="formula__container">
+          <span class="formula__name">Рассчитано по формуле:</span>
+          <span class="material__formula">{{ project_store.formulaRoofBoard  }}</span>
+        </div>
+      </div>
+      <div class="building__material">
+        <span class="name">Карнизная система</span>
+        <span class="material__count"> {{ project_store.estimateEaves }} м</span>
+        <div class="formula__container">
+          <span class="formula__name">Рассчитано по формуле:</span>
+          <span class="material__formula">{{ project_store.formulaRoofEaves  }}</span>
+        </div>
+      </div>
+      <div class="building__material">
+        <span class="name">Кровельный материал</span>
+        <span class="material__count"> {{ project_store.estimateRoofingMaterial }} м</span>
+        <div class="formula__container">
+          <span class="formula__name">Рассчитано по формуле:</span>
+          <span class="material__formula">{{ project_store.formulaRoofRoofingMaterial  }}</span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 </template>
@@ -297,7 +331,8 @@
   const navbar_store = useLocalNavbarStore();
   const show_material_foundation = ref(false)
   const show_material_floor = ref(false)
-  
+  const show_material_roof = ref(false)
+
   async function calculateFoundation(foundationType: number){
     const formulaBoard = ref()
     const formulaConcrete = ref()
@@ -335,6 +370,41 @@
     project_store.estimateRod = eval(formulaRod.value)
 
     show_material_foundation.value = true
+  }
+
+  async function calculateRoof(roofType: number){
+    const formulaBeam = ref()
+    const formulaBoard = ref()
+    const formulaEaves = ref()
+    const formulaRoofingMaterial = ref()
+    const formulas = ref([])
+
+    if(roofType == 1){
+      formulas.value = [29, 32, 37, 41]
+    } else if (roofType == 2){
+      formulas.value = [30, 33, 38, 42]
+    } else if (roofType == 3){
+      formulas.value = [31, 34, 39, 43]
+    } else if(roofType == 4){
+      formulas.value = [36, 35, 40, 44]
+    }
+
+    formulaBeam.value = await formulas_store.fetchTechnicalFormula(formulas.value[0])
+    formulaBoard.value =  await formulas_store.fetchTechnicalFormula(formulas.value[1])
+    formulaEaves.value =  await formulas_store.fetchTechnicalFormula(formulas.value[2])
+    formulaRoofingMaterial.value =  await formulas_store.fetchTechnicalFormula(formulas.value[3])
+
+    project_store.formulaRoofBeam = await formulas_store.fetchFormula(formulas.value[0])
+    project_store.formulaRoofBoard = await formulas_store.fetchFormula(formulas.value[1])
+    project_store.formulaRoofEaves = await formulas_store.fetchFormula(formulas.value[2])
+    project_store.formulaRoofRoofingMaterial = await formulas_store.fetchFormula(formulas.value[3])
+
+    project_store.estimateRoofBeam = eval(formulaBeam.value)
+    project_store.estimateRoofBoard = eval(formulaBoard.value)
+    project_store.estimateEaves = eval(formulaEaves.value)
+    project_store.estimateRoofingMaterial = eval(formulaRoofingMaterial.value)
+
+    show_material_roof.value = true
   }
 
   async function calculateFloor(materialType: number){
@@ -414,7 +484,7 @@
   &.floor{
     justify-content: flex-start;
     .building__material{
-      margin-right: 1.5rem;
+      margin-right: 1.2rem;
     }
   }
   .building__material{
