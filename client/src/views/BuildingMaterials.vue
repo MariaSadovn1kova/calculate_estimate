@@ -29,6 +29,9 @@
       <div class="material-cards__row" v-else-if="sidebar_store.active == 'Брус'">
         <material-card v-for="material in material_store.dataBeam" :key="material.id" :material = "material"/>
       </div>
+      <div class="material-cards__row" v-else-if="sidebar_store.active == 'Кровельный материал'">
+        <material-card v-for="material in material_store.dataRoofMaterial" :key="material.id" :material = "material"/>
+      </div>
       <div class="material-cards__row" v-else>
         <material-card v-for="material in material_store.dataOther" :key="material.id" :material = "material"/>
       </div>
@@ -41,20 +44,19 @@
             <div class="general-information__container">
               <div class="left">
                 <div class="img__container">
-                  <img v-if="modal_store.material.Type == 'Арматура'" src="@/assets/img/materials/reinforcement.svg">
-                  <img v-else-if="modal_store.material.Type == 'Кирпич'" src="@/assets/img/materials/brick.svg">
-                  <img v-else-if="modal_store.material.Type == 'Доска'" src="@/assets/img/materials/construction_board.svg">
-                  <img v-else-if="modal_store.material.Type == 'Бетон'" src="@/assets/img/materials/concrete.svg">
-                  <img v-else-if="modal_store.material.Type == 'Блок'" src="@/assets/img/materials/block.svg"> 
-                  <img v-else-if="modal_store.material.Type == 'Брус'" src="@/assets/img/materials/beam.svg">   
-                  <img v-else src="@/assets/img/materials/other.svg">    
+                  <img src="@/assets/img/materials/block.svg" v-if="material_store.active_material == 'Блок'">  
+                  <img src="@/assets/img/materials/beam.svg" v-else-if="material_store.active_material == 'Брус'">    
+                  <img src="@/assets/img/materials/brick.svg" v-else-if="material_store.active_material == 'Кирпич'">    
+                  <img src="@/assets/img/materials/concrete.svg" v-else-if="material_store.active_material == 'Бетон'">    
+                  <img src="@/assets/img/materials/roof_material.svg" v-else-if="material_store.active_material == 'Кровельный материал'">    
+                  <img src="@/assets/img/materials/reinforcement.svg" v-else-if="material_store.active_material == 'Арматура'">    
+                  <img src="@/assets/img/materials/construction_board.svg" v-else-if="material_store.active_material == 'Доска'">    
+                  <img src="@/assets/img/materials/other.svg" v-else>    
                 </div>
                 <div class="count__container">
                   <div class="count">Количество на складе: {{modal_store.material.Quantity}}</div>
                   <div class="count">Занято на проектах: </div>
                 </div>
-              </div>
-              <div class="right">
                 <div class="input__container">
                   <label for="my-input" class="label">Количество</label>
                   <input class="my-input" type="number" v-model="modal_store.materialQuantity">
@@ -73,9 +75,19 @@
                     <main-btn class="save__material">Добавить</main-btn>
                   </form>
                 </div>
-                <div class="input__container">
-                  <label for="my-input" class="label">Тип материала</label>
-                  <input class="my-input" type="text" v-model="modal_store.materialType">
+              </div>
+              <div class="right">
+                <div class="type__container">
+                  <div class="type__button" v-for="item in material_store.material__imgs[0].imgs" :key="item.id" :class = "{'active' :item.value == material_store.active_material}" @click="material_store.setActiveMaterial(item.value)">
+                    <img :src="material_store.material__active__imgs[item.id].name" v-if="item.value == material_store.active_material">
+                    <img :src="item.name" v-else>
+                  </div>
+                </div>
+                <div class="type__container">
+                  <div class="type__button" v-for="item in material_store.material__imgs[1].imgs" :key="item.id" :class = "{'active' :item.value == material_store.active_material}" @click="material_store.setActiveMaterial(item.value)">
+                    <img :src="material_store.material__active__imgs[item.id].name" v-if="item.value == material_store.active_material">
+                    <img :src="item.name" v-else>
+                  </div>
                 </div>
                 <div class="input__container">
                   <label for="my-input" class="label">Название</label>
@@ -91,7 +103,7 @@
                 </div>
                 <div class="btn__container">                
                   <sub-btn class="sub__button" @click.stop="modal_store.setShow()">Закрыть</sub-btn>
-                  <form @submit.prevent="onUpdateMaterial(modal_store.materialType, modal_store.materialName, modal_store.materialMeasurement, modal_store.materialCost, modal_store.material.ID)">
+                  <form @submit.prevent="onUpdateMaterial(material_store.active_material, modal_store.materialName, modal_store.materialMeasurement, modal_store.materialCost, modal_store.material.ID)">
                     <main-btn class="save__material">Сохранить</main-btn>
                   </form>
                 </div>
@@ -123,17 +135,33 @@
         </div>
         <div v-if="material_store.modalContext == 'СоздатьМатериал'">
           <div class="material-modal__container">
-            <div class="title">Создать новый стройматериал</div>
+            <div  class="content">
+              <div class="title">Создать новый стройматериал</div>
             <div class="general-information__container">
               <div class="left">
                 <div class="img__container">
-                  <img src="@/assets/img/materials/other.svg">    
+                  <img src="@/assets/img/materials/block.svg" v-if="material_store.active_material == 'Блок'">  
+                  <img src="@/assets/img/materials/beam.svg" v-else-if="material_store.active_material == 'Брус'">    
+                  <img src="@/assets/img/materials/brick.svg" v-else-if="material_store.active_material == 'Кирпич'">    
+                  <img src="@/assets/img/materials/concrete.svg" v-else-if="material_store.active_material == 'Бетон'">    
+                  <img src="@/assets/img/materials/roof_material.svg" v-else-if="material_store.active_material == 'Кровельный материал'">    
+                  <img src="@/assets/img/materials/reinforcement.svg" v-else-if="material_store.active_material == 'Арматура'">    
+                  <img src="@/assets/img/materials/construction_board.svg" v-else-if="material_store.active_material == 'Доска'">    
+                  <img src="@/assets/img/materials/other.svg" v-else>    
                 </div>
               </div>
               <div class="right">
-                <div class="input__container">
-                  <label for="my-input" class="label">Тип материала</label>
-                  <input class="my-input" type="text" v-model="modal_store.createType">
+                <div class="type__container">
+                  <div class="type__button" v-for="item in material_store.material__imgs[0].imgs" :key="item.id" :class = "{'active' :item.value == material_store.active_material}" @click="material_store.setActiveMaterial(item.value)">
+                    <img :src="material_store.material__active__imgs[item.id].name" v-if="item.value == material_store.active_material">
+                    <img :src="item.name" v-else>
+                  </div>
+                </div>
+                <div class="type__container">
+                  <div class="type__button" v-for="item in material_store.material__imgs[1].imgs" :key="item.id" :class = "{'active' :item.value == material_store.active_material}" @click="material_store.setActiveMaterial(item.value)">
+                    <img :src="material_store.material__active__imgs[item.id].name" v-if="item.value == material_store.active_material">
+                    <img :src="item.name" v-else>
+                  </div>
                 </div>
                 <div class="input__container">
                   <label for="my-input" class="label">Название</label>
@@ -153,11 +181,12 @@
                 </div>
                 <div class="btn__container"> 
                   <sub-btn class="sub__button" @click.stop="modal_store.setShow()">Закрыть</sub-btn>
-                  <form @submit.prevent="onInsertMaterial(modal_store.createType, modal_store.createName, modal_store.createMeasurement, modal_store.createCost, modal_store.createQuantity), modal_store.setShow()">
+                  <form @submit.prevent="onInsertMaterial(material_store.active_material, modal_store.createName, modal_store.createMeasurement, modal_store.createCost, modal_store.createQuantity), modal_store.setShow()">
                     <main-btn class="save__material">Сохранить</main-btn>
                   </form>
                 </div>
               </div>
+            </div>
             </div>
           </div>
         </div>
@@ -212,6 +241,27 @@
 </script>
 
 <style lang="scss" scoped>
+ .type__container{
+    display: flex;
+    margin-bottom: 1.5rem;
+    justify-content: space-between;
+    .type__button{
+      background-color: #FFF7F5;
+      border: 1px solid #FF594B;
+      padding: 1.2rem;
+      width: 6rem;
+      height: 6rem;
+      border-radius: 0.5rem;
+      transition: 0.2s;
+      &:hover{
+        background-color: #ffede8;
+        cursor: pointer;
+      }
+      &.active{
+        background-color: #FF594B;
+      }
+    }
+  }
 .materials__container{
   .header{
     display: flex;
@@ -304,9 +354,10 @@
       display: flex;
       height: 100%;
       .left{
-        width: 35%;
+        width: 50%;
         display: flex;
         flex-direction: column;
+        padding-bottom: 1rem;
         .img__container{
           display: flex;
           height: 8rem;
@@ -315,10 +366,20 @@
           height: 20%;
         }
         .count__container{
-          margin-top: 16rem;
+          margin-top: 1rem;
+          margin-bottom: 4.3rem;
           .count{
             font-size: 1.1rem;
-            margin-top: 2rem;
+            margin-top: 1rem;
+          }
+        }
+        .btn__container{
+          margin-top: auto;
+          margin-left: auto;
+          display: flex;
+          .sub__button{
+            margin-right: 0.5rem;
+            height: 100%;
           }
         }
       }
@@ -326,8 +387,8 @@
         display: flex;
         flex-direction: column;
         width: 65%;
-        padding-left: 4rem;
-        padding-bottom: 3rem;
+        padding-left: 3rem;
+        padding-bottom: 1rem;
         .btn__container{
           margin-top: auto;
           margin-left: auto;

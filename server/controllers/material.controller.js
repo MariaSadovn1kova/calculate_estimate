@@ -24,11 +24,14 @@ class MaterialController{
         const materials = await db.query('select * from "BuildingMaterial" WHERE "Type" = $1 ORDER BY "ID"', ['Брус'])
         res.json(materials.rows)
     }
+    async getRoofMaterial(req, res){
+        const materials = await db.query('select * from "BuildingMaterial" WHERE "Type" = $1 ORDER BY "ID"', ['Кровельный материал'])
+        res.json(materials.rows)
+    }
     async getOther(req, res){
         const materials = await db.query('select * from "BuildingMaterial" WHERE "Type" = $1 ORDER BY "ID"', ['Прочее'])
         res.json(materials.rows)
     }
-
     async updateMaterial(req, res){
         const { Name, Type, DeclaredValue, UnitOfMeasurement, ID} = req.body
         const material = await db.query('UPDATE "BuildingMaterial" SET "Name" = $1, "Type" = $2, "DeclaredValue" = $3,"UnitOfMeasurement" = $4 WHERE "ID" = $5 RETURNING *', [Name, Type, DeclaredValue, UnitOfMeasurement, ID])

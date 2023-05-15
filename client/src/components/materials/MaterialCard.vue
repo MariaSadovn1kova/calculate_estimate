@@ -8,13 +8,14 @@
         <img v-else-if="material.Type == 'Бетон'" src="@/assets/img/materials/concrete.svg">
         <img v-else-if="material.Type == 'Блок'" src="@/assets/img/materials/block.svg"> 
         <img v-else-if="material.Type == 'Брус'" src="@/assets/img/materials/beam.svg">   
+        <img v-else-if="material.Type == 'Кровельный материал'" src="@/assets/img/materials/roof_material.svg">   
         <img v-else src="@/assets/img/materials/other.svg">        
     </div>
     <div class="material__count"> {{ material.Quantity }} {{material.UnitOfMeasurement}}</div>
     <div class="material__price">{{ Intl.NumberFormat('ru-RU').format(material.DeclaredValue) }} рублей</div>
     <div class="btn__container">
         <sub-btn class="sub__button" @click="deleteMaterial(material.ID)">Удалить</sub-btn>
-        <main-btn class="open__material"  @click.stop="modal_store.setShow(), modal_store.setMaterial(material), material_store.setModalContext('Материал'), modal_store.getAccounting(material.ID)">Открыть</main-btn>
+        <main-btn class="open__material"  @click.stop="modal_store.setShow(), modal_store.setMaterial(material), material_store.setModalContext('Материал'), modal_store.getAccounting(material.ID), material_store.setActiveMaterial(material.Type)">Открыть</main-btn>
     </div>
   </div>
 </template>
